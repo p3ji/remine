@@ -6,7 +6,34 @@ Remine pairs deterministic statistical probes and fail-closed symbolic token bin
 
 ---
 
-## Architecture & Module Layout
+## Architecture & Logic Flow
+
+```mermaid
+flowchart TD
+    S1["Stage 1: Live StatCan Harvester<br/>The Daily HTML + WDS Cube Metadata & Data"] --> P1["Deterministic Probe Engine<br/>Computes deltas, ranks, & {{fact_id.human}} facts;<br/>tags quality flags (F/E/x/..) & 15+ age confounds"]
+    P1 --> G0{"Gate 0: Deterministic Guard<br/>Reliable? + Optional Subgroup Comparability"}
+
+    G0 -- "Suppressed / Flag F / .." --> Q_UNREL["Held Back: Unreliable Data"]
+    G0 -- "Unstandardized confound (Gate ON)" --> Q_SKIP_G0["Filtered: Confounded Comparison"]
+    G0 -- "Passes Gate 0" --> RET["Retrieve via MCP (JSON-RPC 2.0)<br/>Confirmed Rules, Non-Binding Precedent, Coverage Manifest"]
+
+    RET --> ANG{"Agent 1: Angle Selector LLM<br/>Novel beyond The Daily & Analytical Papers?"}
+    ANG -- "Already covered or confounded" --> Q_SKIP_ANG["Filtered: Duplicate / Confounded"]
+    ANG -- "Publishable novel angle" --> DRF["Agent 2: Token-Bound Drafter LLM<br/>Writes prose using ONLY {{fact_id.human}} tokens"]
+
+    DRF --> BIND{"Deterministic Token Compiler<br/>Zero bare digits, quantity words, or superlatives?"}
+    BIND -- "BindError (attempt < max_attempts)" --> DRF
+    BIND -- "BindError (retries exhausted)" --> REV["Fail-Closed Human Review Queue"]
+    BIND -- "All tokens bound" --> CRIT{"Agent 3: Methodology Critic LLM<br/>Denominators, periods & caveats valid?"}
+
+    CRIT -- "Rejected (attempt < max_attempts)" --> DRF
+    CRIT -- "Rejected (retries exhausted) or model parse error" --> REV
+    CRIT -- "Approved" --> PUB["Verified Finding<br/>Published Brief + StatCan Vector Provenance"]
+```
+
+---
+
+## Module Layout
 
 All runtime modules live under [`src/remine/`](src/remine/):
 
