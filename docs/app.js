@@ -36,7 +36,7 @@ const PROCESS_STEPS = [
   {
     num: 5,
     title: "Independent Quality Review",
-    desc: "A second check confirms all qualifiers, time periods, and comparison caveats are stated accurately—or sends the draft back for revision.",
+    desc: "A second check confirms all qualifiers, time periods, and comparison caveats are stated accurately, or sends the draft back for revision.",
   },
 ];
 
@@ -131,26 +131,26 @@ function formatStanceLabel(stance) {
 
 function formatVerdictMeta(verdict, rejectionCategory) {
   if (verdict === "publish") {
-    return { label: "Ready to share", cls: "badge-teal" };
+    return { label: "Ready to share", cls: "verdict-teal" };
   }
   if (verdict === "unreliable_data") {
-    return { label: "Held back — unreliable or suppressed", cls: "badge-crimson" };
+    return { label: "Held back: unreliable or suppressed", cls: "verdict-crimson" };
   }
   if (verdict === "needs_editorial_review") {
-    return { label: "Held back — needs analyst review", cls: "badge-amber" };
+    return { label: "Held back: needs analyst review", cls: "verdict-amber" };
   }
   if (verdict === "skip") {
     const reasonMap = {
-      ALREADY_IN_THE_DAILY: "Filtered — already in The Daily",
-      ALREADY_IN_ANALYTICAL_PAPER: "Filtered — covered in StatCan report",
-      CONFOUNDED_COMPARISON: "Filtered — skewed subgroup comparison",
+      ALREADY_IN_THE_DAILY: "Filtered: already in The Daily",
+      ALREADY_IN_ANALYTICAL_PAPER: "Filtered: covered in StatCan report",
+      CONFOUNDED_COMPARISON: "Filtered: skewed subgroup comparison",
     };
     return {
       label: reasonMap[rejectionCategory] || "Filtered out during screening",
-      cls: rejectionCategory === "CONFOUNDED_COMPARISON" ? "badge-amber" : "badge-muted",
+      cls: rejectionCategory === "CONFOUNDED_COMPARISON" ? "verdict-amber" : "verdict-muted",
     };
   }
-  return { label: verdict || "Screened", cls: "badge-muted" };
+  return { label: verdict || "Screened", cls: "verdict-muted" };
 }
 
 function formatModelLabel(modelName) {
@@ -208,15 +208,13 @@ function populateSelect(selectEl, items, getValue, getLabel) {
 function setStatusBadge() {
   const pill = qs("status-mode");
   if (state.runtimeMode === "static") {
-    pill.textContent = "Published Briefs Archive";
-    pill.className = "status-pill archive";
+    pill.textContent = "Archive edition";
+    pill.className = "status-text";
     return;
   }
   const aiOnline = Boolean(state.health?.local_llm?.online);
-  pill.textContent = aiOnline
-    ? "Local Server · AI Ready"
-    : "Local Server · Saved Reviews Ready";
-  pill.className = "status-pill online";
+  pill.textContent = aiOnline ? "Local server (AI ready)" : "Local server";
+  pill.className = "status-text online";
 }
 
 function setServerControlsVisibility() {
@@ -326,10 +324,8 @@ function renderReleaseAndSummary(data) {
   if (evalSummary && typeof evalSummary.verdict_accuracy === "number") {
     const pct = Math.round(evalSummary.verdict_accuracy * 100);
     qs("kpi-accuracy").textContent = `${pct}% (${evalSummary.correct_verdicts}/${evalSummary.total})`;
-    qs("kpi-accuracy-sub").textContent = "Agreement with expert screening review";
   } else {
     qs("kpi-accuracy").textContent = `${total} checked`;
-    qs("kpi-accuracy-sub").textContent = "Screened against StatCan quality & overlap rules";
   }
 
   qs("tab-count-findings").textContent = String((data.stories || []).length);
@@ -357,33 +353,30 @@ function renderSourceDrawer() {
 
   details.className = "source-block";
   details.innerHTML = `
-    <div>
-      <span class="source-row-label">Verified table figure</span>
-      <p class="source-claim-quote">${escapeHtml(fact?.human || state.selectedToken.text)}</p>
-    </div>
-    <div>
-      <span class="source-row-label">What is being compared</span>
-      ${renderKvChips(cut)}
-    </div>
-    <div>
-      <span class="source-row-label">Population &amp; factors held constant</span>
-      ${renderKvChips(heldAt)}
-    </div>
-    <div>
-      <span class="source-row-label">Comparison period</span>
-      <div>${escapeHtml(formatPeriodList(periods))}</div>
-    </div>
-    <div>
-      <span class="source-row-label">Statistics Canada series ID(s)</span>
-      <div class="kv-chip-list">
-        ${vectors.map((v) => `<span class="kv-chip">${escapeHtml(v)}</span>`).join("")}
-      </div>
-    </div>
+    <p class="source-claim-quote">“${escapeHtml(fact?.human || state.selectedToken.text)}”</p>
+    <table class="source-kv-table">
+      <tbody>
+        <tr>
+          <th>Compared</th>
+          <td>${escapeHtml(formatKvPlainText(cut) || "None")}</td>
+        </tr>
+        <tr>
+          <th>Held constant</th>
+          <td>${escapeHtml(formatKvPlainText(heldAt) || "None")}</td>
+        </tr>
+        <tr>
+          <th>Period</th>
+          <td>${escapeHtml(formatPeriodList(periods))}</td>
+        </tr>
+        <tr>
+          <th>StatCan series</th>
+          <td>${escapeHtml(vectors.join(", ") || "Not specified")}</td>
+        </tr>
+      </tbody>
+    </table>
     ${
       tableUrl
-        ? `<div>
-             <a class="link-btn" href="${escapeHtml(tableUrl)}" target="_blank" rel="noopener noreferrer">Open source table on StatCan &#8599;</a>
-           </div>`
+        ? `<a class="text-link" href="${escapeHtml(tableUrl)}" target="_blank" rel="noopener noreferrer">Open source table on StatCan &#8599;</a>`
         : ""
     }
   `;
@@ -407,18 +400,17 @@ function renderFindings(stories) {
   }
 
   stories.forEach((story) => {
-    const card = document.createElement("article");
-    card.className = "story-card";
+    const entry = document.createElement("article");
+    entry.className = "story-entry";
 
     const rules = findRulesForBrief(story.brief_id);
-    const header = document.createElement("div");
-    header.className = "story-header";
-    header.innerHTML = `
-      <span class="badge badge-teal">Ready to share</span>
-      <span class="badge badge-navy">${escapeHtml(formatStanceLabel(story.stance))}</span>
+    const kicker = document.createElement("div");
+    kicker.className = "story-kicker";
+    kicker.innerHTML = `
+      Ready to share &middot; ${escapeHtml(formatStanceLabel(story.stance))}
       ${
         story.recovered_via_retry
-          ? '<span class="badge badge-amber" title="An initial draft needed clearer source grounding and was revised during quality review.">Revised during review</span>'
+          ? ' &middot; <span class="revision-note">Revised during quality check</span>'
           : ""
       }
     `;
@@ -426,19 +418,6 @@ function renderFindings(stories) {
     const headline = document.createElement("h3");
     headline.className = "story-headline";
     headline.textContent = story.headline || story.title;
-
-    const contextGrid = document.createElement("div");
-    contextGrid.className = "story-context-grid";
-    contextGrid.innerHTML = `
-      <div>
-        <span class="context-label">Policy context</span>
-        <p class="context-text">${escapeHtml(story.assumption || "Provides additional disaggregation from official survey tables.")}</p>
-      </div>
-      <div>
-        <span class="context-label">What The Daily did not cover</span>
-        <p class="context-text">${escapeHtml(story.differs_from_daily || "Extends beyond the headline figures published in the release summary.")}</p>
-      </div>
-    `;
 
     const bodyEl = document.createElement("div");
     bodyEl.className = "story-body";
@@ -474,23 +453,24 @@ function renderFindings(stories) {
       bodyEl.appendChild(p);
     });
 
-    const verifyHint = document.createElement("p");
-    verifyHint.className = "story-verify-hint";
-    verifyHint.textContent =
-      "Underlined figures link directly to verified Statistics Canada vectors — click any underlined statement to check its source.";
-
-    card.appendChild(header);
-    card.appendChild(headline);
-    card.appendChild(contextGrid);
-    card.appendChild(bodyEl);
-    card.appendChild(verifyHint);
-
-    if (story.critic_note) {
-      const note = document.createElement("div");
-      note.className = "story-reviewer-note";
-      note.innerHTML = `<strong>Quality check note:</strong> ${escapeHtml(formatStatCanReason(story.critic_note))}`;
-      card.appendChild(note);
+    const notes = document.createElement("div");
+    notes.className = "story-notes";
+    const noteLines = [];
+    if (story.differs_from_daily) {
+      noteLines.push(`<div><strong>Not in The Daily:</strong> ${escapeHtml(story.differs_from_daily)}</div>`);
     }
+    if (story.assumption) {
+      noteLines.push(`<div><strong>Context:</strong> ${escapeHtml(story.assumption)}</div>`);
+    }
+    if (story.critic_note) {
+      noteLines.push(`<div><strong>Quality check:</strong> ${escapeHtml(formatStatCanReason(story.critic_note))}</div>`);
+    }
+    notes.innerHTML = noteLines.join("");
+
+    entry.appendChild(kicker);
+    entry.appendChild(headline);
+    entry.appendChild(bodyEl);
+    if (noteLines.length > 0) entry.appendChild(notes);
 
     const actions = document.createElement("div");
     actions.className = "story-actions";
@@ -501,7 +481,7 @@ function renderFindings(stories) {
     copyBtn.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(buildCopyText(story));
-        copyBtn.textContent = "Copied to clipboard ✓";
+        copyBtn.textContent = "Copied";
         setTimeout(() => {
           copyBtn.textContent = "Copy brief with citation";
         }, 1800);
@@ -513,14 +493,14 @@ function renderFindings(stories) {
 
     if (story.table_url) {
       const extLink = document.createElement("a");
-      extLink.className = "link-btn";
+      extLink.className = "text-link";
       extLink.href = story.table_url;
       extLink.target = "_blank";
       extLink.rel = "noopener noreferrer";
       extLink.innerHTML = "View StatCan source table &#8599;";
       actions.appendChild(extLink);
     }
-    card.appendChild(actions);
+    entry.appendChild(actions);
 
     if (rules.length > 0) {
       const details = document.createElement("details");
@@ -536,10 +516,10 @@ function renderFindings(stories) {
             .join("")}
         </ul>
       `;
-      card.appendChild(details);
+      entry.appendChild(details);
     }
 
-    listEl.appendChild(card);
+    listEl.appendChild(entry);
   });
 
   renderSourceDrawer();
@@ -559,23 +539,21 @@ function renderCoverageManifest(manifest) {
 
   const coords = manifest.claimed_coordinates;
   box.innerHTML = `
-    <h3>Already Covered in Official Reports (${coords.length} reference points tracked)</h3>
+    <h3>Already Covered in Official Reports (${coords.length} reference points)</h3>
     <p class="section-intro">
-      REMINE extracts claims already reported in <em>The Daily</em>${manifest.paper_catalogue ? ` and <em>${escapeHtml(manifest.paper_catalogue)}</em>` : ""} to avoid surfacing numbers your team has already read.
+      Claims extracted from <em>The Daily</em>${manifest.paper_catalogue ? ` and <em>${escapeHtml(manifest.paper_catalogue)}</em>` : ""} to avoid repeating headline figures.
     </p>
-    <div class="coverage-grid">
+    <div class="coverage-list">
       ${coords
         .map((c) => {
-          const tierLabel = c.tier === "paper" ? "Analytical report" : "The Daily bulletin";
-          const cls = c.tier === "paper" ? "badge-navy" : "badge-muted";
+          const tierLabel = c.tier === "paper" ? "Analytical report" : "The Daily";
           const dimsText = formatKvPlainText(c.dimensions);
           return `
-            <div class="coverage-item">
-              <div class="ledger-meta-row">
-                <span class="badge ${cls}">${escapeHtml(tierLabel)}</span>
-                ${c.period ? `<span class="badge badge-muted">${escapeHtml(c.period)}</span>` : ""}
+            <div>
+              <div class="coverage-entry-meta">
+                ${escapeHtml(tierLabel)}${c.period ? ` &middot; ${escapeHtml(c.period)}` : ""}
               </div>
-              <div style="font-size:0.86rem;font-weight:600;color:var(--ink);">
+              <div class="coverage-entry-dims">
                 ${escapeHtml(dimsText || "Headline estimate")}
               </div>
               <p class="coverage-quote">“${escapeHtml(
@@ -602,32 +580,31 @@ function renderLedger(ledger) {
 
   ledger.forEach((row) => {
     const vMeta = formatVerdictMeta(row.verdict, row.rejection_category);
-    const card = document.createElement("div");
-    card.className = "ledger-card";
-    card.innerHTML = `
+    const item = document.createElement("div");
+    item.className = "ledger-row";
+    item.innerHTML = `
       <div class="ledger-top">
         <h4 class="ledger-title">${escapeHtml(row.title)}</h4>
-        <span class="badge ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
+        <span class="verdict-text ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
       </div>
       <p class="ledger-summary">${escapeHtml(formatStatCanReason(row.summary || ""))}</p>
-      <div class="ledger-meta-row">
-        <span class="badge badge-muted">${escapeHtml(formatQualityFlag(row.quality_flag))}</span>
-        <span class="badge ${row.standardized === false ? "badge-amber" : "badge-muted"}">
-          ${row.standardized === false ? "Unadjusted subgroup mix" : "Comparable subgroups"}
-        </span>
+      <div class="ledger-meta-line">
+        ${escapeHtml(formatQualityFlag(row.quality_flag))} &middot; ${
+          row.standardized === false ? "Unadjusted subgroup mix" : "Comparable subgroups"
+        }
       </div>
       ${
         row.reason
-          ? `<p class="ledger-reason"><strong>Screening decision:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>`
+          ? `<p class="ledger-reason"><strong>Decision:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>`
           : ""
       }
       ${
         row.critic_note
-          ? `<p class="ledger-reason"><strong>Quality reviewer note:</strong> ${escapeHtml(formatStatCanReason(row.critic_note))}</p>`
+          ? `<p class="ledger-reason"><strong>Quality check:</strong> ${escapeHtml(formatStatCanReason(row.critic_note))}</p>`
           : ""
       }
     `;
-    listEl.appendChild(card);
+    listEl.appendChild(item);
   });
 }
 
@@ -645,30 +622,28 @@ function renderReviewQueue(queue) {
 
   queue.forEach((row) => {
     const vMeta = formatVerdictMeta(row.verdict, row.rejection_category);
-    const card = document.createElement("div");
-    card.className = "ledger-card";
-    card.innerHTML = `
+    const item = document.createElement("div");
+    item.className = "ledger-row";
+    item.innerHTML = `
       <div class="ledger-top">
         <h4 class="ledger-title">${escapeHtml(row.title)}</h4>
-        <span class="badge ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
+        <span class="verdict-text ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
       </div>
       <p class="ledger-summary">${escapeHtml(formatStatCanReason(row.summary || ""))}</p>
-      <div class="ledger-meta-row">
-        <span class="badge badge-crimson">${escapeHtml(formatQualityFlag(row.quality_flag))}</span>
-      </div>
-      <p class="ledger-reason"><strong>Why it was held back:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>
+      <div class="ledger-meta-line">${escapeHtml(formatQualityFlag(row.quality_flag))}</div>
+      <p class="ledger-reason"><strong>Reason held back:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>
     `;
-    listEl.appendChild(card);
+    listEl.appendChild(item);
   });
 }
 
 function renderProcessAndBenchmarks(data) {
   qs("process-steps").innerHTML = PROCESS_STEPS.map(
     (step) => `
-      <li class="process-step">
-        <span class="step-num">${step.num}</span>
-        <h4>${escapeHtml(step.title)}</h4>
-        <p>${escapeHtml(step.desc)}</p>
+      <li class="process-item">
+        <span class="process-num">${step.num}.</span>
+        <span class="process-title">${escapeHtml(step.title)}</span>
+        <p class="process-desc">${escapeHtml(step.desc)}</p>
       </li>
     `
   ).join("");
