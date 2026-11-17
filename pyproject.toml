@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "remine"
+version = "0.2.0"
+description = "Token-bound agentic re-mining of Statistics Canada The Daily releases and WDS data cubes"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "langgraph>=1.2,<2",
+  "openai>=2,<4",
+  "pandas>=2,<4",
+  "pyyaml>=6,<7",
+  "requests>=2.31,<3",
+]
+
+[project.scripts]
+remine = "remine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+remine = ["web/*"]

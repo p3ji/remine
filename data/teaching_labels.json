@@ -1,0 +1,54 @@
+{
+  "LFS-201": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "LFS-202": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "LFS-203": {
+    "verdict": "skip",
+    "rejection_category": "confounded_comparison"
+  },
+  "LFS-204": {
+    "verdict": "skip",
+    "rejection_category": "already_in_daily"
+  },
+  "LFS-205": {
+    "verdict": "unreliable_data",
+    "rejection_category": null
+  },
+  "AI-301": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "AI-302": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "AI-303": {
+    "verdict": "skip",
+    "rejection_category": "confounded_comparison"
+  },
+  "AI-304": {
+    "verdict": "skip",
+    "rejection_category": "already_in_daily"
+  },
+  "AI-305": {
+    "verdict": "unreliable_data",
+    "rejection_category": null
+  },
+  "AI-306": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "AI-307": {
+    "verdict": "publish",
+    "rejection_category": null
+  },
+  "AI-308": {
+    "verdict": "skip",
+    "rejection_category": "already_in_analytical_paper"
+  }
+}

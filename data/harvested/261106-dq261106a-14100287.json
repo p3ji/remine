@@ -1,0 +1,214 @@
+{
+  "release": {
+    "id": "dq261106a",
+    "date": "2026-11-06",
+    "title": "Labour Force Survey, October 2026",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm",
+    "pid": 14100287,
+    "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028701",
+    "highlights": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%. The unemployment rate rose 0.2 percentage points to 6.7%. The unemployment rate for youth aged 15 to 24 increased 0.7 percentage points to 13.7%. It also rose for people aged 55 and older (+0.2 percentage points to 5.5%)."
+  },
+  "coverage_manifest": {
+    "release_id": "dq261106a",
+    "paper_catalogue": null,
+    "claimed_coordinates": [
+      {
+        "tier": "daily",
+        "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+        "dimensions": {
+          "Geography": "Quebec",
+          "Labour force characteristics": "Employment"
+        },
+        "value": 22.59999999999991,
+        "period": "2026-10-01"
+      },
+      {
+        "tier": "daily",
+        "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+        "dimensions": {
+          "Geography": "Newfoundland and Labrador",
+          "Labour force characteristics": "Employment rate"
+        },
+        "value": -5.000000000000014,
+        "period": "2026-10-01"
+      },
+      {
+        "tier": "daily",
+        "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+        "dimensions": {
+          "Age group": "25 to 54 years",
+          "Labour force characteristics": "Employment"
+        },
+        "value": 1.6093111444032502,
+        "period": "2026-10-01"
+      }
+    ]
+  },
+  "methodology_rules": [
+    {
+      "id": "M1",
+      "title": "Age group-structure confounding in Geography comparisons",
+      "rule": "Do not publish raw comparisons across Geography while Age group is held at '15 years and over'; standardize to '25 to 54 years'. Raw 15+ provincial rate gaps reflect population age composition rather than purely labour-market differences.",
+      "source": "surveys.yaml#14100287",
+      "confirmed": true,
+      "semantic_rule": {
+        "comparative_dim": "Geography",
+        "confounder_dim": "Age group",
+        "required_benchmark": "25 to 54 years",
+        "unstandardized_aggregate": "15 years and over",
+        "explanation": "Raw 15+ provincial rate gaps reflect population age composition rather than purely labour-market differences."
+      }
+    },
+    {
+      "id": "M2",
+      "title": "Population denominator and subgroup precision",
+      "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+      "source": "wds:getCubeMetadata#14100287",
+      "confirmed": true
+    },
+    {
+      "id": "M3",
+      "title": "Endpoint and multi-period comparison caveats",
+      "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+      "source": "wds:getCubeMetadata#14100287",
+      "confirmed": true
+    },
+    {
+      "id": "M4",
+      "title": "Coverage subtraction against The Daily prose",
+      "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+      "source": "remine/tools.py#check_coverage_overlaps",
+      "confirmed": true
+    },
+    {
+      "id": "M5",
+      "title": "Unconfirmed informal seasonal speculation",
+      "rule": "Unverified scratch note: treat single-period weather swings as permanent structural breaks.",
+      "source": "scratch/unverified-notes.txt",
+      "confirmed": false
+    }
+  ],
+  "candidate_briefs": [
+    {
+      "id": "LIVE-1",
+      "release_id": "dq261106a",
+      "title": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment",
+      "summary": "Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "confound_risk": null,
+      "methodology_ids": [
+        "M4",
+        "M3"
+      ],
+      "mentions": {
+        "Geography|Quebec": true,
+        "Labour force characteristics|Employment": true
+      },
+      "facts": [
+        {
+          "id": "F1_1",
+          "probe_type": "period_change",
+          "human": "between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people, among core-aged workers",
+          "cut": {
+            "Geography": "Quebec",
+            "Labour force characteristics": "Employment"
+          },
+          "held_at": {
+            "Gender": "Total - Gender",
+            "Age group": "25 to 54 years"
+          },
+          "vectors": [
+            "v2063891"
+          ],
+          "periods": [
+            "2026-09-01",
+            "2026-10-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LIVE-2",
+      "release_id": "dq261106a",
+      "title": "Unstandardized 15 years and over geography gap: Newfoundland and Labrador vs Nova Scotia",
+      "summary": "Compares Geography on unstandardized Age group='15 years and over' instead of benchmark '25 to 54 years'.",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": false,
+      "confound_risk": "Raw Geography comparison leaves Age group at '15 years and over' (violates M1).",
+      "methodology_ids": [
+        "M1"
+      ],
+      "mentions": {
+        "Geography|Newfoundland and Labrador": true
+      },
+      "facts": [
+        {
+          "id": "F2_1",
+          "probe_type": "gap_between_members",
+          "human": "in October 1, 2026, the unstandardized 15 years and over unemployment rate gap between Newfoundland and Labrador and Nova Scotia was 2.5 percentage points (8.7% vs 6.2%)",
+          "cut": {
+            "Geography_high": "Newfoundland and Labrador",
+            "Geography_low": "Nova Scotia",
+            "Labour force characteristics": "Unemployment rate"
+          },
+          "held_at": {
+            "Age group": "15 years and over"
+          },
+          "vectors": [
+            "v2063004",
+            "v2063382"
+          ],
+          "periods": [
+            "2026-10-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LIVE-3",
+      "release_id": "dq261106a",
+      "title": "Suppressed cell in Labour force characteristics, monthly, seasonall (Quality Flag ..)",
+      "summary": "Statistics Canada suppressed or flagged this estimate (STATUS='..').",
+      "quality_flag": "..",
+      "reliable": false,
+      "methodology_ids": [
+        "M2"
+      ],
+      "mentions": {},
+      "facts": [
+        {
+          "id": "F3_1",
+          "probe_type": "suppressed_cell",
+          "human": "suppressed estimate (quality flag ..)",
+          "cut": {
+            "Geography": "Canada",
+            "Labour force characteristics": "Employment"
+          },
+          "held_at": {
+            "Gender": "Men+",
+            "Age group": "25 to 54 years"
+          },
+          "vectors": [
+            "v101884954"
+          ],
+          "periods": [
+            "1976-01-01"
+          ]
+        }
+      ]
+    }
+  ],
+  "editorial_memory": [
+    {
+      "id": "H1",
+      "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+    },
+    {
+      "id": "H2",
+      "summary": "Rejected draft prose containing unverified quantity words or bare digits; all claims must bind via {{fact_id.human}}."
+    }
+  ]
+}

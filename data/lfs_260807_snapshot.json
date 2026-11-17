@@ -1,0 +1,254 @@
+{
+  "release": {
+    "id": "dq260807a",
+    "date": "2026-08-07",
+    "title": "Labour Force Survey, July 2026",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260807/dq260807a-eng.htm",
+    "pid": 14100287,
+    "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028701",
+    "highlights": "Employment increased by 75,000 (+0.4%) in July 2026 and the employment rate rose 0.1 percentage points to 60.9%. The unemployment rate declined 0.1 percentage points to 6.4%. Employment rose among core-aged people (25 to 54 years old) (+51,000; +0.4%), mostly for women in that age group (+33,000; +0.5%). The unemployment rate for core-aged women fell 0.3 percentage points to 5.2%, while youth unemployment held steady at 12.6%. Employment increased in Ontario (+52,000; +0.6%), British Columbia (+18,000; +0.6%), Manitoba (+5,900; +0.8%), and Nova Scotia (+4,600; +0.9%)."
+  },
+  "methodology_rules": [
+    {
+      "id": "M1",
+      "title": "Age-structure confounding in provincial 15+ rate comparisons",
+      "rule": "Do not publish raw 15-and-over employment or participation rate gaps across provinces as labour-market differences. Comparing Alberta and Newfoundland and Labrador on the 15+ denominator yields a 13.0 percentage point gap, whereas holding age group to prime working age (25 to 54 years) yields 3.4 points; roughly three-quarters of the 15+ gap is population age structure rather than labour-market conditions.",
+      "source": "docs/remine-known-limitations.md#lesson-5",
+      "confirmed": true,
+      "semantic_rule": {
+        "comparative_dim": "Geography",
+        "confounder_dim": "Age group",
+        "required_benchmark": "25 to 54 years",
+        "unstandardized_aggregate": "15 years and over",
+        "explanation": "Three-quarters of the raw 15+ provincial employment rate gap reflects population age composition rather than labour-market conditions."
+      }
+    },
+    {
+      "id": "M2",
+      "title": "Population denominator precision for gender and age cuts",
+      "rule": "When a series is held at Age group = '25 to 54 years' and Gender = 'Women+', prose must name 'core-aged women' rather than 'women' as a whole, and explain that an all-ages comparison would be affected by differing age structures across populations.",
+      "source": "docs/remine-known-limitations.md#lesson-4",
+      "confirmed": true
+    },
+    {
+      "id": "M3",
+      "title": "Multi-year and long-run endpoint comparisons",
+      "rule": "Seasonally adjusted multi-year or long-run comparisons measure cumulative shifts between endpoints, not single-month movements or linear paths. Prose must distinguish share of total employment (which reflects population size plus employment rate) from an employment rate gap.",
+      "source": "surveys.yaml#14100287",
+      "confirmed": true
+    },
+    {
+      "id": "M4",
+      "title": "Coverage subtraction against The Daily mention map",
+      "rule": "A candidate bundle that merely restates monthly headline employment or unemployment movements already narrated in The Daily highlights should be skipped with rejection_category='already_in_daily'.",
+      "source": "remine/editor.py#check_differs_from_daily",
+      "confirmed": true
+    },
+    {
+      "id": "M5",
+      "title": "Unverified informal cyclical heuristic",
+      "rule": "Draft note (unconfirmed): treat any summer movement in retail trade as structural shift.",
+      "source": "scratch/unverified-notes.txt",
+      "confirmed": false
+    }
+  ],
+  "candidate_briefs": [
+    {
+      "id": "LFS-201",
+      "release_id": "dq260807a",
+      "title": "Long-run participation and employment rates among core-aged women (1976 to 2026)",
+      "summary": "Compares July 2026 seasonally adjusted participation and employment rates for core-aged women (25 to 54 years) against the earliest period in Table 14-10-0287-01 (January 1976).",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M2", "M3"],
+      "mentions": {
+        "Gender|Women+": true,
+        "Age group|25 to 54 years": true,
+        "Period|1976-01": false
+      },
+      "facts": [
+        {
+          "id": "F201_1",
+          "probe_type": "long_run_compare",
+          "human": "as of July 2026, core-aged women's participation rate was 33.8 percentage points higher than in January 1976 (85.6% against 51.8%)",
+          "cut": {
+            "Gender": "Women+",
+            "Labour force characteristics": "Participation rate"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Age group": "25 to 54 years"
+          },
+          "vectors": ["v2062969"],
+          "periods": ["1976-01", "2026-07"]
+        },
+        {
+          "id": "F201_2",
+          "probe_type": "long_run_compare",
+          "human": "as of July 2026, core-aged women's employment rate was 33.0 percentage points higher than in January 1976 (81.2% against 48.2%)",
+          "cut": {
+            "Gender": "Women+",
+            "Labour force characteristics": "Employment rate"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Age group": "25 to 54 years"
+          },
+          "vectors": ["v2062970"],
+          "periods": ["1976-01", "2026-07"]
+        }
+      ]
+    },
+    {
+      "id": "LFS-202",
+      "release_id": "dq260807a",
+      "title": "Core-aged share of employment and employment-rate gap against young workers (2021 to 2026)",
+      "summary": "Measures the multi-year shift in core-aged workers' share of total employment and the widening employment rate gap between core-aged workers (25 to 54 years) and youth (15 to 24 years) from August 2021 to July 2026.",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M3"],
+      "mentions": {
+        "Age group|25 to 54 years": true,
+        "Age group|15 to 24 years": true,
+        "Measure|Share of employment": false
+      },
+      "facts": [
+        {
+          "id": "F202_1",
+          "probe_type": "share_of_total",
+          "human": "between August 2021 and July 2026, core-aged workers' share of total employment rose from 64.9% to 66.6%",
+          "cut": {
+            "Age group": "25 to 54 years",
+            "Labour force characteristics": "Employment"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Gender": "Total - Gender"
+          },
+          "vectors": ["v2062946"],
+          "periods": ["2021-08", "2026-07"]
+        },
+        {
+          "id": "F202_2",
+          "probe_type": "gap_trend",
+          "human": "between August 2021 and July 2026, the employment rate gap between core-aged workers and young workers widened by 3.8 percentage points",
+          "cut": {
+            "Age group_high": "25 to 54 years",
+            "Age group_low": "15 to 24 years",
+            "Labour force characteristics": "Employment rate"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Gender": "Total - Gender"
+          },
+          "vectors": ["v2062952", "v2062844"],
+          "periods": ["2021-08", "2026-07"]
+        }
+      ]
+    },
+    {
+      "id": "LFS-203",
+      "release_id": "dq260807a",
+      "title": "Raw 15+ provincial employment-rate gap between Alberta and Newfoundland and Labrador",
+      "summary": "Compares the unadjusted 15-and-over provincial employment rate in Alberta against Newfoundland and Labrador without holding age group to prime working age (25 to 54 years).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": false,
+      "confound_risk": "Raw comparison across Geography on unstandardized aggregate '15 years and over' without age-standardization (violates M1).",
+      "methodology_ids": ["M1"],
+      "mentions": {
+        "Geography|Alberta": true,
+        "Geography|Newfoundland and Labrador": true
+      },
+      "facts": [
+        {
+          "id": "F203_1",
+          "probe_type": "gap_between_members",
+          "human": "in July 2026, the 15-and-over employment rate gap between Alberta and Newfoundland and Labrador was 13.0 percentage points (compared with 3.4 points on the prime-age 25 to 54 band)",
+          "cut": {
+            "Geography_high": "Alberta",
+            "Geography_low": "Newfoundland and Labrador",
+            "Labour force characteristics": "Employment rate"
+          },
+          "held_at": {
+            "Age group": "15 years and over",
+            "Gender": "Total - Gender"
+          },
+          "vectors": ["v2064516", "v2063004"],
+          "periods": ["2026-07"]
+        }
+      ]
+    },
+    {
+      "id": "LFS-204",
+      "release_id": "dq260807a",
+      "title": "Monthly headline employment gain in Ontario and Canada",
+      "summary": "Reports the July 2026 month-over-month employment increase in Ontario (+52,000; +0.6%) and national employment growth (+75,000; +0.4%) that lead The Daily bulletin.",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M4"],
+      "mentions": {
+        "Geography|Ontario": true,
+        "Geography|Canada": true,
+        "Labour force characteristics|Employment": true
+      },
+      "facts": [
+        {
+          "id": "F204_1",
+          "probe_type": "month_over_month",
+          "human": "in July 2026, employment in Ontario rose by 52,000 (+0.6%) while national employment increased by 75,000 (+0.4%)",
+          "cut": {
+            "Geography": "Ontario",
+            "Labour force characteristics": "Employment"
+          },
+          "held_at": {
+            "Age group": "15 years and over",
+            "Gender": "Total - Gender"
+          },
+          "vectors": ["v2063890", "v2062811"],
+          "periods": ["2026-06", "2026-07"]
+        }
+      ]
+    },
+    {
+      "id": "LFS-205",
+      "release_id": "dq260807a",
+      "title": "Small sub-provincial agricultural youth sub-sample (Quality Flag F)",
+      "summary": "Unreliable small-cell slice flagged by Statistics Canada as too unreliable to be published (quality_flag='F', standard error exceeds release threshold).",
+      "quality_flag": "F",
+      "reliable": false,
+      "methodology_ids": ["M3"],
+      "mentions": {},
+      "facts": [
+        {
+          "id": "F205_1",
+          "probe_type": "level_threshold",
+          "human": "suppressed sub-sample estimate",
+          "cut": {
+            "Age group": "15 to 24 years",
+            "Industry": "Agriculture"
+          },
+          "held_at": {
+            "Geography": "Prince Edward Island"
+          },
+          "vectors": ["v9990205"],
+          "periods": ["2026-07"]
+        }
+      ]
+    }
+  ],
+  "editorial_memory": [
+    {
+      "id": "H1",
+      "summary": "Rejected an earlier provincial employment rate story comparing Alberta and Atlantic provinces on the 15+ denominator because three-quarters of the gap reflected age composition rather than prime-age labour demand."
+    },
+    {
+      "id": "H2",
+      "summary": "Rejected an early draft that wrote 'nearly double' in English prose for a 2.52x ratio; all quantitative claims must be bound from {{fact_id.human}} tokens."
+    },
+    {
+      "id": "H3",
+      "summary": "Approved a long-run participation story once the population denominator was explicitly labelled 'core-aged women' rather than 'all women'."
+    }
+  ]
+}

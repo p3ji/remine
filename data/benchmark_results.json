@@ -1,0 +1,510 @@
+{
+  "generated_at": "2026-11-13 01:15:19",
+  "runs": [
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "replay",
+      "gate0": false,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 1,
+      "llm_calls": 9,
+      "elapsed_s": 0.01,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 2,
+        "LFS-203": 1,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "replay",
+      "gate0": true,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 1,
+      "llm_calls": 8,
+      "elapsed_s": 0.01,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 2,
+        "LFS-203": 0,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "qwen3.8-27b",
+      "gate0": false,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 8,
+      "elapsed_s": 368.36,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 1,
+        "LFS-203": 1,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "qwen3.8-27b",
+      "gate0": true,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 7,
+      "elapsed_s": 323.98,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 1,
+        "LFS-203": 0,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "deepseek-v4-flash@q8_0",
+      "gate0": false,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 8,
+      "elapsed_s": 329.69,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 1,
+        "LFS-203": 1,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "deepseek-v4-flash@q8_0",
+      "gate0": true,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 5,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 7,
+      "elapsed_s": 322.71,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "publish",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 1,
+        "LFS-203": 0,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "microsoft/phi-4",
+      "gate0": false,
+      "verdict_accuracy": 0.8,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 4,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 10,
+      "elapsed_s": 23.38,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "needs_editorial_review",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 2,
+        "LFS-203": 1,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "LFS Aug 2026 (Benchmark)",
+      "snapshot_file": "lfs_260807_snapshot.json",
+      "model": "microsoft/phi-4",
+      "gate0": true,
+      "verdict_accuracy": 0.8,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 4,
+      "total_briefs": 5,
+      "recovered_via_retry": 0,
+      "llm_calls": 9,
+      "elapsed_s": 19.8,
+      "verdicts": {
+        "LFS-201": "publish",
+        "LFS-202": "needs_editorial_review",
+        "LFS-203": "skip",
+        "LFS-204": "skip",
+        "LFS-205": "unreliable_data"
+      },
+      "attempts": {
+        "LFS-201": 1,
+        "LFS-202": 2,
+        "LFS-203": 0,
+        "LFS-204": 1,
+        "LFS-205": 0
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "replay",
+      "gate0": false,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 8,
+      "total_briefs": 8,
+      "recovered_via_retry": 1,
+      "llm_calls": 16,
+      "elapsed_s": 0.01,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "publish",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 2,
+        "AI-303": 1,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 1,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "replay",
+      "gate0": true,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 8,
+      "total_briefs": 8,
+      "recovered_via_retry": 1,
+      "llm_calls": 15,
+      "elapsed_s": 0.01,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "publish",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 2,
+        "AI-303": 0,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 1,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "qwen3.8-27b",
+      "gate0": false,
+      "verdict_accuracy": 0.875,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 7,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 13,
+      "elapsed_s": 703.75,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "skip",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 1,
+        "AI-303": 1,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 1,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "qwen3.8-27b",
+      "gate0": true,
+      "verdict_accuracy": 1.0,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 8,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 14,
+      "elapsed_s": 884.8,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "publish",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 1,
+        "AI-303": 0,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 1,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "deepseek-v4-flash@q8_0",
+      "gate0": false,
+      "verdict_accuracy": 0.875,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 7,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 13,
+      "elapsed_s": 704.41,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "skip",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 1,
+        "AI-303": 1,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 1,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "deepseek-v4-flash@q8_0",
+      "gate0": true,
+      "verdict_accuracy": 0.75,
+      "rejection_accuracy": 0.6667,
+      "correct_verdicts": 6,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 12,
+      "elapsed_s": 701.64,
+      "verdicts": {
+        "AI-301": "publish",
+        "AI-302": "publish",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "publish",
+        "AI-307": "needs_editorial_review",
+        "AI-308": "needs_editorial_review"
+      },
+      "attempts": {
+        "AI-301": 1,
+        "AI-302": 1,
+        "AI-303": 0,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 1,
+        "AI-307": 0,
+        "AI-308": 0
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "microsoft/phi-4",
+      "gate0": false,
+      "verdict_accuracy": 0.5,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 4,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 17,
+      "elapsed_s": 44.14,
+      "verdicts": {
+        "AI-301": "needs_editorial_review",
+        "AI-302": "skip",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "needs_editorial_review",
+        "AI-307": "needs_editorial_review",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 2,
+        "AI-302": 1,
+        "AI-303": 1,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 2,
+        "AI-307": 2,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "AI Adoption Q2 2026 (Benchmark)",
+      "snapshot_file": "ai_adoption_snapshot.json",
+      "model": "microsoft/phi-4",
+      "gate0": true,
+      "verdict_accuracy": 0.5,
+      "rejection_accuracy": 1.0,
+      "correct_verdicts": 4,
+      "total_briefs": 8,
+      "recovered_via_retry": 0,
+      "llm_calls": 16,
+      "elapsed_s": 39.99,
+      "verdicts": {
+        "AI-301": "needs_editorial_review",
+        "AI-302": "skip",
+        "AI-303": "skip",
+        "AI-304": "skip",
+        "AI-305": "unreliable_data",
+        "AI-306": "needs_editorial_review",
+        "AI-307": "needs_editorial_review",
+        "AI-308": "skip"
+      },
+      "attempts": {
+        "AI-301": 2,
+        "AI-302": 1,
+        "AI-303": 0,
+        "AI-304": 1,
+        "AI-305": 0,
+        "AI-306": 2,
+        "AI-307": 2,
+        "AI-308": 1
+      }
+    },
+    {
+      "dataset": "Live Harvest: Building permits, September 2026",
+      "snapshot_file": "261112-dq261112a-34100292.json",
+      "model": "qwen3.8-27b",
+      "gate0": true,
+      "verdict_accuracy": null,
+      "rejection_accuracy": null,
+      "correct_verdicts": null,
+      "total_briefs": 4,
+      "recovered_via_retry": 0,
+      "llm_calls": 12,
+      "elapsed_s": 731.73,
+      "verdicts": {
+        "LIVE-1": "publish",
+        "LIVE-2": "publish",
+        "LIVE-3": "publish",
+        "LIVE-4": "publish"
+      },
+      "attempts": {
+        "LIVE-1": 1,
+        "LIVE-2": 1,
+        "LIVE-3": 1,
+        "LIVE-4": 1
+      }
+    }
+  ]
+}

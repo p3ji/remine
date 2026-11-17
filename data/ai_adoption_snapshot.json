@@ -1,0 +1,455 @@
+{
+  "release": {
+    "id": "dq260619a",
+    "date": "2026-06-19",
+    "title": "Canadian Survey on Business Conditions: Use of artificial intelligence by businesses, second quarter of 2026",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260619/dq260619a-eng.htm",
+    "pid": 33101045,
+    "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3310104501",
+    "highlights": "In the second quarter of 2026, 19.2% of Canadian businesses used artificial intelligence (AI) in producing goods or delivering services, up from 12.2% in the second quarter of 2025. Over one in seven businesses (14.5%) planned to adopt AI over the next 12 months. Businesses in information and cultural industries (38.6%) and finance and insurance (31.5%) were most likely to use or plan to use AI, while adoption was lowest in mining, quarrying, and oil and gas extraction (3.4%) and agriculture, forestry, fishing and hunting (4.9%). By province, AI use was highest in Ontario (16.8%) and Quebec (15.2%), compared with 8.4% in the Atlantic provinces."
+  },
+  "coverage_manifest": {
+    "release_id": "dq260619a",
+    "paper_catalogue": "11-621-M",
+    "claimed_coordinates": [
+      {
+        "tier": "daily",
+        "prose_quote": "19.2% of Canadian businesses used AI in producing goods or delivering services in Q2 2026, up from 12.2% in Q2 2025",
+        "dimensions": {
+          "Geography": "Canada",
+          "Enterprise size": "All enterprise sizes",
+          "Business AI status": "Active use in production or delivery",
+          "Industry": "All industries"
+        },
+        "value": 19.2,
+        "period": "2026-Q2"
+      },
+      {
+        "tier": "daily",
+        "prose_quote": "AI use was highest in Ontario (16.8%) and Quebec (15.2%), compared with 8.4% in the Atlantic provinces",
+        "dimensions": {
+          "Business AI status": "Active use in production or delivery",
+          "Enterprise size": "All enterprise sizes",
+          "Industry": "All industries"
+        },
+        "value": 16.8,
+        "period": "2026-Q2"
+      },
+      {
+        "tier": "analytical_paper",
+        "prose_quote": "Virtual agents or chatbots (34.8%), data analytics (32.9%), and text analytics (28.5%) were the most common planned AI applications across all Canadian industries",
+        "dimensions": {
+          "Geography": "Canada",
+          "Enterprise size": "All enterprise sizes",
+          "Application type": "Top applications",
+          "Industry": "All industries"
+        },
+        "value": 34.8,
+        "period": "2025-Q3"
+      },
+      {
+        "tier": "analytical_paper",
+        "prose_quote": "Large businesses with 100 or more employees were more than three times as likely to use AI (38.4%) compared with businesses with 1 to 19 employees (10.4%)",
+        "dimensions": {
+          "Geography": "Canada",
+          "Industry": "All industries",
+          "Business AI status": "Active use in production or delivery"
+        },
+        "value": 38.4,
+        "period": "2026-Q2"
+      }
+    ]
+  },
+  "methodology_rules": [
+    {
+      "id": "M1",
+      "title": "Enterprise-size confounding in regional business AI adoption comparisons",
+      "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas holding enterprise size to large businesses (100 employees or more) yields a 2.3 percentage point gap (39.1% vs 36.8%). Over 70% of the raw regional gap reflects enterprise size distribution (concentration of large corporate headquarters vs micro-enterprises) rather than regional technological adoption propensity.",
+      "source": "docs/remine-known-limitations.md#csbc-firm-size-confound",
+      "confirmed": true,
+      "semantic_rule": {
+        "comparative_dim": "Geography",
+        "confounder_dim": "Enterprise size",
+        "required_benchmark": "100 employees or more",
+        "unstandardized_aggregate": "All enterprise sizes",
+        "explanation": "Over two-thirds of the raw regional AI adoption gap reflects enterprise size composition (prevalence of micro-enterprises) rather than regional technological uptake."
+      }
+    },
+    {
+      "id": "M2",
+      "title": "Distinguishing active AI utilization from planned future adoption",
+      "rule": "When reporting AI adoption metrics, prose must explicitly distinguish between current active use in production or service delivery ('used AI in the past 12 months') and forward-looking plans ('plans to use AI over the next 12 months'). Confusing active deployment with speculative adoption intentions distorts market penetration estimates.",
+      "source": "surveys.yaml#33101045",
+      "confirmed": true
+    },
+    {
+      "id": "M3",
+      "title": "Multi-period adoption growth and percentage point definitions",
+      "rule": "Year-over-year changes in adoption percentages represent percentage point differences between two survey cross-sections (e.g. 19.2% vs 12.2% is a 7.0 percentage point increase), not relative compounding rates or individual firm transition dynamics. Prose must state percentage point changes and avoid colloquial compounding claims.",
+      "source": "remine/probes.py#year_over_year",
+      "confirmed": true
+    },
+    {
+      "id": "M4",
+      "title": "Two-tier coverage subtraction against The Daily and Analytical Paper",
+      "rule": "A candidate bundle that merely restates national headline adoption figures or lead highlights already narrated in The Daily highlights should be skipped with rejection_category='already_in_daily'. A bundle that restates broad summary tables already reported in the StatCan Analytical Study (Catalogue 11-621-M) should be skipped with rejection_category='already_in_analytical_paper'.",
+      "source": "remine/editor.py#check_coverage_manifest",
+      "confirmed": true
+    },
+    {
+      "id": "M5",
+      "title": "Unverified speculation on tech bubble contraction",
+      "rule": "Draft note (unconfirmed): assume software startup layoff waves indicate imminent collapse of small-firm AI tooling.",
+      "source": "scratch/unverified-notes.txt",
+      "confirmed": false
+    }
+  ],
+  "candidate_briefs": [
+    {
+      "id": "AI-301",
+      "release_id": "dq260619a",
+      "title": "Planned generative AI application mix: virtual agents lead recommendation systems",
+      "summary": "Examines the composition of planned AI applications among businesses intending to adopt AI over the next 12 months, where customer-facing virtual agents or chatbots (34.8%) substantially outpaced internal decision-making systems (13.1%) and recommendation systems (14.0%).",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M2"],
+      "mentions": {
+        "Application|Virtual agents or chatbots": true,
+        "Application|Recommendation systems": true,
+        "Measure|Application share": false
+      },
+      "facts": [
+        {
+          "id": "F301_1",
+          "probe_type": "category_compare",
+          "human": "among businesses planning to adopt AI over the next 12 months, 34.8% planned to deploy virtual agents or chatbots, compared with 14.0% for recommendation systems and 13.1% for AI-based decision-making systems",
+          "cut": {
+            "Application type": "Virtual agents or chatbots",
+            "Measure": "Percent of planning businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes"
+          },
+          "vectors": ["v33101045_04"],
+          "periods": ["2025-Q3"]
+        },
+        {
+          "id": "F301_2",
+          "probe_type": "application_share",
+          "human": "text analytics (28.5%) and marketing automation (25.6%) also substantially outpaced deep learning (8.9%) and computer vision (3.2%)",
+          "cut": {
+            "Application type": "Text analytics",
+            "Measure": "Percent of planning businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes"
+          },
+          "vectors": ["v33101045_08"],
+          "periods": ["2025-Q3"]
+        }
+      ]
+    },
+    {
+      "id": "AI-302",
+      "release_id": "dq260619a",
+      "title": "Year-over-year surge in active enterprise AI utilization (Q2 2025 to Q2 2026)",
+      "summary": "Measures the year-over-year expansion in Canadian enterprises actively utilizing AI in goods production or service delivery, rising from 12.2% in Q2 2025 to 19.2% in Q2 2026 (+7.0 percentage points).",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M2", "M3"],
+      "mentions": {
+        "Measure|Active AI utilization": true,
+        "Period|2026-Q2": true,
+        "Period|2025-Q2": false
+      },
+      "facts": [
+        {
+          "id": "F302_1",
+          "probe_type": "year_over_year",
+          "human": "between the second quarter of 2025 and the second quarter of 2026, the share of Canadian businesses actively using AI rose by 7.0 percentage points, from 12.2% to 19.2%",
+          "cut": {
+            "Business AI status": "Active use in production or delivery",
+            "Measure": "Percent of businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes"
+          },
+          "vectors": ["v33101045_01"],
+          "periods": ["2025-Q2", "2026-Q2"]
+        },
+        {
+          "id": "F302_2",
+          "probe_type": "gap_trend",
+          "human": "active AI deployment outpaced planned adoption intentions by 4.7 percentage points as of the second quarter of 2026",
+          "cut": {
+            "Business AI status": "Active use vs planned adoption",
+            "Measure": "Percentage point gap"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes"
+          },
+          "vectors": ["v33101045_01", "v33101045_02"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-303",
+      "release_id": "dq260619a",
+      "title": "Raw cross-provincial AI adoption gap between Ontario and the Atlantic provinces",
+      "summary": "Compares the headline AI adoption rate in Ontario (16.8%) against the Atlantic provinces (8.4%) across 'All enterprise sizes' without standardizing for firm size distribution.",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": false,
+      "confound_risk": "Raw comparison across Geography on unstandardized aggregate 'All enterprise sizes' without enterprise size standardization (violates M1).",
+      "methodology_ids": ["M1"],
+      "mentions": {
+        "Geography|Ontario": true,
+        "Geography|Atlantic provinces": true
+      },
+      "facts": [
+        {
+          "id": "F303_1",
+          "probe_type": "gap_between_members",
+          "human": "in the second quarter of 2026, the unstandardized AI adoption gap between Ontario and Atlantic Canada was 8.4 percentage points (16.8% vs 8.4%), whereas among enterprises with 100 or more employees the gap narrowed to 2.3 percentage points",
+          "cut": {
+            "Geography_high": "Ontario",
+            "Geography_low": "Atlantic provinces",
+            "Measure": "AI adoption rate"
+          },
+          "held_at": {
+            "Enterprise size": "All enterprise sizes",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_on", "v33101045_atl"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-304",
+      "release_id": "dq260619a",
+      "title": "National business AI adoption rate in Canada (Q2 2026)",
+      "summary": "Reports the top-level national figure that 19.2% of Canadian businesses used AI and 14.5% planned to use AI, which formed the lead sentence of The Daily release.",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M4"],
+      "mentions": {
+        "Geography|Canada": true,
+        "Business AI status|Active use in production or delivery": true,
+        "Measure|Percent of businesses": true
+      },
+      "facts": [
+        {
+          "id": "F304_1",
+          "probe_type": "headline_level",
+          "human": "in the second quarter of 2026, 19.2% of Canadian businesses used AI in producing goods or delivering services, while 14.5% planned to adopt AI over the next 12 months",
+          "cut": {
+            "Business AI status": "Active use in production or delivery",
+            "Measure": "Percent of businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes"
+          },
+          "vectors": ["v33101045_01"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-305",
+      "release_id": "dq260619a",
+      "title": "Deep learning adoption in rural Prince Edward Island forestry micro-enterprises",
+      "summary": "Unreliable small-cell slice flagged by Statistics Canada as too unreliable to be published (quality_flag='F', sampling error exceeds release threshold).",
+      "quality_flag": "F",
+      "reliable": false,
+      "methodology_ids": ["M2"],
+      "mentions": {},
+      "facts": [
+        {
+          "id": "F305_1",
+          "probe_type": "level_threshold",
+          "human": "suppressed sub-sample estimate",
+          "cut": {
+            "Application type": "Deep learning",
+            "Industry": "Forestry and logging"
+          },
+          "held_at": {
+            "Geography": "Prince Edward Island",
+            "Enterprise size": "1 to 4 employees"
+          },
+          "vectors": ["v33101045_f"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-306",
+      "release_id": "dq260619a",
+      "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
+      "summary": "Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "is_decomposition": true,
+      "methodology_ids": ["M1", "M2"],
+      "mentions": {
+        "Geography|Ontario": true,
+        "Geography|Atlantic provinces": true,
+        "Enterprise size|100 employees or more": false,
+        "Enterprise size|1 to 19 employees": false
+      },
+      "facts": [
+        {
+          "id": "F306_1",
+          "probe_type": "surface_gap",
+          "human": "across all enterprise sizes, Ontario's AI adoption rate was 16.8% compared with 8.4% in the Atlantic provinces (an 8.4 percentage point margin)",
+          "cut": {
+            "Geography_high": "Ontario",
+            "Geography_low": "Atlantic provinces",
+            "Measure": "AI adoption rate"
+          },
+          "held_at": {
+            "Enterprise size": "All enterprise sizes",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_on", "v33101045_atl"],
+          "periods": ["2026-Q2"]
+        },
+        {
+          "id": "F306_2",
+          "probe_type": "size_gradient",
+          "human": "enterprises with 100 or more employees adopted AI at 38.4%, compared with 10.4% for small businesses with 1 to 19 employees",
+          "cut": {
+            "Enterprise size_high": "100 employees or more",
+            "Enterprise size_low": "1 to 19 employees",
+            "Measure": "AI adoption rate"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_lrg", "v33101045_sml"],
+          "periods": ["2026-Q2"]
+        },
+        {
+          "id": "F306_3",
+          "probe_type": "benchmark_gap",
+          "human": "among enterprises with 100 or more employees, the gap between Ontario (39.1%) and the Atlantic provinces (36.8%) narrowed to 2.3 percentage points",
+          "cut": {
+            "Geography_high": "Ontario",
+            "Geography_low": "Atlantic provinces",
+            "Measure": "AI adoption rate"
+          },
+          "held_at": {
+            "Enterprise size": "100 employees or more",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_on_lrg", "v33101045_atl_lrg"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-307",
+      "release_id": "dq260619a",
+      "title": "Micro-enterprise AI adoption lag driven by information uncertainty rather than outright rejection",
+      "summary": "Investigates whether small-firm AI adoption lag stems from active rejection or informational uncertainty. While active non-adoption is virtually identical between micro-enterprises and large firms (67.1% vs 65.8%), micro-enterprises report an 'Unknown' adoption status at twice the rate of large enterprises (31.4% vs 15.8%).",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M2"],
+      "mentions": {
+        "Enterprise size|1 to 4 employees": false,
+        "Enterprise size|100 employees or more": false,
+        "Business AI status|Unknown": false
+      },
+      "facts": [
+        {
+          "id": "F307_1",
+          "probe_type": "uncertainty_gradient",
+          "human": "businesses with 1 to 4 employees reported an unknown or uncertain status regarding future AI adoption at 31.4%, compared with 15.8% for large enterprises with 100 or more employees",
+          "cut": {
+            "Enterprise size_high": "1 to 4 employees",
+            "Enterprise size_low": "100 employees or more",
+            "Business AI status": "Unknown or uncertain",
+            "Measure": "Percent of businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_unk_micro", "v33101045_unk_lrg"],
+          "periods": ["2026-Q2"]
+        },
+        {
+          "id": "F307_2",
+          "probe_type": "rejection_parity",
+          "human": "rates of active non-adoption remained comparable across scale, with 67.1% of micro-enterprises and 65.8% of large enterprises stating they do not plan to adopt AI",
+          "cut": {
+            "Enterprise size_micro": "1 to 4 employees",
+            "Enterprise size_lrg": "100 employees or more",
+            "Business AI status": "Does not plan to use AI",
+            "Measure": "Percent of businesses"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_no_micro", "v33101045_no_lrg"],
+          "periods": ["2026-Q2"]
+        }
+      ]
+    },
+    {
+      "id": "AI-308",
+      "release_id": "dq260619a",
+      "title": "National planned AI application mix across Canadian businesses",
+      "summary": "Measures top planned AI tools (virtual agents 34.8%, data analytics 32.9%, text analytics 28.5%) across all industries, duplicating Section 3 of Analytical Paper Catalogue 11-621-M.",
+      "quality_flag": "A",
+      "reliable": true,
+      "methodology_ids": ["M4"],
+      "mentions": {
+        "Application|Virtual agents or chatbots": true,
+        "Application|Data analytics": true,
+        "Application|Text analytics": true
+      },
+      "facts": [
+        {
+          "id": "F308_1",
+          "probe_type": "paper_table_echo",
+          "human": "virtual agents (34.8%), data analytics (32.9%), and text analytics (28.5%) were the three leading planned AI applications across all Canadian businesses",
+          "cut": {
+            "Geography": "Canada",
+            "Enterprise size": "All enterprise sizes",
+            "Application type": "Top applications",
+            "Measure": "Percent of planning businesses"
+          },
+          "held_at": {
+            "Industry": "All industries"
+          },
+          "vectors": ["v33101045_04", "v33101045_05", "v33101045_08"],
+          "periods": ["2025-Q3"]
+        }
+      ]
+    }
+  ],
+  "editorial_memory": [
+    {
+      "id": "H1",
+      "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+    },
+    {
+      "id": "H2",
+      "summary": "Rejected an early draft that wrote 'jumped nearly double'; all quantitative claims must be bound from {{fact_id.human}} tokens."
+    },
+    {
+      "id": "H3",
+      "summary": "Approved an AI application mix story that strictly distinguished active deployment from planned adoption intentions."
+    }
+  ]
+}

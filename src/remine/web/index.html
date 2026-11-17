@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remine · Token-Bound Agentic Re-Mining Workbench</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">R</div>
+      <div>
+        <h1>REMINE <span class="brand-sub">// StatCan Secondary Journalism Workbench</span></h1>
+        <p class="tagline">Two-Tier Coverage Subtraction · MCP Retrieval · Gate 0 Standardization · Zero-Hallucination Token Binding</p>
+      </div>
+    </div>
+    <div class="status-pills">
+      <span id="mcp-pill" class="pill pill-neutral">MCP: probing...</span>
+      <span id="llm-pill" class="pill pill-neutral">Local /v1: probing...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="control-panel card">
+      <div class="control-row">
+        <label class="field">
+          <span>Release Snapshot</span>
+          <select id="snapshot-select"></select>
+        </label>
+        <label class="field">
+          <span>Execution Mode</span>
+          <select id="mode-select">
+            <option value="replay">Replay (Deterministic Audit)</option>
+            <option value="live">Live Local LLM (/v1)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Local Model</span>
+          <select id="model-select">
+            <option value="qwen3.8-27b">qwen3.8-27b</option>
+            <option value="deepseek-v4-flash@q8_0">deepseek-v4-flash@q8_0</option>
+            <option value="microsoft/phi-4">microsoft/phi-4</option>
+          </select>
+        </label>
+        <label class="toggle-field" title="Enforce deterministic Gate 0 semantic standardization check before LLM calls">
+          <input type="checkbox" id="gate0-toggle" checked>
+          <span>Gate 0 Semantic Guard</span>
+        </label>
+        <button id="run-btn" class="btn btn-primary" type="button">Run Agent Swarm</button>
+      </div>
+
+      <div class="harvest-row">
+        <span class="harvest-label">Live StatCan Harvester:</span>
+        <input id="harvest-date" type="text" placeholder="YYMMDD (blank = latest Daily)" maxlength="6" aria-label="Daily release date YYMMDD">
+        <input id="harvest-pid" type="text" placeholder="Optional 8-digit PID (e.g. 14100287)" maxlength="10" aria-label="Cube PID">
+        <button id="harvest-btn" class="btn btn-secondary" type="button">Harvest The Daily + WDS</button>
+        <span id="status-msg" class="status-msg"></span>
+      </div>
+    </section>
+
+    <section class="release-banner card" id="release-banner"></section>
+
+    <section class="kpi-strip" id="kpi-strip"></section>
+
+    <section class="pipeline-grid">
+      <div class="card pipeline-card">
+        <div class="section-head">
+          <div>
+            <h2>LangGraph State Machine &amp; Node Path</h2>
+            <p class="muted">Click any candidate brief pill below to inspect its visited nodes, retry loops, and MCP calls.</p>
+          </div>
+          <span class="badge-mono">7 Nodes · Bounded Retry</span>
+        </div>
+        <div id="brief-pills" class="brief-pills"></div>
+        <div id="graph-svg-wrap" class="graph-svg-wrap"></div>
+      </div>
+
+      <div class="card trace-card">
+        <div class="section-head">
+          <div>
+            <h2>Node-by-Node Trace &amp; MCP Audit</h2>
+            <p class="muted" id="trace-subtitle">Select a brief to inspect transitions.</p>
+          </div>
+        </div>
+        <div id="trace-detail" class="trace-detail"></div>
+      </div>
+    </section>
+
+    <section class="tabs-bar">
+      <button class="tab-btn active" data-tab="stories" type="button">Published Stories &amp; Token Binding</button>
+      <button class="tab-btn" data-tab="ledger" type="button">Audit Ledger &amp; Coverage Manifest</button>
+      <button class="tab-btn" data-tab="review" type="button">Human Review &amp; Reliability Queue</button>
+      <button class="tab-btn" data-tab="benchmarks" type="button">Evaluation &amp; Multi-Model Benchmarks</button>
+    </section>
+
+    <section id="tab-stories" class="tab-panel active"></section>
+    <section id="tab-ledger" class="tab-panel"></section>
+    <section id="tab-review" class="tab-panel"></section>
+    <section id="tab-benchmarks" class="tab-panel"></section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

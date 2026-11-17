@@ -1,0 +1,255 @@
+{
+  "release": {
+    "id": "dq261112a",
+    "date": "2026-11-12",
+    "title": "Building permits, September 2026",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261112/dq261112a-eng.htm",
+    "pid": 34100292,
+    "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+    "highlights": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Release schedule Previous release PDF (491 KB) Released: 2026-11-12 Select geography Building permits — Canada $12.9 billion September 2026 -4 .1% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — N.L. $0.1 billion September 2026 -3 0.5% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — P.E.I."
+  },
+  "coverage_manifest": {
+    "release_id": "dq261112a",
+    "paper_catalogue": null,
+    "claimed_coordinates": [
+      {
+        "tier": "daily",
+        "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+        "dimensions": {
+          "Geography": "Prince Edward Island"
+        },
+        "value": 544794.0,
+        "period": "2026-09-01"
+      },
+      {
+        "tier": "daily",
+        "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+        "dimensions": {
+          "Geography": "Newfoundland and Labrador"
+        },
+        "value": 542834.0,
+        "period": "2026-09-01"
+      },
+      {
+        "tier": "daily",
+        "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+        "dimensions": {
+          "Geography": "Nova Scotia"
+        },
+        "value": 539128.0,
+        "period": "2026-09-01"
+      }
+    ]
+  },
+  "methodology_rules": [
+    {
+      "id": "M1",
+      "title": "Dimensional comparability and aggregate isolation",
+      "rule": "Compare non-aggregate partition members on the same unit and seasonal-adjustment basis.",
+      "source": "wds:getCubeMetadata#34100292",
+      "confirmed": true
+    },
+    {
+      "id": "M2",
+      "title": "Population denominator and subgroup precision",
+      "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+      "source": "wds:getCubeMetadata#34100292",
+      "confirmed": true
+    },
+    {
+      "id": "M3",
+      "title": "Endpoint and multi-period comparison caveats",
+      "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+      "source": "wds:getCubeMetadata#34100292",
+      "confirmed": true
+    },
+    {
+      "id": "M4",
+      "title": "Coverage subtraction against The Daily prose",
+      "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+      "source": "remine/tools.py#check_coverage_overlaps",
+      "confirmed": true
+    },
+    {
+      "id": "M5",
+      "title": "Unconfirmed informal seasonal speculation",
+      "rule": "Unverified scratch note: treat single-period weather swings as permanent structural breaks.",
+      "source": "scratch/unverified-notes.txt",
+      "confirmed": false
+    }
+  ],
+  "candidate_briefs": [
+    {
+      "id": "LIVE-1",
+      "release_id": "dq261112a",
+      "title": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional",
+      "summary": "Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "confound_risk": null,
+      "methodology_ids": [
+        "M2",
+        "M3"
+      ],
+      "mentions": {
+        "Type of building|Total non-residential": false,
+        "Type of building|Total institutional and governmental": false
+      },
+      "facts": [
+        {
+          "id": "F1_1",
+          "probe_type": "gap_trend",
+          "human": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+          "cut": {
+            "Type of building_high": "Total non-residential",
+            "Type of building_low": "Total institutional and governmental"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Type of work": "Types of work, total",
+            "Variables": "Value of permits"
+          },
+          "vectors": [
+            "v1675119649",
+            "v1675119652"
+          ],
+          "periods": [
+            "2023-10-01",
+            "2026-09-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LIVE-2",
+      "release_id": "dq261112a",
+      "title": "Long Run Compare: Type of building=Total non-residential",
+      "summary": "Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "confound_risk": null,
+      "methodology_ids": [
+        "M2",
+        "M3"
+      ],
+      "mentions": {
+        "Type of building|Total non-residential": false
+      },
+      "facts": [
+        {
+          "id": "F2_1",
+          "probe_type": "long_run_compare",
+          "human": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+          "cut": {
+            "Type of building": "Total non-residential"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Type of work": "Types of work, total",
+            "Variables": "Value of permits"
+          },
+          "vectors": [
+            "v1675119649"
+          ],
+          "periods": [
+            "2021-10-01",
+            "2026-09-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LIVE-3",
+      "release_id": "dq261112a",
+      "title": "Period Change: Type of building=Total residential",
+      "summary": "Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "confound_risk": null,
+      "methodology_ids": [
+        "M2",
+        "M3"
+      ],
+      "mentions": {
+        "Type of building|Total residential": false
+      },
+      "facts": [
+        {
+          "id": "F3_1",
+          "probe_type": "period_change",
+          "human": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+          "cut": {
+            "Type of building": "Total residential"
+          },
+          "held_at": {
+            "Geography": "Canada",
+            "Type of work": "Types of work, total",
+            "Variables": "Value of permits"
+          },
+          "vectors": [
+            "v1675119646"
+          ],
+          "periods": [
+            "2026-08-01",
+            "2026-09-01"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LIVE-4",
+      "release_id": "dq261112a",
+      "title": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island",
+      "summary": "Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+      "quality_flag": "A",
+      "reliable": true,
+      "standardized": true,
+      "confound_risk": null,
+      "methodology_ids": [
+        "M4",
+        "M3"
+      ],
+      "mentions": {
+        "Geography|Ontario": true,
+        "Geography|Prince Edward Island": false
+      },
+      "facts": [
+        {
+          "id": "F4_1",
+          "probe_type": "gap_trend",
+          "human": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+          "cut": {
+            "Geography_high": "Ontario",
+            "Geography_low": "Prince Edward Island"
+          },
+          "held_at": {
+            "Type of building": "Total residential and non-residential",
+            "Type of work": "Types of work, total",
+            "Variables": "Value of permits"
+          },
+          "vectors": [
+            "v1675119693",
+            "v1675119661"
+          ],
+          "periods": [
+            "2023-10-01",
+            "2026-09-01"
+          ]
+        }
+      ]
+    }
+  ],
+  "editorial_memory": [
+    {
+      "id": "H1",
+      "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+    },
+    {
+      "id": "H2",
+      "summary": "Rejected draft prose containing unverified quantity words or bare digits; all claims must bind via {{fact_id.human}}."
+    }
+  ]
+}
