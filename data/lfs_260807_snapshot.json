@@ -60,7 +60,10 @@
       "summary": "Compares July 2026 seasonally adjusted participation and employment rates for core-aged women (25 to 54 years) against the earliest period in Table 14-10-0287-01 (January 1976).",
       "quality_flag": "A",
       "reliable": true,
-      "methodology_ids": ["M2", "M3"],
+      "methodology_ids": [
+        "M2",
+        "M3"
+      ],
       "mentions": {
         "Gender|Women+": true,
         "Age group|25 to 54 years": true,
@@ -79,8 +82,29 @@
             "Geography": "Canada",
             "Age group": "25 to 54 years"
           },
-          "vectors": ["v2062969"],
-          "periods": ["1976-01", "2026-07"]
+          "vectors": [
+            "v2062969"
+          ],
+          "periods": [
+            "1976-01",
+            "2026-07"
+          ],
+          "breakdown": {
+            "columns": [
+              "Indicator (Women+, 25 to 54)",
+              "Jan 1976",
+              "Jul 2026",
+              "Change"
+            ],
+            "rows": [
+              [
+                "Participation rate (v2062969)",
+                "51.8%",
+                "85.6%",
+                "+33.8 pp"
+              ]
+            ]
+          }
         },
         {
           "id": "F201_2",
@@ -94,8 +118,29 @@
             "Geography": "Canada",
             "Age group": "25 to 54 years"
           },
-          "vectors": ["v2062970"],
-          "periods": ["1976-01", "2026-07"]
+          "vectors": [
+            "v2062970"
+          ],
+          "periods": [
+            "1976-01",
+            "2026-07"
+          ],
+          "breakdown": {
+            "columns": [
+              "Indicator (Women+, 25 to 54)",
+              "Jan 1976",
+              "Jul 2026",
+              "Change"
+            ],
+            "rows": [
+              [
+                "Employment rate (v2062970)",
+                "48.2%",
+                "81.2%",
+                "+33.0 pp"
+              ]
+            ]
+          }
         }
       ]
     },
@@ -106,7 +151,9 @@
       "summary": "Measures the multi-year shift in core-aged workers' share of total employment and the widening employment rate gap between core-aged workers (25 to 54 years) and youth (15 to 24 years) from August 2021 to July 2026.",
       "quality_flag": "A",
       "reliable": true,
-      "methodology_ids": ["M3"],
+      "methodology_ids": [
+        "M3"
+      ],
       "mentions": {
         "Age group|25 to 54 years": true,
         "Age group|15 to 24 years": true,
@@ -125,8 +172,29 @@
             "Geography": "Canada",
             "Gender": "Total - Gender"
           },
-          "vectors": ["v2062946"],
-          "periods": ["2021-08", "2026-07"]
+          "vectors": [
+            "v2062946"
+          ],
+          "periods": [
+            "2021-08",
+            "2026-07"
+          ],
+          "breakdown": {
+            "columns": [
+              "Series",
+              "Aug 2021",
+              "Jul 2026",
+              "Change"
+            ],
+            "rows": [
+              [
+                "Core-aged (25-54) share of total employment (v2062946)",
+                "64.9%",
+                "66.6%",
+                "+1.7 pp"
+              ]
+            ]
+          }
         },
         {
           "id": "F202_2",
@@ -141,8 +209,42 @@
             "Geography": "Canada",
             "Gender": "Total - Gender"
           },
-          "vectors": ["v2062952", "v2062844"],
-          "periods": ["2021-08", "2026-07"]
+          "vectors": [
+            "v2062952",
+            "v2062844"
+          ],
+          "periods": [
+            "2021-08",
+            "2026-07"
+          ],
+          "breakdown": {
+            "columns": [
+              "Series",
+              "Aug 2021",
+              "Jul 2026",
+              "Change"
+            ],
+            "rows": [
+              [
+                "Core-aged (25-54) employment rate (v2062952)",
+                "—",
+                "83.9%",
+                "—"
+              ],
+              [
+                "Youth (15-24) employment rate (v2062844)",
+                "—",
+                "55.4%",
+                "—"
+              ],
+              [
+                "Employment rate gap (25-54 minus 15-24)",
+                "24.7 pp",
+                "28.5 pp",
+                "+3.8 pp"
+              ]
+            ]
+          }
         }
       ]
     },
@@ -155,7 +257,9 @@
       "reliable": true,
       "standardized": false,
       "confound_risk": "Raw comparison across Geography on unstandardized aggregate '15 years and over' without age-standardization (violates M1).",
-      "methodology_ids": ["M1"],
+      "methodology_ids": [
+        "M1"
+      ],
       "mentions": {
         "Geography|Alberta": true,
         "Geography|Newfoundland and Labrador": true
@@ -174,8 +278,13 @@
             "Age group": "15 years and over",
             "Gender": "Total - Gender"
           },
-          "vectors": ["v2064516", "v2063004"],
-          "periods": ["2026-07"]
+          "vectors": [
+            "v2064516",
+            "v2063004"
+          ],
+          "periods": [
+            "2026-07"
+          ]
         }
       ]
     },
@@ -186,7 +295,9 @@
       "summary": "Reports the July 2026 month-over-month employment increase in Ontario (+52,000; +0.6%) and national employment growth (+75,000; +0.4%) that lead The Daily bulletin.",
       "quality_flag": "A",
       "reliable": true,
-      "methodology_ids": ["M4"],
+      "methodology_ids": [
+        "M4"
+      ],
       "mentions": {
         "Geography|Ontario": true,
         "Geography|Canada": true,
@@ -205,8 +316,14 @@
             "Age group": "15 years and over",
             "Gender": "Total - Gender"
           },
-          "vectors": ["v2063890", "v2062811"],
-          "periods": ["2026-06", "2026-07"]
+          "vectors": [
+            "v2063890",
+            "v2062811"
+          ],
+          "periods": [
+            "2026-06",
+            "2026-07"
+          ]
         }
       ]
     },
@@ -217,7 +334,9 @@
       "summary": "Unreliable small-cell slice flagged by Statistics Canada as too unreliable to be published (quality_flag='F', standard error exceeds release threshold).",
       "quality_flag": "F",
       "reliable": false,
-      "methodology_ids": ["M3"],
+      "methodology_ids": [
+        "M3"
+      ],
       "mentions": {},
       "facts": [
         {
@@ -231,8 +350,12 @@
           "held_at": {
             "Geography": "Prince Edward Island"
           },
-          "vectors": ["v9990205"],
-          "periods": ["2026-07"]
+          "vectors": [
+            "v9990205"
+          ],
+          "periods": [
+            "2026-07"
+          ]
         }
       ]
     }

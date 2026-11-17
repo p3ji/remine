@@ -385,6 +385,42 @@ function renderSourceDrawer() {
   `;
 }
 
+function buildStoryBreakdownTables(facts) {
+  const groups = [];
+  (facts || []).forEach((f) => {
+    const bd = f.breakdown;
+    if (!bd || !Array.isArray(bd.columns) || !Array.isArray(bd.rows) || bd.rows.length === 0) return;
+    const key = bd.columns.join("||");
+    const existing = groups.find((g) => g.key === key);
+    if (existing) {
+      existing.rows.push(...bd.rows);
+    } else {
+      groups.push({ key, columns: bd.columns, rows: [...bd.rows] });
+    }
+  });
+  return groups.map(
+    (g) => `
+      <div class="story-figures-wrap">
+        <div class="table-wrap">
+          <table class="data-table compact">
+            <thead>
+              <tr>${g.columns.map((c) => `<th>${escapeHtml(c)}</th>`).join("")}</tr>
+            </thead>
+            <tbody>
+              ${g.rows
+                .map(
+                  (row) =>
+                    `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `
+  );
+}
+
 function renderFindings(stories) {
   const listEl = qs("stories-list");
   listEl.innerHTML = "";
@@ -473,6 +509,15 @@ function renderFindings(stories) {
     entry.appendChild(kicker);
     entry.appendChild(headline);
     entry.appendChild(bodyEl);
+
+    const breakdownHtml = buildStoryBreakdownTables(story.facts);
+    if (breakdownHtml.length > 0) {
+      const figBox = document.createElement("div");
+      figBox.className = "story-figures-section";
+      figBox.innerHTML = `<div class="story-figures-label">Supporting figures</div>${breakdownHtml.join("")}`;
+      entry.appendChild(figBox);
+    }
+
     if (noteLines.length > 0) entry.appendChild(notes);
 
     const actions = document.createElement("div");

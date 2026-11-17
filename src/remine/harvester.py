@@ -750,6 +750,7 @@ def _fact_to_brief_entry(
                 "held_at": held_at,
                 "vectors": list(fact.vectors),
                 "periods": list(fact.periods),
+                **({"breakdown": fact.meta["breakdown"]} if "breakdown" in fact.meta else {}),
             }
         ],
     }

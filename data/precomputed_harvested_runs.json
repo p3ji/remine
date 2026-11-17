@@ -172,7 +172,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$4,158.1M",
+                    "$5,091.4M",
+                    "+$933.3M"
+                  ],
+                  [
+                    "Total institutional & governmental (v1675119652)",
+                    "$1,374.9M",
+                    "$1,586.6M",
+                    "+$211.7M"
+                  ],
+                  [
+                    "Gap (Non-residential minus Institutional)",
+                    "$2,783.2M",
+                    "$3,504.8M",
+                    "+$721.7M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
@@ -286,7 +314,23 @@
               "periods": [
                 "2021-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2021",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$3,858.0M",
+                    "$5,091.4M",
+                    "+$1,233.3M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
@@ -400,7 +444,23 @@
               "periods": [
                 "2026-08-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Aug 2026",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total residential (v1675119646)",
+                    "$8,261.2M",
+                    "$7,785.5M",
+                    "-$475.7M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
@@ -520,7 +580,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Geography (Total permits)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Ontario (v1675119693)",
+                    "$4,795.8M",
+                    "$5,347.8M",
+                    "+$552.0M"
+                  ],
+                  [
+                    "Prince Edward Island (v1675119661)",
+                    "$42.7M",
+                    "$49.8M",
+                    "+$7.2M"
+                  ],
+                  [
+                    "Gap (Ontario minus PEI)",
+                    "$4,753.1M",
+                    "$5,297.9M",
+                    "+$544.8M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
@@ -701,7 +789,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$4,158.1M",
+                    "$5,091.4M",
+                    "+$933.3M"
+                  ],
+                  [
+                    "Total institutional & governmental (v1675119652)",
+                    "$1,374.9M",
+                    "$1,586.6M",
+                    "+$211.7M"
+                  ],
+                  [
+                    "Gap (Non-residential minus Institutional)",
+                    "$2,783.2M",
+                    "$3,504.8M",
+                    "+$721.7M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -882,7 +998,23 @@
               "periods": [
                 "2021-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2021",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$3,858.0M",
+                    "$5,091.4M",
+                    "+$1,233.3M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -1063,7 +1195,23 @@
               "periods": [
                 "2026-08-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Aug 2026",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total residential (v1675119646)",
+                    "$8,261.2M",
+                    "$7,785.5M",
+                    "-$475.7M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -1245,7 +1393,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Geography (Total permits)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Ontario (v1675119693)",
+                    "$4,795.8M",
+                    "$5,347.8M",
+                    "+$552.0M"
+                  ],
+                  [
+                    "Prince Edward Island (v1675119661)",
+                    "$42.7M",
+                    "$49.8M",
+                    "+$7.2M"
+                  ],
+                  [
+                    "Gap (Ontario minus PEI)",
+                    "$4,753.1M",
+                    "$5,297.9M",
+                    "+$544.8M"
+                  ]
+                ]
+              }
             }
           ]
         }
@@ -1424,7 +1600,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$4,158.1M",
+                    "$5,091.4M",
+                    "+$933.3M"
+                  ],
+                  [
+                    "Total institutional & governmental (v1675119652)",
+                    "$1,374.9M",
+                    "$1,586.6M",
+                    "+$211.7M"
+                  ],
+                  [
+                    "Gap (Non-residential minus Institutional)",
+                    "$2,783.2M",
+                    "$3,504.8M",
+                    "+$721.7M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
@@ -1538,7 +1742,23 @@
               "periods": [
                 "2021-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2021",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$3,858.0M",
+                    "$5,091.4M",
+                    "+$1,233.3M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
@@ -1652,7 +1872,23 @@
               "periods": [
                 "2026-08-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Aug 2026",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total residential (v1675119646)",
+                    "$8,261.2M",
+                    "$7,785.5M",
+                    "-$475.7M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
@@ -1772,7 +2008,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Geography (Total permits)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Ontario (v1675119693)",
+                    "$4,795.8M",
+                    "$5,347.8M",
+                    "+$552.0M"
+                  ],
+                  [
+                    "Prince Edward Island (v1675119661)",
+                    "$42.7M",
+                    "$49.8M",
+                    "+$7.2M"
+                  ],
+                  [
+                    "Gap (Ontario minus PEI)",
+                    "$4,753.1M",
+                    "$5,297.9M",
+                    "+$544.8M"
+                  ]
+                ]
+              }
             }
           ],
           "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
@@ -1953,7 +2217,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$4,158.1M",
+                    "$5,091.4M",
+                    "+$933.3M"
+                  ],
+                  [
+                    "Total institutional & governmental (v1675119652)",
+                    "$1,374.9M",
+                    "$1,586.6M",
+                    "+$211.7M"
+                  ],
+                  [
+                    "Gap (Non-residential minus Institutional)",
+                    "$2,783.2M",
+                    "$3,504.8M",
+                    "+$721.7M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -2134,7 +2426,23 @@
               "periods": [
                 "2021-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Oct 2021",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total non-residential (v1675119649)",
+                    "$3,858.0M",
+                    "$5,091.4M",
+                    "+$1,233.3M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -2315,7 +2623,23 @@
               "periods": [
                 "2026-08-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Building type (Canada)",
+                  "Aug 2026",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Total residential (v1675119646)",
+                    "$8,261.2M",
+                    "$7,785.5M",
+                    "-$475.7M"
+                  ]
+                ]
+              }
             }
           ]
         },
@@ -2497,7 +2821,35 @@
               "periods": [
                 "2023-10-01",
                 "2026-09-01"
-              ]
+              ],
+              "breakdown": {
+                "columns": [
+                  "Geography (Total permits)",
+                  "Oct 2023",
+                  "Sep 2026",
+                  "Change"
+                ],
+                "rows": [
+                  [
+                    "Ontario (v1675119693)",
+                    "$4,795.8M",
+                    "$5,347.8M",
+                    "+$552.0M"
+                  ],
+                  [
+                    "Prince Edward Island (v1675119661)",
+                    "$42.7M",
+                    "$49.8M",
+                    "+$7.2M"
+                  ],
+                  [
+                    "Gap (Ontario minus PEI)",
+                    "$4,753.1M",
+                    "$5,297.9M",
+                    "+$544.8M"
+                  ]
+                ]
+              }
             }
           ]
         }

@@ -118,6 +118,7 @@ class Fact:
     held_at: dict[str, str]
     vectors: tuple[str, ...]
     periods: tuple[str, ...]
+    breakdown: dict[str, Any] | None = None
 
 
 @dataclass(frozen=True)

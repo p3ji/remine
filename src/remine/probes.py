@@ -340,6 +340,12 @@ def probe_gap_trend(df: pd.DataFrame, dim: str, cfg: dict[str, Any]) -> list[Pro
                     "high": hi,
                     "low": lo,
                     "periods_observed": len(series),
+                    "gap_start": float(series[0].values[0]),
+                    "gap_end": float(series[-1].values[0]),
+                    "hi_start": float(series[0].values[1]),
+                    "lo_start": float(series[0].values[2]),
+                    "hi_end": float(series[-1].values[1]),
+                    "lo_end": float(series[-1].values[2]),
                 },
             )
         )
@@ -548,6 +554,31 @@ def _describe_fact(
             f"the{of_m} gap between {hi} and {lo} {verb} by "
             f"{humanize_delta(abs(v[0]), fact.uom, fact.scalar, d, include_direction=False)}{among}"
         )
+        if "hi_start" in fact.meta and "hi_end" in fact.meta:
+            p0, p1 = humanize_period(fact.periods[0]), humanize_period(fact.periods[-1])
+            fact.meta["breakdown"] = {
+                "columns": ["Series", p0, p1, "Change"],
+                "rows": [
+                    [
+                        hi,
+                        humanize_value(fact.meta["hi_start"], fact.uom, fact.scalar, d),
+                        humanize_value(fact.meta["hi_end"], fact.uom, fact.scalar, d),
+                        humanize_delta(fact.meta["hi_end"] - fact.meta["hi_start"], fact.uom, fact.scalar, d),
+                    ],
+                    [
+                        lo,
+                        humanize_value(fact.meta["lo_start"], fact.uom, fact.scalar, d),
+                        humanize_value(fact.meta["lo_end"], fact.uom, fact.scalar, d),
+                        humanize_delta(fact.meta["lo_end"] - fact.meta["lo_start"], fact.uom, fact.scalar, d),
+                    ],
+                    [
+                        f"Gap ({hi} - {lo})",
+                        humanize_value(fact.meta["gap_start"], fact.uom, fact.scalar, d),
+                        humanize_value(fact.meta["gap_end"], fact.uom, fact.scalar, d),
+                        humanize_delta(v[0], fact.uom, fact.scalar, d),
+                    ],
+                ],
+            }
     elif fact.probe == "long_run_compare":
         fact.human = (
             f"as of {humanize_period(fact.periods[-1])}, {_possessive(subject)}{of_m} was "

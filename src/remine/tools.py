@@ -57,6 +57,7 @@ def _parse_fact(item: dict[str, Any]) -> Fact:
         held_at=dict(item["held_at"]),
         vectors=tuple(item["vectors"]),
         periods=tuple(item["periods"]),
+        breakdown=item.get("breakdown"),
     )
 
 

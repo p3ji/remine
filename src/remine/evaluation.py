@@ -120,8 +120,9 @@ def ablation_comparison(
 
 def _serialize_brief_facts(state: State) -> list[dict[str, Any]]:
     brief = state["brief"]
-    return [
-        {
+    out: list[dict[str, Any]] = []
+    for f in brief.facts:
+        item: dict[str, Any] = {
             "id": f.id,
             "probe_type": f.probe_type,
             "human": f.human,
@@ -130,8 +131,10 @@ def _serialize_brief_facts(state: State) -> list[dict[str, Any]]:
             "vectors": list(f.vectors),
             "periods": list(f.periods),
         }
-        for f in brief.facts
-    ]
+        if f.breakdown is not None:
+            item["breakdown"] = f.breakdown
+        out.append(item)
+    return out
 
 
 def serialize_run(

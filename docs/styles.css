@@ -467,6 +467,36 @@ a:focus-visible {
   gap: 4px;
 }
 
+.story-figures-section {
+  margin-top: 14px;
+}
+
+.story-figures-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-subtle);
+  margin-bottom: 6px;
+}
+
+.story-figures-wrap + .story-figures-wrap {
+  margin-top: 10px;
+}
+
+.data-table.compact th,
+.data-table.compact td {
+  padding: 6px 8px;
+  font-size: 0.84rem;
+}
+
+.data-table.compact td:not(:first-child),
+.data-table.compact th:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .story-notes strong {
   color: var(--ink);
   font-weight: 600;
