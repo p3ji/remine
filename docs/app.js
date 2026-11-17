@@ -10,6 +10,9 @@ const state = {
   selectedToken: null,
   selectedStoryId: null,
   highlightsExpanded: false,
+  wfBriefId: null,
+  wfStepIndex: 0,
+  wfTimer: null,
 };
 
 const PROCESS_STEPS = [
@@ -720,6 +723,236 @@ function renderProcessAndBenchmarks(data) {
   `;
 }
 
+const WF_NODE_META = {
+  gate: { label: "Gate 0", sub: "Quality & Guard", x: 16, y: 42, w: 104, h: 54 },
+  retrieve: { label: "MCP Lookup", sub: "Rules & Manifest", x: 144, y: 42, w: 106, h: 54 },
+  angle: { label: "Angle Check", sub: "Novelty Screen", x: 274, y: 42, w: 108, h: 54 },
+  draft: { label: "Drafter", sub: "Locked Figures", x: 406, y: 42, w: 108, h: 54 },
+  bind_check: { label: "Token Check", sub: "Numeral Contract", x: 538, y: 42, w: 108, h: 54 },
+  critic: { label: "Critic", sub: "Methods Audit", x: 670, y: 42, w: 104, h: 54 },
+  published: { label: "Verified", sub: "Ready to Share", x: 798, y: 42, w: 106, h: 54 },
+  filtered: { label: "Filtered / Held", sub: "Skipped or Suppressed", x: 140, y: 184, w: 176, h: 50 },
+  review: { label: "Human Review", sub: "Escalated Safety", x: 608, y: 184, w: 170, h: 50 },
+};
+
+function stopWorkflowPlayback() {
+  if (state.wfTimer) {
+    clearInterval(state.wfTimer);
+    state.wfTimer = null;
+  }
+  const btn = qs("wf-play-btn");
+  if (btn) btn.textContent = "Play";
+}
+
+function buildWorkflowSteps(row) {
+  const trace = Array.isArray(row?.trace) ? row.trace : [];
+  const steps = trace.map((ev, idx) => ({
+    idx,
+    node: ev.node,
+    status: ev.status,
+    attempt: ev.attempt || 0,
+    summary: formatStatCanReason(ev.summary || ""),
+    isTerminal: false,
+  }));
+  if (row) {
+    const v = row.verdict;
+    let outcomeNode = "published";
+    if (v === "skip" || v === "unreliable_data") outcomeNode = "filtered";
+    else if (v === "needs_editorial_review") outcomeNode = "review";
+    const lastEv = trace[trace.length - 1];
+    steps.push({
+      idx: steps.length,
+      node: outcomeNode,
+      status: v,
+      attempt: row.attempts || lastEv?.attempt || 0,
+      summary: formatStatCanReason(
+        row.reason || row.critic_note || formatVerdictMeta(v, row.rejection_category).label
+      ),
+      isTerminal: true,
+    });
+  }
+  return steps;
+}
+
+function renderWorkflowFrame() {
+  const row = (state.activeRun?.ledger || []).find((r) => r.brief_id === state.wfBriefId);
+  const svgWrap = qs("wf-svg-wrap");
+  const pillsEl = qs("wf-step-pills");
+  const logEl = qs("wf-step-log");
+  if (!row) {
+    svgWrap.innerHTML = "";
+    pillsEl.innerHTML = "";
+    logEl.innerHTML = "No items available to inspect.";
+    return;
+  }
+
+  const steps = buildWorkflowSteps(row);
+  const maxIdx = Math.max(0, steps.length - 1);
+  if (state.wfStepIndex > maxIdx) state.wfStepIndex = maxIdx;
+  const activeStep = steps[state.wfStepIndex];
+  const visibleSteps = steps.slice(0, state.wfStepIndex + 1);
+
+  const nodeState = {};
+  const edgeState = {};
+  visibleSteps.forEach((st, i) => {
+    const isCurrent = i === state.wfStepIndex;
+    let kind = "visited";
+    if (st.status === "retry" || st.status === "rejected") kind = "retry";
+    else if (st.status === "blocked" || st.status === "skip" || st.node === "filtered" || st.node === "review") {
+      kind = "blocked";
+    } else if (isCurrent) {
+      kind = "active";
+    }
+    nodeState[st.node] = kind;
+    if (i > 0) {
+      const prevNode = visibleSteps[i - 1].node;
+      const eKey = `${prevNode}->${st.node}`;
+      edgeState[eKey] = {
+        cls:
+          kind === "retry"
+            ? "retry-traversed"
+            : kind === "blocked"
+              ? "blocked-traversed"
+              : "traversed",
+        active: isCurrent,
+      };
+    }
+  });
+
+  const edges = [
+    { key: "gate->retrieve", d: "M 120 69 L 144 69" },
+    { key: "retrieve->angle", d: "M 250 69 L 274 69" },
+    { key: "angle->draft", d: "M 382 69 L 406 69" },
+    { key: "draft->bind_check", d: "M 514 69 L 538 69" },
+    { key: "bind_check->critic", d: "M 646 69 L 670 69" },
+    { key: "critic->published", d: "M 774 69 L 798 69" },
+    { key: "gate->filtered", d: "M 68 96 L 68 209 L 140 209" },
+    { key: "angle->filtered", d: "M 328 96 L 328 150 L 245 150 L 245 184" },
+    { key: "bind_check->draft", d: "M 592 96 L 592 136 L 460 136 L 460 96" },
+    { key: "critic->draft", d: "M 722 96 L 722 148 L 460 148 L 460 96" },
+    { key: "bind_check->review", d: "M 592 96 L 592 209 L 608 209" },
+    { key: "critic->review", d: "M 722 96 L 722 184" },
+    { key: "angle->review", d: "M 328 96 L 328 164 L 660 164 L 660 184" },
+  ];
+
+  const edgeSvg = edges
+    .map((e) => {
+      const st = edgeState[e.key];
+      const cls = ["wf-edge", st ? st.cls : "", st?.active ? "active" : ""].filter(Boolean).join(" ");
+      const marker = st?.active || st ? "url(#wf-arrow-active)" : "url(#wf-arrow)";
+      return `<path class="${cls}" d="${e.d}" marker-end="${marker}" />`;
+    })
+    .join("");
+
+  const nodeSvg = Object.entries(WF_NODE_META)
+    .map(([id, m]) => {
+      const st = nodeState[id] || "idle";
+      return `
+        <g class="wf-node ${st}">
+          <rect x="${m.x}" y="${m.y}" width="${m.w}" height="${m.h}" rx="3" />
+          <text x="${m.x + m.w / 2}" y="${m.y + 22}" text-anchor="middle" font-size="12" font-weight="600">${escapeHtml(m.label)}</text>
+          <text x="${m.x + m.w / 2}" y="${m.y + 39}" text-anchor="middle" font-size="10">${escapeHtml(m.sub)}</text>
+        </g>
+      `;
+    })
+    .join("");
+
+  svgWrap.innerHTML = `
+    <svg class="wf-svg" viewBox="0 0 920 250" role="img" aria-label="Screening workflow state diagram">
+      <defs>
+        <marker id="wf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#b8b3a6" />
+        </marker>
+        <marker id="wf-arrow-active" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1b4965" />
+        </marker>
+      </defs>
+      ${edgeSvg}
+      <text x="530" y="131" text-anchor="middle" font-size="10" fill="#6b7280">Retry loop with feedback</text>
+      ${nodeSvg}
+    </svg>
+  `;
+
+  pillsEl.innerHTML = steps
+    .map((st, i) => {
+      const nodeLabel = WF_NODE_META[st.node]?.label || st.node;
+      let cls = "wf-step-btn";
+      if (i === state.wfStepIndex) cls += " current";
+      else if (st.status === "retry" || st.status === "rejected") cls += " retry";
+      else if (st.status === "blocked" || st.status === "skip") cls += " blocked";
+      else if (i < state.wfStepIndex) cls += " done";
+      const suffix = st.attempt > 0 && st.node === "draft" ? ` (#${st.attempt})` : "";
+      return `<button type="button" class="${cls}" data-wf-step="${i}">${i + 1}. ${escapeHtml(nodeLabel)}${suffix}</button>`;
+    })
+    .join("");
+
+  pillsEl.querySelectorAll("[data-wf-step]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      stopWorkflowPlayback();
+      state.wfStepIndex = Number(btn.dataset.wfStep);
+      renderWorkflowFrame();
+    });
+  });
+
+  if (activeStep) {
+    const label = WF_NODE_META[activeStep.node]?.label || activeStep.node;
+    logEl.innerHTML = `
+      <div class="wf-step-log-head">
+        <span>Step ${state.wfStepIndex + 1} of ${steps.length}: ${escapeHtml(label)}${activeStep.attempt ? ` (Attempt ${activeStep.attempt})` : ""}</span>
+        <span>${escapeHtml(activeStep.isTerminal ? "Final outcome" : `Status: ${activeStep.status}`)}</span>
+      </div>
+      <div>${escapeHtml(activeStep.summary)}</div>
+    `;
+  }
+}
+
+function renderWorkflowExplorer(data) {
+  stopWorkflowPlayback();
+  const ledger = data.ledger || [];
+  const select = qs("wf-brief-select");
+  populateSelect(
+    select,
+    ledger,
+    (r) => r.brief_id,
+    (r) => `${r.brief_id}: ${String(r.title || "").slice(0, 48)}`
+  );
+  if (ledger.length > 0) {
+    const retryRow = ledger.find((r) => (r.trace || []).some((ev) => ev.status === "retry"));
+    const picked = ledger.find((r) => r.brief_id === state.wfBriefId) || retryRow || ledger[0];
+    state.wfBriefId = picked.brief_id;
+    select.value = picked.brief_id;
+    const steps = buildWorkflowSteps(picked);
+    state.wfStepIndex = Math.max(0, steps.length - 1);
+  } else {
+    state.wfBriefId = null;
+    state.wfStepIndex = 0;
+  }
+  renderWorkflowFrame();
+}
+
+function startWorkflowPlayback() {
+  if (state.wfTimer) {
+    stopWorkflowPlayback();
+    return;
+  }
+  const row = (state.activeRun?.ledger || []).find((r) => r.brief_id === state.wfBriefId);
+  const steps = buildWorkflowSteps(row);
+  if (steps.length === 0) return;
+  if (state.wfStepIndex >= steps.length - 1) {
+    state.wfStepIndex = 0;
+    renderWorkflowFrame();
+  }
+  qs("wf-play-btn").textContent = "Pause";
+  state.wfTimer = setInterval(() => {
+    if (state.wfStepIndex >= steps.length - 1) {
+      stopWorkflowPlayback();
+      return;
+    }
+    state.wfStepIndex += 1;
+    renderWorkflowFrame();
+  }, 900);
+}
+
 function applyRunData(data) {
   state.activeRun = data;
   state.selectedToken = null;
@@ -739,6 +972,7 @@ function applyRunData(data) {
   renderLedger(data.ledger || []);
   renderReviewQueue(data.review_queue || []);
   renderProcessAndBenchmarks(data);
+  renderWorkflowExplorer(data);
 }
 
 async function runActiveSelection() {
@@ -880,6 +1114,31 @@ function wireEvents() {
   qs("toggle-highlights-btn").addEventListener("click", () => {
     state.highlightsExpanded = !state.highlightsExpanded;
     if (state.activeRun) renderReleaseAndSummary(state.activeRun);
+  });
+
+  qs("wf-brief-select").addEventListener("change", () => {
+    stopWorkflowPlayback();
+    state.wfBriefId = qs("wf-brief-select").value;
+    state.wfStepIndex = 0;
+    renderWorkflowFrame();
+    startWorkflowPlayback();
+  });
+
+  qs("wf-play-btn").addEventListener("click", startWorkflowPlayback);
+
+  qs("wf-step-btn").addEventListener("click", () => {
+    stopWorkflowPlayback();
+    const row = (state.activeRun?.ledger || []).find((r) => r.brief_id === state.wfBriefId);
+    const steps = buildWorkflowSteps(row);
+    if (steps.length === 0) return;
+    state.wfStepIndex = state.wfStepIndex < steps.length - 1 ? state.wfStepIndex + 1 : 0;
+    renderWorkflowFrame();
+  });
+
+  qs("wf-reset-btn").addEventListener("click", () => {
+    stopWorkflowPlayback();
+    state.wfStepIndex = 0;
+    renderWorkflowFrame();
   });
 }
 

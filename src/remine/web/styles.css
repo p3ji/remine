@@ -709,6 +709,191 @@ a:focus-visible {
   color: var(--ink-muted);
 }
 
+/* Interactive Workflow Player */
+.wf-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.wf-header-row .section-intro {
+  margin-bottom: 0;
+}
+
+.wf-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wf-controls select {
+  width: auto;
+  min-width: 240px;
+  max-width: 340px;
+}
+
+.wf-svg-wrap {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.wf-svg {
+  display: block;
+  width: 100%;
+  min-width: 720px;
+  height: auto;
+}
+
+.wf-edge {
+  fill: none;
+  stroke: #d4d0c5;
+  stroke-width: 1.75;
+  transition: stroke 0.2s ease, opacity 0.2s ease;
+}
+
+.wf-edge.traversed {
+  stroke: var(--teal);
+  stroke-width: 2.25;
+}
+
+.wf-edge.retry-traversed {
+  stroke: var(--amber);
+  stroke-width: 2.25;
+}
+
+.wf-edge.blocked-traversed {
+  stroke: var(--red);
+  stroke-width: 2.25;
+}
+
+.wf-edge.active {
+  stroke-dasharray: 6 4;
+  animation: wf-flow 0.85s linear infinite;
+}
+
+@keyframes wf-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.wf-node rect {
+  fill: var(--bg);
+  stroke: var(--rule-strong);
+  stroke-width: 1.4;
+  transition: fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.wf-node text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  fill: var(--ink-muted);
+}
+
+.wf-node.visited rect {
+  fill: #eef6f5;
+  stroke: var(--teal);
+}
+
+.wf-node.visited text {
+  fill: var(--ink);
+}
+
+.wf-node.active rect {
+  fill: #e3f1ef;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.wf-node.active text {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.wf-node.retry rect {
+  fill: #fef7eb;
+  stroke: var(--amber);
+  stroke-width: 2.2;
+}
+
+.wf-node.retry text {
+  fill: var(--amber);
+  font-weight: 600;
+}
+
+.wf-node.blocked rect {
+  fill: #fdf2f2;
+  stroke: var(--red);
+  stroke-width: 2.2;
+}
+
+.wf-node.blocked text {
+  fill: var(--red);
+  font-weight: 600;
+}
+
+.wf-step-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.wf-step-btn {
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 0.81rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.wf-step-btn.done {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.wf-step-btn.current {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.wf-step-btn.retry {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.wf-step-btn.blocked {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.wf-step-log {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  font-size: 0.89rem;
+}
+
+.wf-step-log-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* Benchmarks Table */
 .table-wrap {
   overflow-x: auto;

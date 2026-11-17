@@ -159,6 +159,26 @@
       <!-- Tab 4: Methodology & Accuracy -->
       <div id="tab-methodology" class="tab-pane" role="tabpanel" hidden>
         <div class="section-block">
+          <div class="wf-header-row">
+            <div>
+              <h3>Interactive Screening Workflow</h3>
+              <p class="section-intro">
+                Select any item to watch or step through how it moves across deterministic guards, tool lookups, drafting, and quality review.
+              </p>
+            </div>
+            <div class="wf-controls">
+              <select id="wf-brief-select" aria-label="Select item to inspect"></select>
+              <button id="wf-play-btn" class="btn-primary" type="button">Play</button>
+              <button id="wf-step-btn" class="btn-secondary" type="button">Step</button>
+              <button id="wf-reset-btn" class="btn-secondary" type="button">Reset</button>
+            </div>
+          </div>
+          <div id="wf-svg-wrap" class="wf-svg-wrap"></div>
+          <div id="wf-step-pills" class="wf-step-pills"></div>
+          <div id="wf-step-log" class="wf-step-log"></div>
+        </div>
+
+        <div class="section-block">
           <h3>How Findings Are Screened</h3>
           <p class="section-intro">
             Candidate figures go through five checks before appearing under Verified Findings.
