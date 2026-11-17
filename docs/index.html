@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REMINE — Statistics Canada Findings Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-kicker">Statistics Canada Release Review</div>
+        <div class="brand-row">
+          <h1>REMINE</h1>
+          <span class="brand-subtitle">Overlooked, Source-Verified Findings</span>
+        </div>
+        <p class="tagline">
+          Finds reliable, comparable numbers in Statistics Canada tables that were not highlighted in <em>The Daily</em> or companion reports.
+        </p>
+      </div>
+      <div class="status-cluster">
+        <span id="status-mode" class="status-pill neutral">Loading archive…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-shell">
+    <!-- Release & Filter Controls -->
+    <section class="card control-card" aria-label="Release selection and safeguards">
+      <div class="controls-primary">
+        <div class="field field-grow">
+          <label for="snapshot-select">Statistics Canada Release</label>
+          <select id="snapshot-select"></select>
+        </div>
+
+        <div class="field toggle-field">
+          <span class="field-label">Comparability Safeguard</span>
+          <label class="checkbox-label" for="gate0-toggle">
+            <input type="checkbox" id="gate0-toggle" checked>
+            <span>Require comparable subgroups before comparing regions or sectors</span>
+          </label>
+          <p class="field-hint">
+            Filters out raw aggregate comparisons (for example, comparing provinces without holding age structure constant).
+          </p>
+        </div>
+
+        <div class="field field-action" id="server-run-wrap" hidden>
+          <button id="run-btn" class="btn-primary" type="button">Update Review</button>
+        </div>
+      </div>
+
+      <details id="advanced-local-panel" class="advanced-panel" hidden>
+        <summary>Local server tools (live AI analysis &amp; Statistics Canada fetch)</summary>
+        <div class="advanced-grid">
+          <div class="field">
+            <label for="mode-select">Review Source</label>
+            <select id="mode-select">
+              <option value="replay">Saved pre-verified review (Instant)</option>
+              <option value="live">Local AI assistant</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="model-select">Local Model</label>
+            <select id="model-select">
+              <option value="qwen3.8-27b">qwen3.8-27b</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="harvest-date">Fetch Daily Release (YYMMDD)</label>
+            <div class="inline-inputs">
+              <input id="harvest-date" type="text" placeholder="261112" maxlength="6" aria-label="Release date YYMMDD">
+              <input id="harvest-pid" type="text" placeholder="Table ID" aria-label="Statistics Canada table ID (optional)">
+              <button id="harvest-btn" class="btn-secondary" type="button">Fetch Release</button>
+            </div>
+          </div>
+        </div>
+        <div id="harvest-feedback" class="feedback-line" hidden></div>
+      </details>
+    </section>
+
+    <div id="error-banner" class="error-banner" role="alert" hidden></div>
+
+    <!-- Release Overview -->
+    <section class="card release-banner" aria-label="Selected release overview">
+      <div class="release-top">
+        <div>
+          <div id="release-meta" class="release-meta">Loading release details…</div>
+          <h2 id="release-title">—</h2>
+        </div>
+        <div class="release-links">
+          <a id="release-daily-link" class="link-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Read The Daily &#8599;</a>
+          <a id="release-table-link" class="link-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Open StatCan Table &#8599;</a>
+        </div>
+      </div>
+      <div class="release-highlights-wrap">
+        <span class="highlights-label">What Statistics Canada reported:</span>
+        <p id="release-highlights" class="release-highlights">—</p>
+        <button id="toggle-highlights-btn" class="text-link-btn" type="button" hidden>Show full summary</button>
+      </div>
+    </section>
+
+    <!-- Plain-Language Summary Cards -->
+    <section class="kpi-strip" aria-label="Screening summary">
+      <div class="kpi-card kpi-teal">
+        <span class="kpi-label">Ready to Share</span>
+        <strong id="kpi-published" class="kpi-value">—</strong>
+        <span id="kpi-published-sub" class="kpi-sub">New findings verified against source tables</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Filtered Out</span>
+        <strong id="kpi-skipped" class="kpi-value">—</strong>
+        <span id="kpi-skipped-sub" class="kpi-sub">Already covered in official text or skewed comparison</span>
+      </div>
+      <div class="kpi-card kpi-crimson">
+        <span class="kpi-label">Held Back</span>
+        <strong id="kpi-review" class="kpi-value">—</strong>
+        <span id="kpi-review-sub" class="kpi-sub">Suppressed by StatCan or flagged for specialist review</span>
+      </div>
+      <div class="kpi-card kpi-navy">
+        <span class="kpi-label">Screening Accuracy</span>
+        <strong id="kpi-accuracy" class="kpi-value">—</strong>
+        <span id="kpi-accuracy-sub" class="kpi-sub">Agreement with expert review checks</span>
+      </div>
+    </section>
+
+    <!-- Main Policy Explorer Tabs -->
+    <section class="tabs-shell" aria-label="Findings and screening breakdown">
+      <div class="tab-bar" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="findings">
+          Verified Findings <span id="tab-count-findings" class="tab-count">0</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="checked">
+          All Checked Items <span id="tab-count-checked" class="tab-count">0</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="held">
+          Suppressed &amp; Flagged <span id="tab-count-held" class="tab-count">0</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="methodology">
+          How It Screens &amp; Accuracy
+        </button>
+      </div>
+
+      <!-- Tab 1: Verified Findings -->
+      <div id="tab-findings" class="tab-pane active" role="tabpanel">
+        <div id="stories-layout" class="findings-layout">
+          <div id="stories-list" class="stories-list"></div>
+          <aside id="source-drawer" class="card source-drawer" aria-label="Source verification note">
+            <h3>Source &amp; Methodology Note</h3>
+            <p class="muted-note">
+              Click any underlined number or figure inside a finding to verify its exact Statistics Canada series, group definitions, and time periods.
+            </p>
+            <div id="source-details" class="source-details-empty">
+              Select a highlighted figure to view its official source record.
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Tab 2: All Checked Items -->
+      <div id="tab-checked" class="tab-pane" role="tabpanel" hidden>
+        <div id="coverage-manifest-box" class="card sub-card"></div>
+        <div id="ledger-list" class="ledger-list"></div>
+      </div>
+
+      <!-- Tab 3: Suppressed & Flagged -->
+      <div id="tab-held" class="tab-pane" role="tabpanel" hidden>
+        <div id="review-queue-list" class="ledger-list"></div>
+      </div>
+
+      <!-- Tab 4: Plain-Language Screening Process & Reliability -->
+      <div id="tab-methodology" class="tab-pane" role="tabpanel" hidden>
+        <div class="card sub-card">
+          <h3>How Every Number Is Screened Before You Read It</h3>
+          <p class="section-intro">
+            Every candidate statistical finding passes through five structured checks so policy analysts only see numbers that are reliable, fair to compare, and not already reported in Statistics Canada's official release.
+          </p>
+          <ol id="process-steps" class="process-steps"></ol>
+        </div>
+
+        <div class="card sub-card">
+          <h3>Consistency Across Automated Reviewers</h3>
+          <p class="section-intro">
+            Comparing how different language models screen benchmarked Statistics Canada releases with and without the subgroup comparability safeguard turned on.
+          </p>
+          <div id="benchmarks-table-wrap"></div>
+        </div>
+
+        <details class="card technical-drawer">
+          <summary>Technical details: per-item verification trace &amp; workflow telemetry</summary>
+          <div id="technical-trace-panel" class="technical-trace-body"></div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>
+      REMINE verifies statistical narratives strictly against retrieved Statistics Canada table data and quality flags. All numbers remain linked to their source vectors.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

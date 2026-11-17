@@ -1,0 +1,3409 @@
+{
+  "261112-dq261112a-34100292": {
+    "off": {
+      "release": {
+        "id": "dq261112a",
+        "date": "2026-11-12",
+        "title": "Building permits, September 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261112/dq261112a-eng.htm",
+        "pid": 34100292,
+        "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+        "highlights": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Release schedule Previous release PDF (491 KB) Released: 2026-11-12 Select geography Building permits — Canada $12.9 billion September 2026 -4 .1% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — N.L. $0.1 billion September 2026 -3 0.5% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — P.E.I."
+      },
+      "config": {
+        "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_M",
+        "enforce_semantic_standardization": false
+      },
+      "summary": {
+        "total_briefs": 4,
+        "publish_count": 4,
+        "skip_count": 0,
+        "review_count": 0,
+        "unreliable_count": 0,
+        "llm_calls": 12,
+        "mcp_calls": 12,
+        "total_duration_ms": 390810.17,
+        "evaluation": null
+      },
+      "coverage_manifest": {
+        "release_id": "dq261112a",
+        "paper_catalogue": null,
+        "claimed_coordinates": [
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Prince Edward Island"
+            },
+            "value": 544794.0,
+            "period": "2026-09-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Newfoundland and Labrador"
+            },
+            "value": 542834.0,
+            "period": "2026-09-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Nova Scotia"
+            },
+            "value": 539128.0,
+            "period": "2026-09-01"
+          }
+        ]
+      },
+      "stories": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional",
+          "headline": "Canadian permit gap between non-residential and institutional buildings widened",
+          "raw_headline": "Canadian permit gap between non-residential and institutional buildings widened",
+          "assumption": "The candidate assumes the Canadian value-of-permits series, with types of work held at total, supports building-type gap comparison.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the Canadian building-permit value and its monthly change, along with provincial figures, but omitted the multi-year gap between total non-residential and total institutional and governmental permit values.",
+          "body": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits. The comparison reflects endpoint co-movement rather than causal proof.",
+          "raw_body": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: {{F1_1.human}}. The comparison reflects endpoint co-movement rather than causal proof.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F1_1.human}}",
+              "fact_id": "F1_1",
+              "text": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". The comparison reflects endpoint co-movement rather than causal proof."
+            }
+          ],
+          "fact_ids": [
+            "F1_1"
+          ],
+          "citations": [
+            "F:F1_1",
+            "R:dq261112a",
+            "M:M2"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F1_1",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F1_1.human}}",
+              "fact_id": "F1_1",
+              "field_name": "body",
+              "resolved_text": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Long Run Compare: Type of building=Total non-residential",
+          "headline": "Canada non-residential permit values: endpoint comparison",
+          "raw_headline": "Canada non-residential permit values: endpoint comparison",
+          "assumption": "The comparison holds Geography at Canada, Type of building at Total non-residential, Types of work at Types of work, total, and Variables at Value of permits.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the current monthly change for total building permits and named provincial values, but it did not isolate the total non-residential building-type cut or compare the earlier and later endpoints.",
+          "body": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits. This compares specific start and end periods, not a linear path or causal proof.",
+          "raw_body": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: {{F2_1.human}}. This compares specific start and end periods, not a linear path or causal proof.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F2_1.human}}",
+              "fact_id": "F2_1",
+              "text": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". This compares specific start and end periods, not a linear path or causal proof."
+            }
+          ],
+          "fact_ids": [
+            "F2_1"
+          ],
+          "citations": [
+            "F:F2_1",
+            "R:dq261112a",
+            "M:M2",
+            "M:M3"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F2_1",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F2_1.human}}",
+              "fact_id": "F2_1",
+              "field_name": "body",
+              "resolved_text": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "long_run_compare",
+              "human": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Period Change: Type of building=Total residential",
+          "headline": "Residential permit value sharpens the Canada permit picture",
+          "raw_headline": "Residential permit value sharpens the Canada permit picture",
+          "assumption": "The story treats the residential building-type series as the relevant slice of the Canada permit value",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the aggregate permit value and its monthly decline, while leaving the residential building-type detail out of the highlighted text",
+          "body": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits. This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation.",
+          "raw_body": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: {{F3_1.human}}. This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F3_1.human}}",
+              "fact_id": "F3_1",
+              "text": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation."
+            }
+          ],
+          "fact_ids": [
+            "F3_1"
+          ],
+          "citations": [
+            "F:F3_1",
+            "R:dq261112a",
+            "M:M2",
+            "M:M3"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F3_1",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F3_1.human}}",
+              "fact_id": "F3_1",
+              "field_name": "body",
+              "resolved_text": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "period_change",
+              "human": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-4",
+          "title": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island",
+          "headline": "Ontario and Prince Edward Island permit values moved apart over the release window",
+          "raw_headline": "Ontario and Prince Edward Island permit values moved apart over the release window",
+          "assumption": "The comparison treats Ontario and Prince Edward Island as the named geography members in the value-of-permits gap.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily named P.E.I. and reported permit values and month-to-month movements, but it omitted the Ontario-P.E.I. gap trend.",
+          "body": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause.",
+          "raw_body": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. {{F4_1.human}} The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. "
+            },
+            {
+              "kind": "token",
+              "token": "{{F4_1.human}}",
+              "fact_id": "F4_1",
+              "text": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": " The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause."
+            }
+          ],
+          "fact_ids": [
+            "F4_1"
+          ],
+          "citations": [
+            "F:F4_1",
+            "R:dq261112a",
+            "M:M4"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F4_1",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F4_1.human}}",
+              "fact_id": "F4_1",
+              "field_name": "body",
+              "resolved_text": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F4_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        }
+      ],
+      "ledger": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional",
+          "summary": "Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total non-residential": false,
+            "Type of building|Total institutional and governmental": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds a Canada-wide, value-of-permits gap trend between Total non-residential and Total institutional and governmental building permits over October 2023 to September 2026. This long-run spread is not reported in the Daily highlights, which focus on the national total and Newfoundland monthly change, and the fact names the exact held geography, work type, and variable cut required by M2.",
+          "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F1_1",
+            "M:M2"
+          ],
+          "rules": [
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-1",
+                "query": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.06,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-1"
+              },
+              "ok": true,
+              "duration_ms": 0.01,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.11,
+              "details": {
+                "rule_ids": [
+                  "M2"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 17784.3,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 46800.77,
+              "details": {
+                "fact_ids": [
+                  "F1_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.15,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F1_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 57727.61,
+              "details": {
+                "note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Long Run Compare: Type of building=Total non-residential",
+          "summary": "Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total non-residential": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds an unmined long-run endpoint comparison for Canada's total non-residential value of permits (September 2026 versus October 2021), which is not reported in the Daily release highlights. It respects M:M3 by comparing specific endpoints rather than asserting a linear trend or causal path, and M:M2 by naming the exact held cut: Geography=Canada, Type of work=total, Variable=Value of permits, Type of building=Total non-residential.",
+          "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F2_1",
+            "M:M3",
+            "M:M2"
+          ],
+          "rules": [
+            {
+              "id": "M3",
+              "title": "Endpoint and multi-period comparison caveats",
+              "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+              "source": "wds:getCubeMetadata#34100292"
+            },
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-2",
+                "query": "Long Run Compare: Type of building=Total non-residential Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.1,
+              "result_count": 2
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Long Run Compare: Type of building=Total non-residential Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-2"
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 2 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.18,
+              "details": {
+                "rule_ids": [
+                  "M3",
+                  "M2"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 9745.56,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 40169.86,
+              "details": {
+                "fact_ids": [
+                  "F2_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.17,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F2_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 11147.91,
+              "details": {
+                "note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "long_run_compare",
+              "human": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Period Change: Type of building=Total residential",
+          "summary": "Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total residential": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds an unmined Canada-wide disaggregated movement for Total residential building permits, showing a specific August-to-September 2026 value decline of $475.7 million to $7.786 billion. This residential subgroup change is not reported in the Daily release highlights, which only show the total Canada building-permit value and monthly percentage change. The comparison respects the methodology rules by naming the exact held denominator (Canada, total work, value of permits) and by comparing specific endpoint periods rather than implying a linear trend.",
+          "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F3_1",
+            "M:M2",
+            "M:M3"
+          ],
+          "rules": [
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            },
+            {
+              "id": "M3",
+              "title": "Endpoint and multi-period comparison caveats",
+              "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-3",
+                "query": "Period Change: Type of building=Total residential Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 2
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Period Change: Type of building=Total residential Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-3"
+              },
+              "ok": true,
+              "duration_ms": 0.01,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 2 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.13,
+              "details": {
+                "rule_ids": [
+                  "M2",
+                  "M3"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 12600.42,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 83175.19,
+              "details": {
+                "fact_ids": [
+                  "F3_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.15,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F3_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 9290.03,
+              "details": {
+                "note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "period_change",
+              "human": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-4",
+          "title": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island",
+          "summary": "Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Geography|Ontario": true,
+            "Geography|Prince Edward Island": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds a 3-year Ontario–Prince Edward Island value-of-permits gap trend, a spread delta and long-run comparison not already reported at the headline level in the Daily’s current-month provincial highlights. No retrieved methodology rule confounds this comparison.",
+          "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F4_1",
+            "M:M4"
+          ],
+          "rules": [
+            {
+              "id": "M4",
+              "title": "Coverage subtraction against The Daily prose",
+              "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+              "source": "remine/tools.py#check_coverage_overlaps"
+            }
+          ],
+          "memory": [],
+          "coverage_overlaps": [
+            {
+              "tier": "daily",
+              "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+              "matched_dimensions": {
+                "Geography": "Prince Edward Island"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            }
+          ],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-4",
+                "query": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.1,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.04,
+              "result_count": 0
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-4"
+              },
+              "ok": true,
+              "duration_ms": 0.04,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 0 precedent(s), 1 overlap(s)",
+              "duration_ms": 0.2,
+              "details": {
+                "rule_ids": [
+                  "M4"
+                ],
+                "memory_ids": [],
+                "overlap_tiers": [
+                  "daily"
+                ],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 14925.53,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 66758.61,
+              "details": {
+                "fact_ids": [
+                  "F4_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.09,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F4_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 20683.2,
+              "details": {
+                "note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F4_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        }
+      ],
+      "review_queue": []
+    },
+    "strict": {
+      "release": {
+        "id": "dq261112a",
+        "date": "2026-11-12",
+        "title": "Building permits, September 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261112/dq261112a-eng.htm",
+        "pid": 34100292,
+        "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+        "highlights": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Release schedule Previous release PDF (491 KB) Released: 2026-11-12 Select geography Building permits — Canada $12.9 billion September 2026 -4 .1% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — N.L. $0.1 billion September 2026 -3 0.5% (monthly change) Source(s): Table 34-10-0292-01 . Building permits — P.E.I."
+      },
+      "config": {
+        "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_M",
+        "enforce_semantic_standardization": true
+      },
+      "summary": {
+        "total_briefs": 4,
+        "publish_count": 4,
+        "skip_count": 0,
+        "review_count": 0,
+        "unreliable_count": 0,
+        "llm_calls": 12,
+        "mcp_calls": 12,
+        "total_duration_ms": 381379.1,
+        "evaluation": null
+      },
+      "coverage_manifest": {
+        "release_id": "dq261112a",
+        "paper_catalogue": null,
+        "claimed_coordinates": [
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Prince Edward Island"
+            },
+            "value": 544794.0,
+            "period": "2026-09-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Newfoundland and Labrador"
+            },
+            "value": 542834.0,
+            "period": "2026-09-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+            "dimensions": {
+              "Geography": "Nova Scotia"
+            },
+            "value": 539128.0,
+            "period": "2026-09-01"
+          }
+        ]
+      },
+      "stories": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional",
+          "headline": "Canadian permit gap between non-residential and institutional buildings widened",
+          "raw_headline": "Canadian permit gap between non-residential and institutional buildings widened",
+          "assumption": "The candidate assumes the Canadian value-of-permits series, with types of work held at total, supports building-type gap comparison.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the Canadian building-permit value and its monthly change, along with provincial figures, but omitted the multi-year gap between total non-residential and total institutional and governmental permit values.",
+          "body": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits. The comparison reflects endpoint co-movement rather than causal proof.",
+          "raw_body": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: {{F1_1.human}}. The comparison reflects endpoint co-movement rather than causal proof.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For Canada, among value of permits with types of work held at total, the gap between total non-residential and total institutional and governmental buildings moved as follows: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F1_1.human}}",
+              "fact_id": "F1_1",
+              "text": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". The comparison reflects endpoint co-movement rather than causal proof."
+            }
+          ],
+          "fact_ids": [
+            "F1_1"
+          ],
+          "citations": [
+            "F:F1_1",
+            "R:dq261112a",
+            "M:M2"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F1_1",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F1_1.human}}",
+              "fact_id": "F1_1",
+              "field_name": "body",
+              "resolved_text": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Long Run Compare: Type of building=Total non-residential",
+          "headline": "Canada non-residential permit values: endpoint comparison",
+          "raw_headline": "Canada non-residential permit values: endpoint comparison",
+          "assumption": "The comparison holds Geography at Canada, Type of building at Total non-residential, Types of work at Types of work, total, and Variables at Value of permits.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the current monthly change for total building permits and named provincial values, but it did not isolate the total non-residential building-type cut or compare the earlier and later endpoints.",
+          "body": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits. This compares specific start and end periods, not a linear path or causal proof.",
+          "raw_body": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: {{F2_1.human}}. This compares specific start and end periods, not a linear path or causal proof.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For Canada, total non-residential building permits, measured by Value of permits and held at Types of work, total, show an endpoint comparison: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F2_1.human}}",
+              "fact_id": "F2_1",
+              "text": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". This compares specific start and end periods, not a linear path or causal proof."
+            }
+          ],
+          "fact_ids": [
+            "F2_1"
+          ],
+          "citations": [
+            "F:F2_1",
+            "R:dq261112a",
+            "M:M2",
+            "M:M3"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F2_1",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F2_1.human}}",
+              "fact_id": "F2_1",
+              "field_name": "body",
+              "resolved_text": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "long_run_compare",
+              "human": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Period Change: Type of building=Total residential",
+          "headline": "Residential permit value sharpens the Canada permit picture",
+          "raw_headline": "Residential permit value sharpens the Canada permit picture",
+          "assumption": "The story treats the residential building-type series as the relevant slice of the Canada permit value",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily reported the aggregate permit value and its monthly decline, while leaving the residential building-type detail out of the highlighted text",
+          "body": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits. This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation.",
+          "raw_body": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: {{F3_1.human}}. This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "For the Canada geography, with Type of work held at Types of work, total and Variables held at Value of permits, the Total residential building-type series shows: "
+            },
+            {
+              "kind": "token",
+              "token": "{{F3_1.human}}",
+              "fact_id": "F3_1",
+              "text": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": ". This endpoint comparison describes the start and end periods, not a continuous path or causal mechanism. The series reflects current permit values, not planned future permit values, and the residential detail co-moves with the aggregate permit picture without proving causation."
+            }
+          ],
+          "fact_ids": [
+            "F3_1"
+          ],
+          "citations": [
+            "F:F3_1",
+            "R:dq261112a",
+            "M:M2",
+            "M:M3"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F3_1",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F3_1.human}}",
+              "fact_id": "F3_1",
+              "field_name": "body",
+              "resolved_text": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "period_change",
+              "human": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        },
+        {
+          "brief_id": "LIVE-4",
+          "title": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island",
+          "headline": "Ontario and Prince Edward Island permit values moved apart over the release window",
+          "raw_headline": "Ontario and Prince Edward Island permit values moved apart over the release window",
+          "assumption": "The comparison treats Ontario and Prince Edward Island as the named geography members in the value-of-permits gap.",
+          "stance": "concretizes",
+          "differs_from_daily": "The Daily named P.E.I. and reported permit values and month-to-month movements, but it omitted the Ontario-P.E.I. gap trend.",
+          "body": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause.",
+          "raw_body": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. {{F4_1.human}} The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause.",
+          "body_segments": [
+            {
+              "kind": "text",
+              "text": "The release token reports the Ontario-P.E.I. value-of-permits comparison in residential and non-residential building permits, all types of work. "
+            },
+            {
+              "kind": "token",
+              "token": "{{F4_1.human}}",
+              "fact_id": "F4_1",
+              "text": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            },
+            {
+              "kind": "text",
+              "text": " The token is an endpoint co-movement, not causal proof that Ontario's permit values and P.E.I.'s permit values moved because of a shared cause."
+            }
+          ],
+          "fact_ids": [
+            "F4_1"
+          ],
+          "citations": [
+            "F:F4_1",
+            "R:dq261112a",
+            "M:M4"
+          ],
+          "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201",
+          "provenance": [
+            {
+              "id": "F4_1",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "token_bindings": [
+            {
+              "token": "{{F4_1.human}}",
+              "fact_id": "F4_1",
+              "field_name": "body",
+              "resolved_text": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ],
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410029201"
+            }
+          ],
+          "facts": [
+            {
+              "id": "F4_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ],
+          "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
+          "attempts": 1,
+          "recovered_via_retry": false
+        }
+      ],
+      "ledger": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional",
+          "summary": "Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total non-residential": false,
+            "Type of building|Total institutional and governmental": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds a Canada-wide, value-of-permits gap trend between Total non-residential and Total institutional and governmental building permits over October 2023 to September 2026. This long-run spread is not reported in the Daily highlights, which focus on the national total and Newfoundland monthly change, and the fact names the exact held geography, work type, and variable cut required by M2.",
+          "critic_note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F1_1",
+            "M:M2"
+          ],
+          "rules": [
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-1",
+                "query": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Gap Trend: Type of building_high=Total non-residential, Type of building_low=Total institutional Deterministic gap_trend finding (between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $72).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-1"
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (strict semantic check)",
+              "duration_ms": 0.01,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.14,
+              "details": {
+                "rule_ids": [
+                  "M2"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 17161.06,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 46040.44,
+              "details": {
+                "fact_ids": [
+                  "F1_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.09,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F1_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 57010.53,
+              "details": {
+                "note": "The story names the exact held denominator (Canada, value of permits, types of work total) and building-type cut, does not claim causality, and accurately notes the Daily omitted the multi-year gap."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Total non-residential and Total institutional and governmental widened by $721,682,000, among Value of permits",
+              "cut": {
+                "Type of building_high": "Total non-residential",
+                "Type of building_low": "Total institutional and governmental"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649",
+                "v1675119652"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Long Run Compare: Type of building=Total non-residential",
+          "summary": "Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total non-residential": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds an unmined long-run endpoint comparison for Canada's total non-residential value of permits (September 2026 versus October 2021), which is not reported in the Daily release highlights. It respects M:M3 by comparing specific endpoints rather than asserting a linear trend or causal path, and M:M2 by naming the exact held cut: Geography=Canada, Type of work=total, Variable=Value of permits, Type of building=Total non-residential.",
+          "critic_note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F2_1",
+            "M:M3",
+            "M:M2"
+          ],
+          "rules": [
+            {
+              "id": "M3",
+              "title": "Endpoint and multi-period comparison caveats",
+              "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+              "source": "wds:getCubeMetadata#34100292"
+            },
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-2",
+                "query": "Long Run Compare: Type of building=Total non-residential Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 2
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Long Run Compare: Type of building=Total non-residential Deterministic long_run_compare finding (as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), am).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-2"
+              },
+              "ok": true,
+              "duration_ms": 0.01,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (strict semantic check)",
+              "duration_ms": 0.01,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 2 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.11,
+              "details": {
+                "rule_ids": [
+                  "M3",
+                  "M2"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 9010.01,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 39306.85,
+              "details": {
+                "fact_ids": [
+                  "F2_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.09,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F2_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 10340.84,
+              "details": {
+                "note": "The story names the exact held denominator (Canada, total non-residential, types of work total, value of permits), frames the change as an endpoint comparison rather than a linear path or causal claim, and accurately characterizes the Daily as covering total permits and provincial values without isolating this cut."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "long_run_compare",
+              "human": "as of September 1, 2026, Total non-residential's was $1,233,348,000 more than in October 1, 2021 ($5,091,392,000 against $3,858,044,000), among Value of permits",
+              "cut": {
+                "Type of building": "Total non-residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119649"
+              ],
+              "periods": [
+                "2021-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Period Change: Type of building=Total residential",
+          "summary": "Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Type of building|Total residential": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds an unmined Canada-wide disaggregated movement for Total residential building permits, showing a specific August-to-September 2026 value decline of $475.7 million to $7.786 billion. This residential subgroup change is not reported in the Daily release highlights, which only show the total Canada building-permit value and monthly percentage change. The comparison respects the methodology rules by naming the exact held denominator (Canada, total work, value of permits) and by comparing specific endpoint periods rather than implying a linear trend.",
+          "critic_note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F3_1",
+            "M:M2",
+            "M:M3"
+          ],
+          "rules": [
+            {
+              "id": "M2",
+              "title": "Population denominator and subgroup precision",
+              "rule": "Name the exact held population denominator and dimension cut rather than generalizing to an unconditioned total.",
+              "source": "wds:getCubeMetadata#34100292"
+            },
+            {
+              "id": "M3",
+              "title": "Endpoint and multi-period comparison caveats",
+              "rule": "Long-run and window changes compare specific start and end periods rather than asserting linear paths or causal proof.",
+              "source": "wds:getCubeMetadata#34100292"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-3",
+                "query": "Period Change: Type of building=Total residential Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.08,
+              "result_count": 2
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Period Change: Type of building=Total residential Deterministic period_change finding (between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-3"
+              },
+              "ok": true,
+              "duration_ms": 0.01,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (strict semantic check)",
+              "duration_ms": 0.01,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 2 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.13,
+              "details": {
+                "rule_ids": [
+                  "M2",
+                  "M3"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 11821.68,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 82258.23,
+              "details": {
+                "fact_ids": [
+                  "F3_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.1,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F3_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 8597.92,
+              "details": {
+                "note": "The story names the exact Canada, Total residential, Value of permits cut, frames the change as an endpoint comparison, avoids causal claims, and correctly characterizes the Daily as reporting the aggregate permit value and monthly decline."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "period_change",
+              "human": "between August 1, 2026 and September 1, 2026, Total residential's fell by $475,707,000 to $7,785,532,000, among Value of permits",
+              "cut": {
+                "Type of building": "Total residential"
+              },
+              "held_at": {
+                "Geography": "Canada",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119646"
+              ],
+              "periods": [
+                "2026-08-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-4",
+          "title": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island",
+          "summary": "Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Geography|Ontario": true,
+            "Geography|Prince Edward Island": false
+          },
+          "verdict": "publish",
+          "rejection_category": null,
+          "reason": "The candidate adds a 3-year Ontario–Prince Edward Island value-of-permits gap trend, a spread delta and long-run comparison not already reported at the headline level in the Daily’s current-month provincial highlights. No retrieved methodology rule confounds this comparison.",
+          "critic_note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures.",
+          "attempts": 1,
+          "citations": [
+            "R:dq261112a",
+            "F:F4_1",
+            "M:M4"
+          ],
+          "rules": [
+            {
+              "id": "M4",
+              "title": "Coverage subtraction against The Daily prose",
+              "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+              "source": "remine/tools.py#check_coverage_overlaps"
+            }
+          ],
+          "memory": [],
+          "coverage_overlaps": [
+            {
+              "tier": "daily",
+              "prose_quote": "The Daily | Search The Daily Search website Search In the news Indicators Releases by subject Special interest Release schedule Information Building permits, September 2026 Text - Selected Tables Related information Rele",
+              "matched_dimensions": {
+                "Geography": "Prince Edward Island"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            }
+          ],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-4",
+                "query": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Daily-mentioned cut (gap_trend): Geography_high=Ontario, Geography_low=Prince Edward Island Cut shares dimension members explicitly named in The Daily (between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000,).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 0
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-4"
+              },
+              "ok": true,
+              "duration_ms": 0.02,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (strict semantic check)",
+              "duration_ms": 0.01,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 0 precedent(s), 1 overlap(s)",
+              "duration_ms": 0.13,
+              "details": {
+                "rule_ids": [
+                  "M4"
+                ],
+                "memory_ids": [],
+                "overlap_tiers": [
+                  "daily"
+                ],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "publish",
+              "attempt": 0,
+              "summary": "Angle Verdict: publish",
+              "duration_ms": 14217.34,
+              "details": {
+                "verdict": "publish",
+                "rejection_category": null
+              }
+            },
+            {
+              "node": "draft",
+              "status": "ok",
+              "attempt": 1,
+              "summary": "Draft attempt 1 generated (concretizes)",
+              "duration_ms": 65871.92,
+              "details": {
+                "fact_ids": [
+                  "F4_1"
+                ]
+              }
+            },
+            {
+              "node": "bind_check",
+              "status": "passed",
+              "attempt": 1,
+              "summary": "Bound 1 symbolic token(s) with 0 contract violations",
+              "duration_ms": 0.13,
+              "details": {
+                "token_count": 1,
+                "fact_ids": [
+                  "F4_1"
+                ]
+              }
+            },
+            {
+              "node": "critic",
+              "status": "approved",
+              "attempt": 1,
+              "summary": "Critic approved on attempt 1",
+              "duration_ms": 19741.32,
+              "details": {
+                "note": "The story correctly presents the Ontario–P.E.I. value-of-permits gap as a non-causal endpoint comparison and does not duplicate the Daily’s P.E.I. monthly figures."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F4_1",
+              "probe_type": "gap_trend",
+              "human": "between October 1, 2023 and September 1, 2026, the gap between Ontario and Prince Edward Island widened by $544,794,000, among Value of permits",
+              "cut": {
+                "Geography_high": "Ontario",
+                "Geography_low": "Prince Edward Island"
+              },
+              "held_at": {
+                "Type of building": "Total residential and non-residential",
+                "Type of work": "Types of work, total",
+                "Variables": "Value of permits"
+              },
+              "vectors": [
+                "v1675119693",
+                "v1675119661"
+              ],
+              "periods": [
+                "2023-10-01",
+                "2026-09-01"
+              ]
+            }
+          ]
+        }
+      ],
+      "review_queue": []
+    }
+  },
+  "261106-dq261106a-14100287": {
+    "off": {
+      "release": {
+        "id": "dq261106a",
+        "date": "2026-11-06",
+        "title": "Labour Force Survey, October 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm",
+        "pid": 14100287,
+        "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028701",
+        "highlights": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%. The unemployment rate rose 0.2 percentage points to 6.7%. The unemployment rate for youth aged 15 to 24 increased 0.7 percentage points to 13.7%. It also rose for people aged 55 and older (+0.2 percentage points to 5.5%)."
+      },
+      "config": {
+        "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_M",
+        "enforce_semantic_standardization": false
+      },
+      "summary": {
+        "total_briefs": 3,
+        "publish_count": 0,
+        "skip_count": 2,
+        "review_count": 0,
+        "unreliable_count": 1,
+        "llm_calls": 2,
+        "mcp_calls": 6,
+        "total_duration_ms": 9188.15,
+        "evaluation": null
+      },
+      "coverage_manifest": {
+        "release_id": "dq261106a",
+        "paper_catalogue": null,
+        "claimed_coordinates": [
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Geography": "Quebec",
+              "Labour force characteristics": "Employment"
+            },
+            "value": 22.59999999999991,
+            "period": "2026-10-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Geography": "Newfoundland and Labrador",
+              "Labour force characteristics": "Employment rate"
+            },
+            "value": -5.000000000000014,
+            "period": "2026-10-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Age group": "25 to 54 years",
+              "Labour force characteristics": "Employment"
+            },
+            "value": 1.6093111444032502,
+            "period": "2026-10-01"
+          }
+        ]
+      },
+      "stories": [],
+      "ledger": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment",
+          "summary": "Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Geography|Quebec": true,
+            "Labour force characteristics|Employment": true
+          },
+          "verdict": "skip",
+          "rejection_category": "already_in_daily",
+          "reason": "The candidate fact duplicates a Quebec employment movement already reported in The Daily coverage, with no additional unmined disaggregation, year-over-year delta, or spread comparison.",
+          "critic_note": "",
+          "attempts": 1,
+          "citations": [
+            "R:dq261106a",
+            "F:F1_1",
+            "M:M4"
+          ],
+          "rules": [
+            {
+              "id": "M4",
+              "title": "Coverage subtraction against The Daily prose",
+              "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+              "source": "remine/tools.py#check_coverage_overlaps"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [
+            {
+              "tier": "daily",
+              "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+              "matched_dimensions": {
+                "Geography": "Quebec",
+                "Labour force characteristics": "Employment"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            },
+            {
+              "tier": "daily",
+              "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+              "matched_dimensions": {
+                "Age group": "25 to 54 years",
+                "Labour force characteristics": "Employment"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            }
+          ],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-1",
+                "query": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-1"
+              },
+              "ok": true,
+              "duration_ms": 0.04,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 1 precedent(s), 2 overlap(s)",
+              "duration_ms": 0.16,
+              "details": {
+                "rule_ids": [
+                  "M4"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [
+                  "daily"
+                ],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "skip",
+              "attempt": 0,
+              "summary": "Angle Verdict: skip (already_in_daily)",
+              "duration_ms": 5165.76,
+              "details": {
+                "verdict": "skip",
+                "rejection_category": "already_in_daily"
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "period_change",
+              "human": "between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people, among core-aged workers",
+              "cut": {
+                "Geography": "Quebec",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Total - Gender",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v2063891"
+              ],
+              "periods": [
+                "2026-09-01",
+                "2026-10-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Unstandardized 15 years and over geography gap: Newfoundland and Labrador vs Nova Scotia",
+          "summary": "Compares Geography on unstandardized Age group='15 years and over' instead of benchmark '25 to 54 years'.",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": false,
+          "is_decomposition": false,
+          "confound_risk": "Raw Geography comparison leaves Age group at '15 years and over' (violates M1).",
+          "mentions": {
+            "Geography|Newfoundland and Labrador": true
+          },
+          "verdict": "skip",
+          "rejection_category": "confounded_comparison",
+          "reason": "The candidate compares unstandardized 15+ unemployment rates across provinces, which is confounded by differences in age composition. Methodology rule M1 requires standardizing geography comparisons to the 25 to 54 age group before publishing.",
+          "critic_note": "",
+          "attempts": 1,
+          "citations": [
+            "R:dq261106a",
+            "F:F2_1",
+            "M:M1"
+          ],
+          "rules": [
+            {
+              "id": "M1",
+              "title": "Age group-structure confounding in Geography comparisons",
+              "rule": "Do not publish raw comparisons across Geography while Age group is held at '15 years and over'; standardize to '25 to 54 years'. Raw 15+ provincial rate gaps reflect population age composition rather than purely labour-market differences.",
+              "source": "surveys.yaml#14100287"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-2",
+                "query": "Unstandardized 15 years and over geography gap: Newfoundland and Labrador vs Nova Scotia Compares Geography on unstandardized Age group='15 years and over' instead of benchmark '25 to 54 years'.",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Unstandardized 15 years and over geography gap: Newfoundland and Labrador vs Nova Scotia Compares Geography on unstandardized Age group='15 years and over' instead of benchmark '25 to 54 years'.",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-2"
+              },
+              "ok": true,
+              "duration_ms": 0.01,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (advisory semantic check)",
+              "duration_ms": 0.0,
+              "details": {
+                "quality_flag": "A",
+                "standardized": false
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 1 precedent(s), 0 overlap(s)",
+              "duration_ms": 0.12,
+              "details": {
+                "rule_ids": [
+                  "M1"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "skip",
+              "attempt": 0,
+              "summary": "Angle Verdict: skip (confounded_comparison)",
+              "duration_ms": 4022.1,
+              "details": {
+                "verdict": "skip",
+                "rejection_category": "confounded_comparison"
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "gap_between_members",
+              "human": "in October 1, 2026, the unstandardized 15 years and over unemployment rate gap between Newfoundland and Labrador and Nova Scotia was 2.5 percentage points (8.7% vs 6.2%)",
+              "cut": {
+                "Geography_high": "Newfoundland and Labrador",
+                "Geography_low": "Nova Scotia",
+                "Labour force characteristics": "Unemployment rate"
+              },
+              "held_at": {
+                "Age group": "15 years and over"
+              },
+              "vectors": [
+                "v2063004",
+                "v2063382"
+              ],
+              "periods": [
+                "2026-10-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Suppressed cell in Labour force characteristics, monthly, seasonall (Quality Flag ..)",
+          "summary": "Statistics Canada suppressed or flagged this estimate (STATUS='..').",
+          "quality_flag": "..",
+          "reliable": false,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {},
+          "verdict": "unreliable_data",
+          "rejection_category": null,
+          "reason": "Blocked by deterministic reliability gate (quality_flag='..', reliable=False).",
+          "critic_note": "",
+          "attempts": 0,
+          "citations": [
+            "R:dq261106a"
+          ],
+          "rules": [],
+          "memory": [],
+          "coverage_overlaps": [],
+          "mcp_calls": [],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "blocked",
+              "attempt": 0,
+              "summary": "Reliability gate blocked LIVE-3 (flag=..)",
+              "duration_ms": 0.01,
+              "details": {
+                "verdict": "unreliable_data",
+                "quality_flag": ".."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "suppressed_cell",
+              "human": "suppressed estimate (quality flag ..)",
+              "cut": {
+                "Geography": "Canada",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Men+",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v101884954"
+              ],
+              "periods": [
+                "1976-01-01"
+              ]
+            }
+          ]
+        }
+      ],
+      "review_queue": [
+        {
+          "brief_id": "LIVE-3",
+          "title": "Suppressed cell in Labour force characteristics, monthly, seasonall (Quality Flag ..)",
+          "summary": "Statistics Canada suppressed or flagged this estimate (STATUS='..').",
+          "quality_flag": "..",
+          "reliable": false,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {},
+          "verdict": "unreliable_data",
+          "rejection_category": null,
+          "reason": "Blocked by deterministic reliability gate (quality_flag='..', reliable=False).",
+          "critic_note": "",
+          "attempts": 0,
+          "citations": [
+            "R:dq261106a"
+          ],
+          "rules": [],
+          "memory": [],
+          "coverage_overlaps": [],
+          "mcp_calls": [],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "blocked",
+              "attempt": 0,
+              "summary": "Reliability gate blocked LIVE-3 (flag=..)",
+              "duration_ms": 0.01,
+              "details": {
+                "verdict": "unreliable_data",
+                "quality_flag": ".."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "suppressed_cell",
+              "human": "suppressed estimate (quality flag ..)",
+              "cut": {
+                "Geography": "Canada",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Men+",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v101884954"
+              ],
+              "periods": [
+                "1976-01-01"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "strict": {
+      "release": {
+        "id": "dq261106a",
+        "date": "2026-11-06",
+        "title": "Labour Force Survey, October 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm",
+        "pid": 14100287,
+        "table_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028701",
+        "highlights": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%. The unemployment rate rose 0.2 percentage points to 6.7%. The unemployment rate for youth aged 15 to 24 increased 0.7 percentage points to 13.7%. It also rose for people aged 55 and older (+0.2 percentage points to 5.5%)."
+      },
+      "config": {
+        "model": "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_M",
+        "enforce_semantic_standardization": true
+      },
+      "summary": {
+        "total_briefs": 3,
+        "publish_count": 0,
+        "skip_count": 2,
+        "review_count": 0,
+        "unreliable_count": 1,
+        "llm_calls": 1,
+        "mcp_calls": 3,
+        "total_duration_ms": 5167.99,
+        "evaluation": null
+      },
+      "coverage_manifest": {
+        "release_id": "dq261106a",
+        "paper_catalogue": null,
+        "claimed_coordinates": [
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Geography": "Quebec",
+              "Labour force characteristics": "Employment"
+            },
+            "value": 22.59999999999991,
+            "period": "2026-10-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Geography": "Newfoundland and Labrador",
+              "Labour force characteristics": "Employment rate"
+            },
+            "value": -5.000000000000014,
+            "period": "2026-10-01"
+          },
+          {
+            "tier": "daily",
+            "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+            "dimensions": {
+              "Age group": "25 to 54 years",
+              "Labour force characteristics": "Employment"
+            },
+            "value": 1.6093111444032502,
+            "period": "2026-10-01"
+          }
+        ]
+      },
+      "stories": [],
+      "ledger": [
+        {
+          "brief_id": "LIVE-1",
+          "title": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment",
+          "summary": "Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {
+            "Geography|Quebec": true,
+            "Labour force characteristics|Employment": true
+          },
+          "verdict": "skip",
+          "rejection_category": "already_in_daily",
+          "reason": "The candidate fact duplicates a Quebec employment movement already reported in The Daily coverage, with no additional unmined disaggregation, year-over-year delta, or spread comparison.",
+          "critic_note": "",
+          "attempts": 1,
+          "citations": [
+            "R:dq261106a",
+            "F:F1_1",
+            "M:M4"
+          ],
+          "rules": [
+            {
+              "id": "M4",
+              "title": "Coverage subtraction against The Daily prose",
+              "rule": "Skip candidate bundles whose main cut and movement duplicate figures already highlighted in The Daily article.",
+              "source": "remine/tools.py#check_coverage_overlaps"
+            }
+          ],
+          "memory": [
+            {
+              "id": "H1",
+              "summary": "Rejected unstandardized cross-geography comparisons when compositional confounders were held at an aggregate total."
+            }
+          ],
+          "coverage_overlaps": [
+            {
+              "tier": "daily",
+              "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+              "matched_dimensions": {
+                "Geography": "Quebec",
+                "Labour force characteristics": "Employment"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            },
+            {
+              "tier": "daily",
+              "prose_quote": "Employment was little changed in October ( -4 ,700; 0.0%) and the employment rate fell 0.1 percentage points to 60.5%.",
+              "matched_dimensions": {
+                "Age group": "25 to 54 years",
+                "Labour force characteristics": "Employment"
+              },
+              "overlap_ratio": 1.0,
+              "period_match": true,
+              "paper_catalogue": null
+            }
+          ],
+          "mcp_calls": [
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "search_methodology_rules",
+              "arguments": {
+                "brief_id": "LIVE-1",
+                "query": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+                "limit": 3
+              },
+              "ok": true,
+              "duration_ms": 0.07,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "recall_editorial_memory",
+              "arguments": {
+                "query": "Daily-mentioned cut (period_change): Geography=Quebec, Labour force characteristics=Employment Cut shares dimension members explicitly named in The Daily (between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people).",
+                "limit": 2
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 1
+            },
+            {
+              "protocol": "mcp-jsonrpc-2.0",
+              "tool": "inspect_coverage_manifest",
+              "arguments": {
+                "brief_id": "LIVE-1"
+              },
+              "ok": true,
+              "duration_ms": 0.03,
+              "result_count": 5
+            }
+          ],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "passed",
+              "attempt": 0,
+              "summary": "Passed Gate 0 (strict semantic check)",
+              "duration_ms": 0.01,
+              "details": {
+                "quality_flag": "A",
+                "standardized": true
+              }
+            },
+            {
+              "node": "retrieve",
+              "status": "ok",
+              "attempt": 0,
+              "summary": "Retrieved 1 rule(s), 1 precedent(s), 2 overlap(s)",
+              "duration_ms": 0.14,
+              "details": {
+                "rule_ids": [
+                  "M4"
+                ],
+                "memory_ids": [
+                  "H1"
+                ],
+                "overlap_tiers": [
+                  "daily"
+                ],
+                "mcp_tool_count": 3
+              }
+            },
+            {
+              "node": "angle",
+              "status": "skip",
+              "attempt": 0,
+              "summary": "Angle Verdict: skip (already_in_daily)",
+              "duration_ms": 5167.83,
+              "details": {
+                "verdict": "skip",
+                "rejection_category": "already_in_daily"
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F1_1",
+              "probe_type": "period_change",
+              "human": "between September 1, 2026 and October 1, 2026, Quebec's employment rose by about 23,000 people to about 3,003,000 people, among core-aged workers",
+              "cut": {
+                "Geography": "Quebec",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Total - Gender",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v2063891"
+              ],
+              "periods": [
+                "2026-09-01",
+                "2026-10-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-2",
+          "title": "Unstandardized 15 years and over geography gap: Newfoundland and Labrador vs Nova Scotia",
+          "summary": "Compares Geography on unstandardized Age group='15 years and over' instead of benchmark '25 to 54 years'.",
+          "quality_flag": "A",
+          "reliable": true,
+          "standardized": false,
+          "is_decomposition": false,
+          "confound_risk": "Raw Geography comparison leaves Age group at '15 years and over' (violates M1).",
+          "mentions": {
+            "Geography|Newfoundland and Labrador": true
+          },
+          "verdict": "skip",
+          "rejection_category": "confounded_comparison",
+          "reason": "Blocked by metadata semantic comparability gate: Semantic confound metadata check: Raw Geography comparison leaves Age group at '15 years and over' (violates M1).",
+          "critic_note": "",
+          "attempts": 0,
+          "citations": [
+            "R:dq261106a",
+            "M:M1"
+          ],
+          "rules": [],
+          "memory": [],
+          "coverage_overlaps": [],
+          "mcp_calls": [],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "blocked",
+              "attempt": 0,
+              "summary": "Gate 0 semantic check skipped LIVE-2",
+              "duration_ms": 0.01,
+              "details": {
+                "verdict": "skip",
+                "reason": "Semantic confound metadata check: Raw Geography comparison leaves Age group at '15 years and over' (violates M1)."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F2_1",
+              "probe_type": "gap_between_members",
+              "human": "in October 1, 2026, the unstandardized 15 years and over unemployment rate gap between Newfoundland and Labrador and Nova Scotia was 2.5 percentage points (8.7% vs 6.2%)",
+              "cut": {
+                "Geography_high": "Newfoundland and Labrador",
+                "Geography_low": "Nova Scotia",
+                "Labour force characteristics": "Unemployment rate"
+              },
+              "held_at": {
+                "Age group": "15 years and over"
+              },
+              "vectors": [
+                "v2063004",
+                "v2063382"
+              ],
+              "periods": [
+                "2026-10-01"
+              ]
+            }
+          ]
+        },
+        {
+          "brief_id": "LIVE-3",
+          "title": "Suppressed cell in Labour force characteristics, monthly, seasonall (Quality Flag ..)",
+          "summary": "Statistics Canada suppressed or flagged this estimate (STATUS='..').",
+          "quality_flag": "..",
+          "reliable": false,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {},
+          "verdict": "unreliable_data",
+          "rejection_category": null,
+          "reason": "Blocked by deterministic reliability gate (quality_flag='..', reliable=False).",
+          "critic_note": "",
+          "attempts": 0,
+          "citations": [
+            "R:dq261106a"
+          ],
+          "rules": [],
+          "memory": [],
+          "coverage_overlaps": [],
+          "mcp_calls": [],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "blocked",
+              "attempt": 0,
+              "summary": "Reliability gate blocked LIVE-3 (flag=..)",
+              "duration_ms": 0.0,
+              "details": {
+                "verdict": "unreliable_data",
+                "quality_flag": ".."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "suppressed_cell",
+              "human": "suppressed estimate (quality flag ..)",
+              "cut": {
+                "Geography": "Canada",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Men+",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v101884954"
+              ],
+              "periods": [
+                "1976-01-01"
+              ]
+            }
+          ]
+        }
+      ],
+      "review_queue": [
+        {
+          "brief_id": "LIVE-3",
+          "title": "Suppressed cell in Labour force characteristics, monthly, seasonall (Quality Flag ..)",
+          "summary": "Statistics Canada suppressed or flagged this estimate (STATUS='..').",
+          "quality_flag": "..",
+          "reliable": false,
+          "standardized": true,
+          "is_decomposition": false,
+          "confound_risk": null,
+          "mentions": {},
+          "verdict": "unreliable_data",
+          "rejection_category": null,
+          "reason": "Blocked by deterministic reliability gate (quality_flag='..', reliable=False).",
+          "critic_note": "",
+          "attempts": 0,
+          "citations": [
+            "R:dq261106a"
+          ],
+          "rules": [],
+          "memory": [],
+          "coverage_overlaps": [],
+          "mcp_calls": [],
+          "trace": [
+            {
+              "node": "gate",
+              "status": "blocked",
+              "attempt": 0,
+              "summary": "Reliability gate blocked LIVE-3 (flag=..)",
+              "duration_ms": 0.0,
+              "details": {
+                "verdict": "unreliable_data",
+                "quality_flag": ".."
+              }
+            }
+          ],
+          "feedback_log": [],
+          "error": "",
+          "facts": [
+            {
+              "id": "F3_1",
+              "probe_type": "suppressed_cell",
+              "human": "suppressed estimate (quality flag ..)",
+              "cut": {
+                "Geography": "Canada",
+                "Labour force characteristics": "Employment"
+              },
+              "held_at": {
+                "Gender": "Men+",
+                "Age group": "25 to 54 years"
+              },
+              "vectors": [
+                "v101884954"
+              ],
+              "periods": [
+                "1976-01-01"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -201,6 +201,8 @@ class WebServerTests(unittest.TestCase):
                     html = resp.read().decode("utf-8")
                     self.assertEqual(resp.status, 200)
                     self.assertIn("REMINE", html)
+                    self.assertIn('href="styles.css"', html)
+                    self.assertIn('src="app.js"', html)
 
                 status, health = self._http_json(f"{base}/api/health")
                 self.assertEqual(status, 200)
@@ -235,6 +237,27 @@ class WebServerTests(unittest.TestCase):
             finally:
                 server.shutdown()
                 server.server_close()
+
+    def test_build_pages_creates_static_bundle(self) -> None:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from build_pages import build_pages  # noqa: E402
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out_dir = Path(tmp) / "docs"
+            build_pages(
+                data_dir=ROOT / "data",
+                web_dir=ROOT / "src" / "remine" / "web",
+                docs_dir=out_dir,
+            )
+            self.assertTrue((out_dir / ".nojekyll").is_file())
+            self.assertTrue((out_dir / "index.html").is_file())
+            self.assertTrue((out_dir / "styles.css").is_file())
+            self.assertTrue((out_dir / "app.js").is_file())
+            bundle = json.loads((out_dir / "static" / "site_data.json").read_text(encoding="utf-8"))
+            self.assertGreaterEqual(len(bundle["snapshots"]), 2)
+            for snap in bundle["snapshots"]:
+                self.assertIn("off", bundle["runs"][snap["id"]])
+                self.assertIn("strict", bundle["runs"][snap["id"]])
 
 
 if __name__ == "__main__":

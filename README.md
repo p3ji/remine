@@ -18,8 +18,10 @@ All runtime modules live under [`src/remine/`](src/remine/):
 - `agents.py` — Role-specialized agents (`ANGLE_SYSTEM`, `DRAFTER_SYSTEM`, `CRITIC_SYSTEM`), strict `json_schema` decoding, `<think>` / `reasoning_content` fallback, `URGENT_REVISION_REQUIRED` retry feedback, and `LLMCallRecord` telemetry.
 - `workflow.py` — 7-node LangGraph `StateGraph` (`START -> gate -> retrieve -> angle -> draft -> bind_check -> critic -> review -> END`) using `Command[Literal[...]]` routing, `RetryPolicy` for transient errors, fail-closed `_is_model_failure` escalation, and `Annotated[..., operator.add]` reducers.
 - `evaluation.py` — Verdict & skip-category accuracy metrics, Gate 0 ablation comparison, and full JSON run serialization.
-- `web.py` + [`web/`](src/remine/web/) — Zero-dependency `ThreadingHTTPServer` interactive workbench (`index.html`, `styles.css`, `app.js`).
+- `web.py` + [`web/`](src/remine/web/) — Zero-dependency `ThreadingHTTPServer` interactive explorer (`index.html`, `styles.css`, `app.js`) designed in plain language for policy and social science staff, with automatic static-archive fallback for GitHub Pages.
 - `cli.py` — Unified CLI entrypoint (`run`, `harvest`, `serve`, `mcp`).
+
+**Live Web Explorer (GitHub Pages):** <https://p3ji.github.io/remine/> (built from `docs/` via `python scripts/build_pages.py`).
 
 ---
 

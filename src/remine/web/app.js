@@ -1,652 +1,974 @@
-/* Remine Workbench Client */
-(() => {
-  const state = {
-    snapshots: [],
-    runData: null,
-    selectedBriefId: null,
-    benchmarks: null,
-    rawTokenView: {},
-    selectedTokenByBrief: {},
+"use strict";
+
+const state = {
+  runtimeMode: "detecting", // "server" | "static"
+  health: null,
+  staticBundle: null,
+  snapshots: [],
+  benchmarks: { runs: [] },
+  activeRun: null,
+  selectedToken: null,
+  selectedStoryId: null,
+  highlightsExpanded: false,
+};
+
+const PROCESS_STEPS = [
+  {
+    num: 1,
+    title: "Data Reliability Check",
+    desc: "Automatically holds back Statistics Canada estimates flagged as suppressed or too unreliable to publish (such as Flag F or unavailable cells).",
+  },
+  {
+    num: 2,
+    title: "Fair Comparison Guard",
+    desc: "Checks whether comparing two regions or sectors holds key factors steady (for example, comparing core-aged workers rather than unadjusted all-age totals).",
+  },
+  {
+    num: 3,
+    title: "Coverage & Rules Lookup",
+    desc: "Checks whether Statistics Canada already reported the finding in The Daily or a companion paper, and retrieves official table methodology notes.",
+  },
+  {
+    num: 4,
+    title: "Plain-English Draft with Locked Figures",
+    desc: "Writes a short policy summary where every statistic must come verbatim from a verified Statistics Canada table slice rather than free-text generation.",
+  },
+  {
+    num: 5,
+    title: "Independent Quality Review",
+    desc: "A second check confirms all qualifiers, time periods, and comparison caveats are stated accurately—or sends the draft back for revision.",
+  },
+];
+
+const qs = (id) => document.getElementById(id);
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function showError(msg) {
+  const el = qs("error-banner");
+  if (!msg) {
+    el.hidden = true;
+    el.textContent = "";
+    return;
+  }
+  el.textContent = msg;
+  el.hidden = false;
+}
+
+function formatDateLabel(dateStr) {
+  if (!dateStr) return "";
+  const match = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return dateStr;
+  const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  return date.toLocaleDateString("en-CA", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function formatPeriodList(periods) {
+  if (!Array.isArray(periods) || periods.length === 0) return "Not specified";
+  if (periods.length === 2) return `${periods[0]} to ${periods[1]}`;
+  return periods.join(", ");
+}
+
+function humanizeKey(rawKey) {
+  return String(rawKey || "")
+    .replace(/_high$/i, " (Higher)")
+    .replace(/_low$/i, " (Lower)")
+    .replace(/_/g, " ");
+}
+
+function renderKvChips(obj) {
+  if (!obj || typeof obj !== "object") return "<span class=\"muted-note\">None</span>";
+  const entries = Object.entries(obj);
+  if (entries.length === 0) return "<span class=\"muted-note\">None</span>";
+  return `<div class="kv-chip-list">${entries
+    .map(
+      ([k, v]) =>
+        `<span class="kv-chip"><strong>${escapeHtml(humanizeKey(k))}:</strong> ${escapeHtml(v)}</span>`
+    )
+    .join("")}</div>`;
+}
+
+function formatKvPlainText(obj) {
+  if (!obj || typeof obj !== "object") return "";
+  return Object.entries(obj)
+    .map(([k, v]) => `${humanizeKey(k)}: ${v}`)
+    .join("; ");
+}
+
+function formatQualityFlag(flag) {
+  const map = {
+    A: "Very reliable (StatCan Flag A)",
+    B: "Reliable (StatCan Flag B)",
+    C: "Good quality (StatCan Flag C)",
+    D: "Acceptable quality (StatCan Flag D)",
+    E: "Use with caution (StatCan Flag E)",
+    F: "Too unreliable to publish (StatCan Flag F)",
+    "..": "Not available / suppressed (StatCan Flag ..)",
+    x: "Suppressed for confidentiality (Flag x)",
   };
+  return map[flag] || `StatCan Quality Flag ${flag || "A"}`;
+}
 
-  const els = {
-    snapshotSelect: document.getElementById("snapshot-select"),
-    modeSelect: document.getElementById("mode-select"),
-    modelSelect: document.getElementById("model-select"),
-    gate0Toggle: document.getElementById("gate0-toggle"),
-    runBtn: document.getElementById("run-btn"),
-    harvestDate: document.getElementById("harvest-date"),
-    harvestPid: document.getElementById("harvest-pid"),
-    harvestBtn: document.getElementById("harvest-btn"),
-    statusMsg: document.getElementById("status-msg"),
-    mcpPill: document.getElementById("mcp-pill"),
-    llmPill: document.getElementById("llm-pill"),
-    releaseBanner: document.getElementById("release-banner"),
-    kpiStrip: document.getElementById("kpi-strip"),
-    briefPills: document.getElementById("brief-pills"),
-    graphSvgWrap: document.getElementById("graph-svg-wrap"),
-    traceSubtitle: document.getElementById("trace-subtitle"),
-    traceDetail: document.getElementById("trace-detail"),
-    tabStories: document.getElementById("tab-stories"),
-    tabLedger: document.getElementById("tab-ledger"),
-    tabReview: document.getElementById("tab-review"),
-    tabBenchmarks: document.getElementById("tab-benchmarks"),
+function formatStanceLabel(stance) {
+  const map = {
+    concretizes: "Adds historical or subgroup detail",
+    contrasts: "Highlights subgroup contrast",
+    extends: "Extends published trend",
   };
+  return map[stance] || "Verified table finding";
+}
 
-  function esc(val) {
-    return String(val ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
+function formatVerdictMeta(verdict, rejectionCategory) {
+  if (verdict === "publish") {
+    return { label: "Ready to share", cls: "badge-teal" };
   }
-
-  function setStatus(text) {
-    els.statusMsg.textContent = text;
+  if (verdict === "unreliable_data") {
+    return { label: "Held back — unreliable or suppressed", cls: "badge-crimson" };
   }
-
-  function verdictClass(verdict) {
-    return `verdict-${String(verdict || "skip").toLowerCase()}`;
+  if (verdict === "needs_editorial_review") {
+    return { label: "Held back — needs analyst review", cls: "badge-amber" };
   }
-
-  async function apiJson(url, options = {}) {
-    const resp = await fetch(url, {
-      headers: { "Content-Type": "application/json" },
-      ...options,
-    });
-    const data = await resp.json();
-    if (!resp.ok) {
-      throw new Error(data.error || `HTTP ${resp.status}`);
-    }
-    return data;
-  }
-
-  async function refreshHealthAndSnapshots(preferredSnapshotId = null) {
-    const [health, snapResp, benchResp] = await Promise.all([
-      apiJson("/api/health"),
-      apiJson("/api/snapshots"),
-      apiJson("/api/benchmarks"),
-    ]);
-
-    const toolCount = (health.mcp_tools || []).length;
-    els.mcpPill.textContent = `MCP: ${toolCount} tools active`;
-    els.mcpPill.className = "pill pill-ok";
-
-    const llm = health.local_llm || {};
-    if (llm.online) {
-      els.llmPill.textContent = `Local /v1: ${(llm.models || []).length} model(s)`;
-      els.llmPill.className = "pill pill-ok";
-      const existing = Array.from(els.modelSelect.options).map((o) => o.value);
-      for (const m of llm.models || []) {
-        if (!existing.includes(m)) {
-          const opt = document.createElement("option");
-          opt.value = m;
-          opt.textContent = m;
-          els.modelSelect.appendChild(opt);
-        }
-      }
-    } else {
-      els.llmPill.textContent = "Local /v1: offline (Replay ready)";
-      els.llmPill.className = "pill pill-warn";
-    }
-
-    state.snapshots = snapResp.snapshots || [];
-    state.benchmarks = benchResp;
-    const current = preferredSnapshotId || els.snapshotSelect.value;
-    els.snapshotSelect.innerHTML = state.snapshots
-      .map(
-        (s) =>
-          `<option value="${esc(s.id)}">[${esc(s.source)}] ${esc(s.title)} (${esc(s.brief_count)} briefs)</option>`
-      )
-      .join("");
-    if (current && state.snapshots.some((s) => s.id === current)) {
-      els.snapshotSelect.value = current;
-    }
-  }
-
-  function renderReleaseAndKpis() {
-    const data = state.runData;
-    if (!data) return;
-    const rel = data.release || {};
-    const cfg = data.config || {};
-    const sum = data.summary || {};
-
-    els.releaseBanner.innerHTML = `
-      <div class="release-top">
-        <h2>${esc(rel.title)}</h2>
-        <div class="status-pills">
-          <span class="badge-mono">Release: ${esc(rel.id)}</span>
-          <span class="badge-mono">Model: ${esc(cfg.model)}</span>
-          <span class="badge-mono">Gate 0: ${cfg.enforce_semantic_standardization ? "STRICT" : "OFF"}</span>
-          ${rel.table_url ? `<a class="btn btn-ghost" href="${esc(rel.table_url)}" target="_blank" rel="noopener">StatCan Cube</a>` : ""}
-        </div>
-      </div>
-      <p class="release-highlights">${esc(rel.highlights)}</p>
-    `;
-
-    const evalObj = sum.evaluation;
-    const kpis = [
-      { label: "Published Stories", value: sum.publish_count ?? 0 },
-      { label: "Skipped (Novelty / Confounded)", value: sum.skip_count ?? 0 },
-      { label: "Human Review Queue", value: sum.review_count ?? 0 },
-      { label: "Unreliable Blocked", value: sum.unreliable_count ?? 0 },
-      { label: "LLM Agent Calls", value: sum.llm_calls ?? 0 },
-      { label: "MCP Tool Calls", value: sum.mcp_calls ?? 0 },
-      ...(evalObj
-        ? [{ label: "Benchmark Verdict Acc.", value: `${Math.round(evalObj.verdict_accuracy * 100)}%` }]
-        : []),
-    ];
-
-    els.kpiStrip.innerHTML = kpis
-      .map(
-        (k) => `
-          <div class="kpi-card">
-            <div class="kpi-label">${esc(k.label)}</div>
-            <div class="kpi-value">${esc(k.value)}</div>
-          </div>
-        `
-      )
-      .join("");
-  }
-
-  function renderPipelineGraph() {
-    const data = state.runData;
-    if (!data) return;
-    const ledger = data.ledger || [];
-    if (!ledger.length) return;
-
-    if (!ledger.some((r) => r.brief_id === state.selectedBriefId)) {
-      state.selectedBriefId = ledger[0].brief_id;
-    }
-
-    els.briefPills.innerHTML = ledger
-      .map((row) => {
-        const selected = row.brief_id === state.selectedBriefId ? "selected" : "";
-        const retryTag = row.attempts > 1 ? ` · R${row.attempts}` : "";
-        return `
-          <button
-            type="button"
-            class="brief-pill ${verdictClass(row.verdict)} ${selected}"
-            data-brief-id="${esc(row.brief_id)}"
-          >${esc(row.brief_id)} · ${esc(row.verdict.toUpperCase())}${esc(retryTag)}</button>
-        `;
-      })
-      .join("");
-
-    els.briefPills.querySelectorAll(".brief-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        state.selectedBriefId = btn.dataset.briefId;
-        renderPipelineGraph();
-      });
-    });
-
-    const selectedRow = ledger.find((r) => r.brief_id === state.selectedBriefId);
-    const trace = selectedRow ? selectedRow.trace || [] : [];
-    const nodeStatus = {};
-    let hadRetry = false;
-    for (const ev of trace) {
-      nodeStatus[ev.node] = ev.status;
-      if (ev.status === "retry") hadRetry = true;
-    }
-
-    const nodes = [
-      { id: "gate", label: "Gate 0\nReliability + Semantic", x: 18, y: 62, w: 122 },
-      { id: "retrieve", label: "MCP Retrieve\nRules + Memory", x: 162, y: 62, w: 112 },
-      { id: "angle", label: "Angle Selector\nLLM", x: 296, y: 62, w: 108 },
-      { id: "draft", label: "Token Drafter\nLLM", x: 426, y: 62, w: 108 },
-      { id: "bind_check", label: "Bind Check\nContract", x: 556, y: 62, w: 104 },
-      { id: "critic", label: "Method Critic\nLLM", x: 682, y: 62, w: 104 },
-      { id: "review", label: "Human Review\nEscalation", x: 380, y: 168, w: 140 },
-    ];
-
-    const styleFor = (id) => {
-      const st = nodeStatus[id];
-      if (!st) return { fill: "#ffffff", stroke: "#cbd5e1", text: "#64748b" };
-      if (st === "blocked" || st === "escalated" || st === "error") {
-        return { fill: "#fdf1f2", stroke: "#af3c43", text: "#7f1d1d" };
-      }
-      if (st === "retry") {
-        return { fill: "#fef6e7", stroke: "#b45309", text: "#92400e" };
-      }
-      return { fill: "#eaf6f5", stroke: "#1d7874", text: "#0f4c49" };
+  if (verdict === "skip") {
+    const reasonMap = {
+      ALREADY_IN_THE_DAILY: "Filtered — already in The Daily",
+      ALREADY_IN_ANALYTICAL_PAPER: "Filtered — covered in StatCan report",
+      CONFOUNDED_COMPARISON: "Filtered — skewed subgroup comparison",
     };
+    return {
+      label: reasonMap[rejectionCategory] || "Filtered out during screening",
+      cls: rejectionCategory === "CONFOUNDED_COMPARISON" ? "badge-amber" : "badge-muted",
+    };
+  }
+  return { label: verdict || "Screened", cls: "badge-muted" };
+}
 
-    const rectSvg = nodes
-      .map((n) => {
-        const c = styleFor(n.id);
-        const lines = n.label.split("\n");
-        return `
-          <g>
-            <rect x="${n.x}" y="${n.y}" width="${n.w}" height="52" rx="8"
-              fill="${c.fill}" stroke="${c.stroke}" stroke-width="2" />
-            <text x="${n.x + n.w / 2}" y="${n.y + 22}" text-anchor="middle"
-              font-size="11.5" font-weight="700" fill="${c.text}">${esc(lines[0])}</text>
-            <text x="${n.x + n.w / 2}" y="${n.y + 38}" text-anchor="middle"
-              font-size="10" fill="${c.text}">${esc(lines[1])}</text>
-          </g>
-        `;
-      })
-      .join("");
+function formatModelLabel(modelName) {
+  const map = {
+    replay: "Pre-verified benchmark script",
+    "qwen3.8-27b": "Qwen 3.8 (27B Local)",
+    "deepseek-v4-flash@q8_0": "DeepSeek v4 Flash (Local)",
+    "microsoft/phi-4": "Phi-4 (14B Local)",
+  };
+  return map[modelName] || modelName;
+}
 
-    const retryColor = hadRetry ? "#b45309" : "#cbd5e1";
-    const svg = `
-      <svg viewBox="0 0 806 238" width="100%" height="225" role="img" aria-label="LangGraph workflow graph">
-        <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
-          </marker>
-          <marker id="arrow-retry" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="${retryColor}" />
-          </marker>
-        </defs>
-        <line x1="140" y1="88" x2="162" y2="88" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)" />
-        <line x1="274" y1="88" x2="296" y2="88" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)" />
-        <line x1="404" y1="88" x2="426" y2="88" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)" />
-        <line x1="534" y1="88" x2="556" y2="88" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)" />
-        <line x1="660" y1="88" x2="682" y2="88" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)" />
+function formatStatCanPid(pid) {
+  const digits = String(pid || "").replace(/\D/g, "");
+  if (digits.length === 8) {
+    return `Table ${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4, 8)}-01`;
+  }
+  return pid ? `Table ${pid}` : "";
+}
 
-        <!-- Bounded retry loops -->
-        <path d="M 608 62 C 608 24, 480 24, 480 62" fill="none" stroke="${retryColor}"
-          stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-retry)" />
-        <path d="M 734 62 C 734 14, 468 14, 468 62" fill="none" stroke="${retryColor}"
-          stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-retry)" />
-        <text x="580" y="18" text-anchor="middle" font-size="10" fill="${retryColor}" font-weight="600">Bounded Retry Loop (attempt &lt;= max_attempts)</text>
+function formatStatCanReason(reason) {
+  if (!reason) return "";
+  return String(reason)
+    .replace(/quality_flag='([^']+)',\s*reliable=False/gi, "Statistics Canada reliability flag '$1'")
+    .replace(/quality_flag='([^']+)'/gi, "Statistics Canada reliability flag '$1'")
+    .replace(/reliable=False/gi, "marked as unreliable by Statistics Canada")
+    .replace(/Blocked by deterministic reliability gate/gi, "Held back by data quality check")
+    .replace(/Blocked by Gate 0 semantic guard/gi, "Filtered by subgroup comparability check")
+    .replace(/Blocked by metadata semantic comparability gate/gi, "Filtered by subgroup comparability check")
+    .replace(/Semantic confound metadata check:\s*/gi, "")
+    .replace(/\s*\(violates M\d+\)/gi, "")
+    .replace(/\bM:(M\d+)\b/g, "Rule $1")
+    .replace(/Methodology rule (M\d+) /gi, "Methodology check ($1) ")
+    .replace(/binds all numbers from verified tokens/gi, "links all figures directly to verified source series")
+    .replace(/binds all facts to tokens/gi, "links all figures directly to verified source series")
+    .replace(/verified tokens/gi, "verified source series")
+    .replace(/\s+([.,;])/g, "$1")
+    .trim();
+}
 
-        <!-- Escalation edges to review -->
-        <path d="M 608 114 L 500 168" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#arrow)" />
-        <path d="M 734 114 L 520 185" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#arrow)" />
-        <path d="M 350 114 L 405 168" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#arrow)" />
+function populateSelect(selectEl, items, getValue, getLabel) {
+  const prev = selectEl.value;
+  selectEl.innerHTML = "";
+  items.forEach((item) => {
+    const opt = document.createElement("option");
+    opt.value = getValue(item);
+    opt.textContent = getLabel(item);
+    selectEl.appendChild(opt);
+  });
+  if (items.some((item) => getValue(item) === prev)) {
+    selectEl.value = prev;
+  }
+}
 
-        ${rectSvg}
-      </svg>
+function setStatusBadge() {
+  const pill = qs("status-mode");
+  if (state.runtimeMode === "static") {
+    pill.textContent = "Published Briefs Archive";
+    pill.className = "status-pill archive";
+    return;
+  }
+  const aiOnline = Boolean(state.health?.local_llm?.online);
+  pill.textContent = aiOnline
+    ? "Local Server · AI Ready"
+    : "Local Server · Saved Reviews Ready";
+  pill.className = "status-pill online";
+}
+
+function setServerControlsVisibility() {
+  const isServer = state.runtimeMode === "server";
+  qs("server-run-wrap").hidden = !isServer;
+  qs("advanced-local-panel").hidden = !isServer;
+}
+
+function splitParagraphsWithSegments(segments) {
+  const paragraphs = [];
+  let current = [];
+  (segments || []).forEach((seg) => {
+    if (seg.kind === "text") {
+      const parts = String(seg.text || "").split(/\n\n+/);
+      parts.forEach((part, idx) => {
+        if (idx > 0) {
+          paragraphs.push(current);
+          current = [];
+        }
+        if (part) current.push({ kind: "text", text: part });
+      });
+    } else {
+      current.push(seg);
+    }
+  });
+  if (current.length > 0) paragraphs.push(current);
+  return paragraphs;
+}
+
+function findRulesForBrief(briefId) {
+  const ledgerRow = (state.activeRun?.ledger || []).find((r) => r.brief_id === briefId);
+  return ledgerRow?.rules || [];
+}
+
+function buildCopyText(story) {
+  const lines = [
+    story.headline || story.title,
+    "",
+    story.body || "",
+    "",
+    `Source: Statistics Canada — ${state.activeRun?.release?.title || ""}`,
+  ];
+  if (story.table_url) lines.push(`Table link: ${story.table_url}`);
+  const vectors = Array.from(
+    new Set((story.provenance || []).flatMap((p) => p.vectors || []))
+  );
+  if (vectors.length > 0) lines.push(`Series vector(s): ${vectors.join(", ")}`);
+  return lines.join("\n");
+}
+
+function renderReleaseAndSummary(data) {
+  const release = data.release || {};
+  const summary = data.summary || {};
+
+  const parts = [];
+  if (release.date) parts.push(`Released ${formatDateLabel(release.date)}`);
+  if (release.pid) parts.push(formatStatCanPid(release.pid));
+  qs("release-meta").textContent = parts.join(" · ") || "Statistics Canada Release";
+  qs("release-title").textContent = release.title || "Selected Release";
+
+  const dailyLink = qs("release-daily-link");
+  if (release.url) {
+    dailyLink.href = release.url;
+    dailyLink.hidden = false;
+  } else {
+    dailyLink.hidden = true;
+  }
+
+  const tableLink = qs("release-table-link");
+  if (release.table_url) {
+    tableLink.href = release.table_url;
+    tableLink.hidden = false;
+  } else {
+    tableLink.hidden = true;
+  }
+
+  const rawHighlights = String(release.highlights || "")
+    .replace(/^The Daily\s*\|.*?Released:\s*\d{4}-\d{2}-\d{2}\s*(?:Select geography\s*)?/i, "")
+    .replace(/\s*\(\s*-\s*(\d+)/g, " (-$1")
+    .replace(/(\d+)\s+\.(\d+%)/g, "$1.$2")
+    .replace(/-\s*(\d+)\s+(\d+\.\d+%)/g, "-$1$2")
+    .trim();
+  const highlightsEl = qs("release-highlights");
+  const toggleBtn = qs("toggle-highlights-btn");
+  if (rawHighlights.length > 360 && !state.highlightsExpanded) {
+    const trimmed = rawHighlights.slice(0, 360).replace(/\s+\S*$/, "").trim();
+    highlightsEl.textContent = `${trimmed}…`;
+    toggleBtn.textContent = "Show full summary";
+    toggleBtn.hidden = false;
+  } else {
+    highlightsEl.textContent = rawHighlights || "No official summary recorded for this snapshot.";
+    if (rawHighlights.length > 360) {
+      toggleBtn.textContent = "Show shorter summary";
+      toggleBtn.hidden = false;
+    } else {
+      toggleBtn.hidden = true;
+    }
+  }
+
+  const total = summary.total_briefs || 0;
+  const heldCount = (summary.review_count || 0) + (summary.unreliable_count || 0);
+  qs("kpi-published").textContent = `${summary.publish_count ?? 0} of ${total}`;
+  qs("kpi-skipped").textContent = String(summary.skip_count ?? 0);
+  qs("kpi-review").textContent = String(heldCount);
+
+  const evalSummary = summary.evaluation;
+  if (evalSummary && typeof evalSummary.verdict_accuracy === "number") {
+    const pct = Math.round(evalSummary.verdict_accuracy * 100);
+    qs("kpi-accuracy").textContent = `${pct}% (${evalSummary.correct_verdicts}/${evalSummary.total})`;
+    qs("kpi-accuracy-sub").textContent = "Agreement with expert screening review";
+  } else {
+    qs("kpi-accuracy").textContent = `${total} checked`;
+    qs("kpi-accuracy-sub").textContent = "Screened against StatCan quality & overlap rules";
+  }
+
+  qs("tab-count-findings").textContent = String((data.stories || []).length);
+  qs("tab-count-checked").textContent = String((data.ledger || []).length);
+  qs("tab-count-held").textContent = String((data.review_queue || []).length);
+}
+
+function renderSourceDrawer() {
+  const details = qs("source-details");
+  if (!state.selectedToken || !state.activeRun) {
+    details.className = "source-details-empty";
+    details.textContent =
+      "Select any underlined figure inside a finding to verify its exact Statistics Canada series, group definitions, and time periods.";
+    return;
+  }
+
+  const story = (state.activeRun.stories || []).find((s) => s.brief_id === state.selectedStoryId);
+  const fact = story?.facts?.find((f) => f.id === state.selectedToken.fact_id);
+  const prov = story?.provenance?.find((p) => p.id === state.selectedToken.fact_id);
+  const vectors = state.selectedToken.vectors || prov?.vectors || fact?.vectors || [];
+  const periods = state.selectedToken.periods || prov?.periods || fact?.periods || [];
+  const cut = prov?.cut || fact?.cut || {};
+  const heldAt = prov?.held_at || fact?.held_at || {};
+  const tableUrl = prov?.table_url || story?.table_url || "";
+
+  details.className = "source-block";
+  details.innerHTML = `
+    <div>
+      <span class="source-row-label">Verified table figure</span>
+      <p class="source-claim-quote">${escapeHtml(fact?.human || state.selectedToken.text)}</p>
+    </div>
+    <div>
+      <span class="source-row-label">What is being compared</span>
+      ${renderKvChips(cut)}
+    </div>
+    <div>
+      <span class="source-row-label">Population &amp; factors held constant</span>
+      ${renderKvChips(heldAt)}
+    </div>
+    <div>
+      <span class="source-row-label">Comparison period</span>
+      <div>${escapeHtml(formatPeriodList(periods))}</div>
+    </div>
+    <div>
+      <span class="source-row-label">Statistics Canada series ID(s)</span>
+      <div class="kv-chip-list">
+        ${vectors.map((v) => `<span class="kv-chip">${escapeHtml(v)}</span>`).join("")}
+      </div>
+    </div>
+    ${
+      tableUrl
+        ? `<div>
+             <a class="link-btn" href="${escapeHtml(tableUrl)}" target="_blank" rel="noopener noreferrer">Open source table on StatCan &#8599;</a>
+           </div>`
+        : ""
+    }
+  `;
+}
+
+function renderFindings(stories) {
+  const listEl = qs("stories-list");
+  listEl.innerHTML = "";
+
+  if (!stories || stories.length === 0) {
+    listEl.innerHTML = `
+      <div class="empty-state">
+        <strong>No new findings passed all quality checks for this release.</strong>
+        <p class="muted-note" style="margin-top:6px;">
+          Check <em>All Checked Items</em> to see which table candidates were already covered in <em>The Daily</em> or filtered out by reliability and comparability safeguards.
+        </p>
+      </div>
     `;
-    els.graphSvgWrap.innerHTML = svg;
-    renderTracePanel(selectedRow);
+    renderSourceDrawer();
+    return;
   }
 
-  function renderTracePanel(row) {
-    if (!row) {
-      els.traceDetail.innerHTML = "";
-      return;
-    }
-    els.traceSubtitle.textContent = `${row.brief_id} · ${row.title} (${row.verdict.toUpperCase()})`;
+  stories.forEach((story) => {
+    const card = document.createElement("article");
+    card.className = "story-card";
 
-    const traceHtml = (row.trace || [])
-      .map(
-        (ev) => `
-          <div class="trace-item">
-            <div class="trace-item-head">
-              <span>${esc(ev.node)} · ${esc(ev.status)} ${ev.attempt ? `(attempt ${esc(ev.attempt)})` : ""}</span>
-              <span>${esc(ev.duration_ms)} ms</span>
-            </div>
-            <p>${esc(ev.summary)}</p>
-          </div>
-        `
-      )
-      .join("");
+    const rules = findRulesForBrief(story.brief_id);
+    const header = document.createElement("div");
+    header.className = "story-header";
+    header.innerHTML = `
+      <span class="badge badge-teal">Ready to share</span>
+      <span class="badge badge-navy">${escapeHtml(formatStanceLabel(story.stance))}</span>
+      ${
+        story.recovered_via_retry
+          ? '<span class="badge badge-amber" title="An initial draft needed clearer source grounding and was revised during quality review.">Revised during review</span>'
+          : ""
+      }
+    `;
 
-    const mcpHtml = (row.mcp_calls || []).length
-      ? `
-        <div class="trace-item">
-          <div class="trace-item-head">
-            <span>MCP JSON-RPC 2.0 Calls (${row.mcp_calls.length})</span>
-            <span>Audited</span>
-          </div>
-          <p class="mono">${row.mcp_calls.map((c) => `${esc(c.tool)}(${esc(JSON.stringify(c.arguments))}) -> ${esc(c.duration_ms)}ms`).join("<br>")}</p>
-        </div>
-      `
-      : "";
+    const headline = document.createElement("h3");
+    headline.className = "story-headline";
+    headline.textContent = story.headline || story.title;
 
-    const feedbackHtml = (row.feedback_log || []).length
-      ? `
-        <div class="trace-item" style="border-color:#f3d7a4;background:#fef6e7;">
-          <div class="trace-item-head"><span>Self-Correction Feedback Log</span><span>${row.feedback_log.length} note(s)</span></div>
-          <p>${row.feedback_log.map((f) => `• ${esc(f)}`).join("<br>")}</p>
-        </div>
-      `
-      : "";
+    const contextGrid = document.createElement("div");
+    contextGrid.className = "story-context-grid";
+    contextGrid.innerHTML = `
+      <div>
+        <span class="context-label">Policy context</span>
+        <p class="context-text">${escapeHtml(story.assumption || "Provides additional disaggregation from official survey tables.")}</p>
+      </div>
+      <div>
+        <span class="context-label">What The Daily did not cover</span>
+        <p class="context-text">${escapeHtml(story.differs_from_daily || "Extends beyond the headline figures published in the release summary.")}</p>
+      </div>
+    `;
 
-    els.traceDetail.innerHTML = traceHtml + mcpHtml + feedbackHtml;
-  }
-
-  function renderBoundParagraph(story, showRaw) {
-    const segs = story.body_segments || [];
-    if (!segs.length) return esc(showRaw ? story.raw_body || story.body : story.body);
-    return segs
-      .map((seg) => {
-        if (seg.kind === "text") return esc(seg.text);
-        const label = showRaw ? seg.token : seg.text;
-        const rawCls = showRaw ? "raw" : "";
-        return `<span class="token-span ${rawCls}" data-brief="${esc(story.brief_id)}" data-fact="${esc(seg.fact_id)}" title="Click to inspect StatCan vector provenance">${esc(label)}</span>`;
-      })
-      .join("");
-  }
-
-  function renderStoriesTab() {
-    const stories = (state.runData && state.runData.stories) || [];
-    if (!stories.length) {
-      els.tabStories.innerHTML = `<div class="card"><p class="muted">No stories were published in this run (check the Audit Ledger or Human Review tabs).</p></div>`;
-      return;
-    }
-
-    els.tabStories.innerHTML = stories
-      .map((story) => {
-        const showRaw = Boolean(state.rawTokenView[story.brief_id]);
-        const activeFactId =
-          state.selectedTokenByBrief[story.brief_id] ||
-          ((story.token_bindings || [])[0] && story.token_bindings[0].fact_id);
-        const activeBinding = (story.token_bindings || []).find((b) => b.fact_id === activeFactId);
-
-        const drawerHtml = activeBinding
-          ? `
-            <div class="token-drawer">
-              <strong>Token Provenance Inspector:</strong>
-              <span class="mono">${esc(activeBinding.token)}</span> &rarr;
-              <span class="mono">${esc(activeBinding.resolved_text)}</span>
-              <div class="mono" style="margin-top:4px;color:#334155;">
-                Vectors: ${esc((activeBinding.vectors || []).join(", "))} |
-                Periods: ${esc((activeBinding.periods || []).join(", "))} |
-                Cut: ${esc(JSON.stringify(activeBinding.cut))} |
-                Held At: ${esc(JSON.stringify(activeBinding.held_at))}
-              </div>
-            </div>
-          `
-          : "";
-
-        return `
-          <article class="card story-card">
-            <div class="story-header">
-              <div>
-                <div class="status-pills">
-                  <span class="badge-mono">${esc(story.brief_id)}</span>
-                  <span class="badge-mono">${esc(story.stance.toUpperCase())}</span>
-                  <span class="badge-mono">Attempts: ${esc(story.attempts)}${story.recovered_via_retry ? " (RECOVERED)" : ""}</span>
-                </div>
-                <h3 class="story-headline">${esc(story.headline)}</h3>
-              </div>
-              <button class="btn btn-ghost toggle-token-btn" type="button" data-brief="${esc(story.brief_id)}">
-                ${showRaw ? "Show Bound Prose" : "Show {{token}} Overlay"}
-              </button>
-            </div>
-
-            <p class="story-body">${renderBoundParagraph(story, showRaw)}</p>
-            ${drawerHtml}
-
-            <div class="story-meta-grid">
-              <div class="meta-box">
-                <h4>Explicit Assumption</h4>
-                <div>${esc(story.assumption)}</div>
-              </div>
-              <div class="meta-box">
-                <h4>Novelty vs. The Daily</h4>
-                <div>${esc(story.differs_from_daily)}</div>
-              </div>
-            </div>
-
-            <div class="status-pills">
-              <span class="pill pill-neutral">Citations: ${esc((story.citations || []).join(", "))}</span>
-              <span class="pill pill-ok">Critic: ${esc(story.critic_note)}</span>
-              ${story.table_url ? `<a class="btn btn-ghost" href="${esc(story.table_url)}" target="_blank" rel="noopener">Open StatCan Cube</a>` : ""}
-            </div>
-          </article>
-        `;
-      })
-      .join("");
-
-    els.tabStories.querySelectorAll(".toggle-token-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.dataset.brief;
-        state.rawTokenView[id] = !state.rawTokenView[id];
-        renderStoriesTab();
+    const bodyEl = document.createElement("div");
+    bodyEl.className = "story-body";
+    const paragraphs = splitParagraphsWithSegments(story.body_segments || []);
+    paragraphs.forEach((segs) => {
+      const p = document.createElement("p");
+      segs.forEach((seg) => {
+        if (seg.kind === "text") {
+          p.appendChild(document.createTextNode(seg.text));
+        } else if (seg.kind === "token") {
+          const link = document.createElement("a");
+          link.href = "#source-drawer";
+          link.setAttribute("role", "button");
+          link.className = "figure-link";
+          if (
+            state.selectedStoryId === story.brief_id &&
+            state.selectedToken?.fact_id === seg.fact_id
+          ) {
+            link.classList.add("selected");
+          }
+          link.textContent = seg.text;
+          link.title = "Click to inspect Statistics Canada source details";
+          link.addEventListener("click", (evt) => {
+            evt.preventDefault();
+            state.selectedStoryId = story.brief_id;
+            state.selectedToken = seg;
+            renderFindings(stories);
+            renderSourceDrawer();
+          });
+          p.appendChild(link);
+        }
       });
+      bodyEl.appendChild(p);
     });
 
-    els.tabStories.querySelectorAll(".token-span").forEach((span) => {
-      span.addEventListener("click", () => {
-        state.selectedTokenByBrief[span.dataset.brief] = span.dataset.fact;
-        renderStoriesTab();
-      });
+    const verifyHint = document.createElement("p");
+    verifyHint.className = "story-verify-hint";
+    verifyHint.textContent =
+      "Underlined figures link directly to verified Statistics Canada vectors — click any underlined statement to check its source.";
+
+    card.appendChild(header);
+    card.appendChild(headline);
+    card.appendChild(contextGrid);
+    card.appendChild(bodyEl);
+    card.appendChild(verifyHint);
+
+    if (story.critic_note) {
+      const note = document.createElement("div");
+      note.className = "story-reviewer-note";
+      note.innerHTML = `<strong>Quality check note:</strong> ${escapeHtml(formatStatCanReason(story.critic_note))}`;
+      card.appendChild(note);
+    }
+
+    const actions = document.createElement("div");
+    actions.className = "story-actions";
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "btn-secondary";
+    copyBtn.textContent = "Copy brief with citation";
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(buildCopyText(story));
+        copyBtn.textContent = "Copied to clipboard ✓";
+        setTimeout(() => {
+          copyBtn.textContent = "Copy brief with citation";
+        }, 1800);
+      } catch (_) {
+        copyBtn.textContent = "Select text above to copy";
+      }
     });
+    actions.appendChild(copyBtn);
+
+    if (story.table_url) {
+      const extLink = document.createElement("a");
+      extLink.className = "link-btn";
+      extLink.href = story.table_url;
+      extLink.target = "_blank";
+      extLink.rel = "noopener noreferrer";
+      extLink.innerHTML = "View StatCan source table &#8599;";
+      actions.appendChild(extLink);
+    }
+    card.appendChild(actions);
+
+    if (rules.length > 0) {
+      const details = document.createElement("details");
+      details.className = "story-rules-details";
+      details.innerHTML = `
+        <summary>Methodology rules verified (${rules.length})</summary>
+        <ul class="story-rules-list">
+          ${rules
+            .map(
+              (r) =>
+                `<li><strong>${escapeHtml(r.title)}:</strong> ${escapeHtml(r.rule)}</li>`
+            )
+            .join("")}
+        </ul>
+      `;
+      card.appendChild(details);
+    }
+
+    listEl.appendChild(card);
+  });
+
+  renderSourceDrawer();
+}
+
+function renderCoverageManifest(manifest) {
+  const box = qs("coverage-manifest-box");
+  if (!manifest || !Array.isArray(manifest.claimed_coordinates) || manifest.claimed_coordinates.length === 0) {
+    box.innerHTML = `
+      <h3>Already Covered by Statistics Canada</h3>
+      <p class="section-intro" style="margin-bottom:0;">
+        This release checks candidate items directly against headlines mentioned in <em>The Daily</em> so analysts are not shown duplicate findings.
+      </p>
+    `;
+    return;
   }
 
-  function renderLedgerTab() {
-    const data = state.runData;
-    if (!data) return;
-    const manifest = data.coverage_manifest;
-    const ledger = data.ledger || [];
-
-    const manifestCard = manifest
-      ? `
-        <div class="card">
-          <div class="section-head">
-            <div>
-              <h2>Two-Tier Coverage Subtraction Manifest</h2>
-              <p class="muted">Tier 1 (The Daily release) and Tier 2 (Analytical Study ${esc(manifest.paper_catalogue || "None")}) claimed coordinate envelopes.</p>
-            </div>
-            <span class="badge-mono">${esc((manifest.claimed_coordinates || []).length)} Claimed Cut(s)</span>
-          </div>
-          <table>
-            <thead><tr><th>Tier</th><th>Period</th><th>Claimed Dimensions</th><th>Published Quote</th></tr></thead>
-            <tbody>
-              ${(manifest.claimed_coordinates || [])
-                .map(
-                  (c) => `
-                    <tr>
-                      <td><span class="badge-mono">${esc(c.tier)}</span></td>
-                      <td class="mono">${esc(c.period || "—")}</td>
-                      <td class="mono">${esc(JSON.stringify(c.dimensions))}</td>
-                      <td>${esc(c.prose_quote)}</td>
-                    </tr>
-                  `
+  const coords = manifest.claimed_coordinates;
+  box.innerHTML = `
+    <h3>Already Covered in Official Reports (${coords.length} reference points tracked)</h3>
+    <p class="section-intro">
+      REMINE extracts claims already reported in <em>The Daily</em>${manifest.paper_catalogue ? ` and <em>${escapeHtml(manifest.paper_catalogue)}</em>` : ""} to avoid surfacing numbers your team has already read.
+    </p>
+    <div class="coverage-grid">
+      ${coords
+        .map((c) => {
+          const tierLabel = c.tier === "paper" ? "Analytical report" : "The Daily bulletin";
+          const cls = c.tier === "paper" ? "badge-navy" : "badge-muted";
+          const dimsText = formatKvPlainText(c.dimensions);
+          return `
+            <div class="coverage-item">
+              <div class="ledger-meta-row">
+                <span class="badge ${cls}">${escapeHtml(tierLabel)}</span>
+                ${c.period ? `<span class="badge badge-muted">${escapeHtml(c.period)}</span>` : ""}
+              </div>
+              <div style="font-size:0.86rem;font-weight:600;color:var(--ink);">
+                ${escapeHtml(dimsText || "Headline estimate")}
+              </div>
+              <p class="coverage-quote">“${escapeHtml(
+                String(c.prose_quote || "").replace(
+                  /^The Daily\s*\|.*?Release schedule Information\s*/i,
+                  ""
                 )
-                .join("")}
-            </tbody>
-          </table>
-        </div>
-      `
-      : "";
+              )}”</p>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
 
-    const ledgerCard = `
-      <div class="card">
-        <div class="section-head">
-          <div>
-            <h2>Full Editorial Audit Ledger</h2>
-            <p class="muted">Every candidate brief evaluated with deterministic quality gates, MCP rule citations, and novelty overlap scores.</p>
-          </div>
-        </div>
-        <table>
-          <thead><tr><th>Brief</th><th>Verdict</th><th>Category / Gate</th><th>Overlaps</th><th>Reason &amp; Citations</th></tr></thead>
+function renderLedger(ledger) {
+  const listEl = qs("ledger-list");
+  listEl.innerHTML = "";
+  if (!ledger || ledger.length === 0) {
+    listEl.innerHTML = `<div class="empty-state">No table items checked in this release.</div>`;
+    return;
+  }
+
+  ledger.forEach((row) => {
+    const vMeta = formatVerdictMeta(row.verdict, row.rejection_category);
+    const card = document.createElement("div");
+    card.className = "ledger-card";
+    card.innerHTML = `
+      <div class="ledger-top">
+        <h4 class="ledger-title">${escapeHtml(row.title)}</h4>
+        <span class="badge ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
+      </div>
+      <p class="ledger-summary">${escapeHtml(formatStatCanReason(row.summary || ""))}</p>
+      <div class="ledger-meta-row">
+        <span class="badge badge-muted">${escapeHtml(formatQualityFlag(row.quality_flag))}</span>
+        <span class="badge ${row.standardized === false ? "badge-amber" : "badge-muted"}">
+          ${row.standardized === false ? "Unadjusted subgroup mix" : "Comparable subgroups"}
+        </span>
+      </div>
+      ${
+        row.reason
+          ? `<p class="ledger-reason"><strong>Screening decision:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>`
+          : ""
+      }
+      ${
+        row.critic_note
+          ? `<p class="ledger-reason"><strong>Quality reviewer note:</strong> ${escapeHtml(formatStatCanReason(row.critic_note))}</p>`
+          : ""
+      }
+    `;
+    listEl.appendChild(card);
+  });
+}
+
+function renderReviewQueue(queue) {
+  const listEl = qs("review-queue-list");
+  listEl.innerHTML = "";
+  if (!queue || queue.length === 0) {
+    listEl.innerHTML = `
+      <div class="empty-state">
+        No items were held back for data suppression or analyst escalation in this release.
+      </div>
+    `;
+    return;
+  }
+
+  queue.forEach((row) => {
+    const vMeta = formatVerdictMeta(row.verdict, row.rejection_category);
+    const card = document.createElement("div");
+    card.className = "ledger-card";
+    card.innerHTML = `
+      <div class="ledger-top">
+        <h4 class="ledger-title">${escapeHtml(row.title)}</h4>
+        <span class="badge ${vMeta.cls}">${escapeHtml(vMeta.label)}</span>
+      </div>
+      <p class="ledger-summary">${escapeHtml(formatStatCanReason(row.summary || ""))}</p>
+      <div class="ledger-meta-row">
+        <span class="badge badge-crimson">${escapeHtml(formatQualityFlag(row.quality_flag))}</span>
+      </div>
+      <p class="ledger-reason"><strong>Why it was held back:</strong> ${escapeHtml(formatStatCanReason(row.reason))}</p>
+    `;
+    listEl.appendChild(card);
+  });
+}
+
+function renderProcessAndBenchmarks(data) {
+  qs("process-steps").innerHTML = PROCESS_STEPS.map(
+    (step) => `
+      <li class="process-step">
+        <span class="step-num">${step.num}</span>
+        <h4>${escapeHtml(step.title)}</h4>
+        <p>${escapeHtml(step.desc)}</p>
+      </li>
+    `
+  ).join("");
+
+  const runs = state.benchmarks?.runs || [];
+  const wrap = qs("benchmarks-table-wrap");
+  if (runs.length === 0) {
+    wrap.innerHTML = `<p class="muted-note">No cross-model screening benchmarks recorded yet.</p>`;
+  } else {
+    wrap.innerHTML = `
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Release Dataset</th>
+              <th>Automated Reviewer</th>
+              <th>Comparability Guard</th>
+              <th>Correct Decisions</th>
+              <th>Drafts Revised &amp; Fixed</th>
+              <th>Time Taken</th>
+            </tr>
+          </thead>
           <tbody>
-            ${ledger
-              .map(
-                (row) => `
+            ${runs
+              .map((r) => {
+                const accPct =
+                  typeof r.verdict_accuracy === "number"
+                    ? `${Math.round(r.verdict_accuracy * 100)}% (${r.correct_verdicts}/${r.total_briefs})`
+                    : "—";
+                return `
                   <tr>
-                    <td><strong>${esc(row.brief_id)}</strong><br><span class="muted">${esc(row.title)}</span></td>
-                    <td><span class="brief-pill ${verdictClass(row.verdict)}">${esc(row.verdict.toUpperCase())}</span></td>
-                    <td class="mono">${esc(row.rejection_category || (row.reliable ? `flag=${row.quality_flag}` : `BLOCKED (${row.quality_flag})`))}</td>
-                    <td class="mono">${(row.coverage_overlaps || []).length ? row.coverage_overlaps.map((o) => `${esc(o.tier)} (${Math.round(o.overlap_ratio * 100)}%)`).join("<br>") : "0 overlaps"}</td>
-                    <td>${esc(row.reason)}<div class="mono muted" style="margin-top:4px;">Citations: ${esc((row.citations || []).join(", "))}</div></td>
+                    <td>${escapeHtml(r.dataset)}</td>
+                    <td>${escapeHtml(formatModelLabel(r.model))}</td>
+                    <td>${r.gate0 ? "On (strict)" : "Off (caught later)"}</td>
+                    <td>${escapeHtml(accPct)}</td>
+                    <td>${escapeHtml(r.recovered_via_retry ?? 0)}</td>
+                    <td>${escapeHtml(r.elapsed_s != null ? `${r.elapsed_s}s` : "—")}</td>
                   </tr>
-                `
-              )
+                `;
+              })
               .join("")}
           </tbody>
         </table>
       </div>
     `;
-
-    els.tabLedger.innerHTML = manifestCard + ledgerCard;
   }
 
-  function renderReviewTab() {
-    const queue = (state.runData && state.runData.review_queue) || [];
-    if (!queue.length) {
-      els.tabReview.innerHTML = `<div class="card"><p class="muted">Zero briefs currently require human editorial escalation.</p></div>`;
-      return;
-    }
-
-    els.tabReview.innerHTML = queue
+  const tracePanel = qs("technical-trace-panel");
+  const ledger = data.ledger || [];
+  tracePanel.innerHTML = `
+    <div class="kv-chip-list">
+      <span class="kv-chip"><strong>Model engine:</strong> ${escapeHtml(data.config?.model || "replay")}</span>
+      <span class="kv-chip"><strong>Comparable-subgroup guard:</strong> ${data.config?.enforce_semantic_standardization ? "Enabled" : "Disabled"}</span>
+      <span class="kv-chip"><strong>Model calls:</strong> ${escapeHtml(data.summary?.llm_calls ?? 0)}</span>
+      <span class="kv-chip"><strong>Tool lookups:</strong> ${escapeHtml(data.summary?.mcp_calls ?? 0)}</span>
+    </div>
+    ${ledger
       .map(
-        (item) => `
-          <div class="card" style="border-left:4px solid var(--amber);">
-            <div class="story-header">
-              <div>
-                <span class="brief-pill ${verdictClass(item.verdict)}">${esc(item.verdict.toUpperCase())}</span>
-                <strong style="margin-left:8px;">${esc(item.brief_id)} — ${esc(item.title)}</strong>
-              </div>
-              <span class="badge-mono">Flag: ${esc(item.quality_flag)} | Attempts: ${esc(item.attempts)}</span>
-            </div>
-            <p>${esc(item.reason)}</p>
-            ${item.critic_note ? `<div class="meta-box"><h4>Escalation Note</h4><div class="mono">${esc(item.critic_note)}</div></div>` : ""}
-            ${(item.feedback_log || []).length ? `<div class="meta-box" style="margin-top:8px;"><h4>Retry Trace</h4><div class="mono">${item.feedback_log.map(esc).join("<br>")}</div></div>` : ""}
+        (row) => `
+          <div class="coverage-item">
+            <strong>${escapeHtml(row.brief_id)} — ${escapeHtml(row.title)}</strong>
+            <ul style="margin:6px 0 0;padding-left:18px;font-size:0.84rem;color:var(--ink-muted);">
+              ${(row.trace || [])
+                .map(
+                  (ev) =>
+                    `<li><code>${escapeHtml(ev.node)}</code> (${escapeHtml(ev.status)}) — ${escapeHtml(ev.summary)}</li>`
+                )
+                .join("")}
+            </ul>
           </div>
         `
       )
-      .join("");
-  }
+      .join("")}
+  `;
+}
 
-  function renderBenchmarksTab() {
-    const evalObj = state.runData && state.runData.summary && state.runData.summary.evaluation;
-    const runs = (state.benchmarks && state.benchmarks.runs) || [];
+function applyRunData(data) {
+  state.activeRun = data;
+  state.selectedToken = null;
+  state.selectedStoryId = null;
 
-    const currentCard = evalObj
-      ? `
-        <div class="card">
-          <h2>Current Run Evaluation (${esc(state.runData.config.model)})</h2>
-          <p class="muted">Verdict Accuracy: <strong>${Math.round(evalObj.verdict_accuracy * 100)}%</strong> (${esc(evalObj.correct_verdicts)}/${esc(evalObj.total)}) · Skip Category Accuracy: <strong>${Math.round(evalObj.rejection_accuracy * 100)}%</strong> · Self-Correction Recoveries: <strong>${esc(evalObj.recovered_via_retry)}</strong></p>
-          <pre class="mono" style="background:#faf8f4;padding:10px;border-radius:6px;overflow:auto;">Confusion Matrix: ${esc(JSON.stringify(evalObj.confusion, null, 2))}</pre>
-        </div>
-      `
-      : "";
-
-    const benchCard = runs.length
-      ? `
-        <div class="card">
-          <div class="section-head">
-            <div>
-              <h2>Multi-Model &amp; Gate 0 Ablation Benchmarks</h2>
-              <p class="muted">Measured locally on Apple Silicon /v1 across deterministic Replay and local open-weight models.</p>
-            </div>
-            <span class="badge-mono">${runs.length} Benchmark Runs</span>
-          </div>
-          <table>
-            <thead><tr><th>Dataset</th><th>Model</th><th>Gate 0</th><th>Verdict Acc.</th><th>Rejection Acc.</th><th>LLM Calls</th><th>Duration</th></tr></thead>
-            <tbody>
-              ${runs
-                .map((r) => {
-                  const pct = Math.round((r.verdict_accuracy || 0) * 100);
-                  const rej = Math.round((r.rejection_accuracy || 0) * 100);
-                  return `
-                    <tr>
-                      <td>${esc(r.dataset)}</td>
-                      <td class="mono">${esc(r.model)}</td>
-                      <td class="mono">${r.gate0 ? "STRICT" : "OFF"}</td>
-                      <td>
-                        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-                        <span class="mono">${pct}%</span>
-                      </td>
-                      <td class="mono">${rej}%</td>
-                      <td class="mono">${esc(r.llm_calls)}</td>
-                      <td class="mono">${esc(r.elapsed_s)}s</td>
-                    </tr>
-                  `;
-                })
-                .join("")}
-            </tbody>
-          </table>
-        </div>
-      `
-      : `<div class="card"><p class="muted">No saved multi-model benchmark matrix found yet.</p></div>`;
-
-    els.tabBenchmarks.innerHTML = currentCard + benchCard;
-  }
-
-  function renderAll() {
-    renderReleaseAndKpis();
-    renderPipelineGraph();
-    renderStoriesTab();
-    renderLedgerTab();
-    renderReviewTab();
-    renderBenchmarksTab();
-  }
-
-  async function executeRun() {
-    els.runBtn.disabled = true;
-    setStatus("Running LangGraph swarm...");
-    try {
-      const payload = {
-        snapshot_id: els.snapshotSelect.value,
-        mode: els.modeSelect.value,
-        model: els.modelSelect.value,
-        enforce_semantic_standardization: els.gate0Toggle.checked,
-      };
-      state.runData = await apiJson("/api/run", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-      renderAll();
-      setStatus(
-        `Completed in ${state.runData.summary.total_duration_ms} ms (${state.runData.summary.llm_calls} LLM / ${state.runData.summary.mcp_calls} MCP calls)`
-      );
-    } catch (err) {
-      setStatus(`Error: ${err.message}`);
-    } finally {
-      els.runBtn.disabled = false;
+  if (Array.isArray(data.stories) && data.stories.length > 0) {
+    const firstSeg = (data.stories[0].body_segments || []).find((s) => s.kind === "token");
+    if (firstSeg) {
+      state.selectedStoryId = data.stories[0].brief_id;
+      state.selectedToken = firstSeg;
     }
   }
 
-  async function executeHarvest() {
-    els.harvestBtn.disabled = true;
-    setStatus("Harvesting live StatCan Daily article + WDS cube slices...");
-    try {
-      const body = {
-        date: els.harvestDate.value.trim() || null,
-        pid: els.harvestPid.value.trim() || null,
-      };
-      const resp = await apiJson("/api/harvest", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
-      await refreshHealthAndSnapshots(resp.snapshot_id);
-      if (resp.snapshot_id) {
-        els.snapshotSelect.value = resp.snapshot_id;
-      }
-      setStatus(`Harvested PID ${resp.harvested.pid} (${resp.harvested.brief_count} briefs). Running swarm...`);
-      if (els.modeSelect.value === "replay") {
-        // Fresh live harvests do not have synthetic replay entries; switch cleanly if local /v1 is online.
-        if (els.llmPill.className.includes("pill-ok")) {
-          els.modeSelect.value = "live";
-        }
-      }
-      if (els.modeSelect.value === "live") {
-        await executeRun();
-      }
-    } catch (err) {
-      setStatus(`Harvest failed: ${err.message}`);
-    } finally {
-      els.harvestBtn.disabled = false;
+  renderReleaseAndSummary(data);
+  renderFindings(data.stories || []);
+  renderCoverageManifest(data.coverage_manifest);
+  renderLedger(data.ledger || []);
+  renderReviewQueue(data.review_queue || []);
+  renderProcessAndBenchmarks(data);
+}
+
+async function runActiveSelection() {
+  const snapshotId = qs("snapshot-select").value;
+  const strictComparability = qs("gate0-toggle").checked;
+  if (!snapshotId) return;
+
+  showError("");
+  state.highlightsExpanded = false;
+
+  if (state.runtimeMode === "static") {
+    const runPair = state.staticBundle?.runs?.[snapshotId];
+    const picked = runPair?.[strictComparability ? "strict" : "off"];
+    if (!picked) {
+      showError("Pre-verified screening data is not available for this release.");
+      return;
     }
+    applyRunData(picked);
+    return;
   }
 
-  function wireTabs() {
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
-        btn.classList.add("active");
-        document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
-      });
+  const runBtn = qs("run-btn");
+  runBtn.disabled = true;
+  runBtn.textContent = "Reviewing…";
+  try {
+    const payload = {
+      snapshot_id: snapshotId,
+      mode: qs("mode-select").value,
+      model: qs("model-select").value,
+      enforce_semantic_standardization: strictComparability,
+      use_mcp: true,
+    };
+    const res = await fetch("api/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "Unable to complete release review.");
+    }
+    applyRunData(data);
+  } catch (err) {
+    const msg = err.message || String(err);
+    if (msg.includes("no replay response")) {
+      showError(
+        "This freshly fetched release does not have a saved pre-verified script yet. Open 'Local server tools' above and choose 'Local AI assistant' to review it."
+      );
+    } else {
+      showError(msg);
+    }
+  } finally {
+    runBtn.disabled = false;
+    runBtn.textContent = "Update Review";
+  }
+}
+
+async function harvestRelease() {
+  const btn = qs("harvest-btn");
+  const feedback = qs("harvest-feedback");
+  btn.disabled = true;
+  btn.textContent = "Fetching…";
+  feedback.hidden = false;
+  feedback.textContent = "Downloading The Daily summary and Statistics Canada table metadata…";
+  showError("");
+  try {
+    const res = await fetch("api/harvest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: qs("harvest-date").value.trim() || null,
+        pid: qs("harvest-pid").value.trim() || null,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "Fetch failed");
+    }
+    state.snapshots = data.snapshots || [];
+    populateSelect(
+      qs("snapshot-select"),
+      state.snapshots,
+      (s) => s.id,
+      (s) => `${s.title} (${formatDateLabel(s.date) || s.id})`
+    );
+    if (data.snapshot_id) {
+      qs("snapshot-select").value = data.snapshot_id;
+    }
+    feedback.textContent = `Saved "${data.harvested?.article || data.snapshot_id}" with ${data.harvested?.brief_count ?? 0} candidate table items.`;
+  } catch (err) {
+    feedback.hidden = true;
+    showError(err.message || String(err));
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Fetch Release";
+  }
+}
+
+function wireEvents() {
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      document.querySelectorAll(".tab-pane").forEach((pane) => {
+        pane.classList.remove("active");
+        pane.hidden = true;
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      const target = qs(`tab-${btn.dataset.tab}`);
+      if (target) {
+        target.classList.add("active");
+        target.hidden = false;
+      }
+    });
+  });
+
+  qs("snapshot-select").addEventListener("change", () => {
+    if (state.runtimeMode === "static") {
+      runActiveSelection();
+    } else {
+      const selected = state.snapshots.find((s) => s.id === qs("snapshot-select").value);
+      if (selected?.source === "harvested" && state.health?.local_llm?.online) {
+        qs("mode-select").value = "live";
+      } else {
+        qs("mode-select").value = "replay";
+      }
+    }
+  });
+
+  qs("gate0-toggle").addEventListener("change", () => {
+    runActiveSelection();
+  });
+
+  qs("run-btn").addEventListener("click", runActiveSelection);
+  qs("harvest-btn").addEventListener("click", harvestRelease);
+  qs("toggle-highlights-btn").addEventListener("click", () => {
+    state.highlightsExpanded = !state.highlightsExpanded;
+    if (state.activeRun) renderReleaseAndSummary(state.activeRun);
+  });
+}
+
+async function init() {
+  wireEvents();
+
+  // Detect live Remine HTTP API vs static GitHub Pages bundle
+  try {
+    const healthRes = await fetch("api/health", { cache: "no-store" });
+    const ct = healthRes.headers.get("content-type") || "";
+    if (healthRes.ok && ct.includes("application/json")) {
+      state.runtimeMode = "server";
+      state.health = await healthRes.json();
+    } else {
+      state.runtimeMode = "static";
+    }
+  } catch (_) {
+    state.runtimeMode = "static";
   }
 
-  async function init() {
-    wireTabs();
-    els.runBtn.addEventListener("click", executeRun);
-    els.harvestBtn.addEventListener("click", executeHarvest);
-    await refreshHealthAndSnapshots();
-    await executeRun();
-  }
+  setStatusBadge();
+  setServerControlsVisibility();
 
-  init().catch((err) => setStatus(`Initialization error: ${err.message}`));
-})();
+  try {
+    if (state.runtimeMode === "server") {
+      const [snapsRes, benchRes] = await Promise.all([
+        fetch("api/snapshots", { cache: "no-store" }),
+        fetch("api/benchmarks", { cache: "no-store" }),
+      ]);
+      const snapsData = await snapsRes.json();
+      state.benchmarks = await benchRes.json();
+      state.snapshots = snapsData.snapshots || [];
+
+      const llmModels = state.health?.local_llm?.models || [];
+      const modelOptions = llmModels.length > 0 ? llmModels : [state.health?.default_model || "qwen3.8-27b"];
+      populateSelect(qs("model-select"), modelOptions, (m) => m, (m) => m);
+    } else {
+      const staticRes = await fetch("static/site_data.json", { cache: "no-store" });
+      if (!staticRes.ok) {
+        throw new Error("Could not load pre-verified Statistics Canada archive data.");
+      }
+      state.staticBundle = await staticRes.json();
+      state.snapshots = state.staticBundle.snapshots || [];
+      state.benchmarks = state.staticBundle.benchmarks || { runs: [] };
+    }
+
+    populateSelect(
+      qs("snapshot-select"),
+      state.snapshots,
+      (s) => s.id,
+      (s) => `${s.title} (${formatDateLabel(s.date) || s.id})`
+    );
+
+    // Default to Labour Force Survey benchmark if present
+    const defaultSnap =
+      state.snapshots.find((s) => s.id === "lfs_260807_snapshot") || state.snapshots[0];
+    if (defaultSnap) {
+      qs("snapshot-select").value = defaultSnap.id;
+    }
+
+    await runActiveSelection();
+  } catch (err) {
+    showError(`Unable to initialize viewer: ${err.message || err}`);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
