@@ -65,7 +65,7 @@
           "unreliable_count": 1,
           "llm_calls": 16,
           "mcp_calls": 21,
-          "total_duration_ms": 1.51,
+          "total_duration_ms": 1.62,
           "evaluation": {
             "total": 8,
             "correct_verdicts": 8,
@@ -601,14 +601,14 @@
           },
           {
             "brief_id": "AI-306",
-            "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
-            "headline": "Regional AI divide narrows sharply once accounting for company size",
-            "raw_headline": "Regional AI divide narrows sharply once accounting for company size",
-            "assumption": "Public commentary often assumes Atlantic Canada suffers from an acute regional technology adoption deficit relative to Ontario.",
+            "title": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall",
+            "headline": "Regional AI divide narrows sharply inside large enterprises",
+            "raw_headline": "Regional AI divide narrows sharply inside large enterprises",
+            "assumption": "Public commentary often treats headline all-firm provincial differences as evidence of a uniform regional technology deficit.",
             "stance": "challenges",
-            "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size distribution.",
-            "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, across all enterprise sizes, Ontario's AI adoption rate was 16.8% compared with 8.4% in the Atlantic provinces (an 8.4 percentage point margin). However, enterprise scale is the primary driver of technology uptake: nationwide, enterprises with 100 or more employees adopted AI at 38.4%, compared with 10.4% for small businesses with 1 to 19 employees.\n\nWhen drilling down to compare firms of similar scale, among enterprises with 100 or more employees, the gap between Ontario (39.1%) and the Atlantic provinces (36.8%) narrowed to 2.3 percentage points.\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology.",
-            "raw_body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, enterprise scale is the primary driver of technology uptake: nationwide, {{F306_2.human}}.\n\nWhen drilling down to compare firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology.",
+            "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size.",
+            "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, across all enterprise sizes, Ontario's AI adoption rate was 16.8% compared with 8.4% in the Atlantic provinces (an 8.4 percentage point margin). However, adoption varies sharply by enterprise scale: nationwide, enterprises with 100 or more employees adopted AI at 38.4%, compared with 10.4% for small businesses with 1 to 19 employees.\n\nWhen comparing firms of similar scale, among enterprises with 100 or more employees, the gap between Ontario (39.1%) and the Atlantic provinces (36.8%) narrowed to 2.3 percentage points.\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap.",
+            "raw_body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, adoption varies sharply by enterprise scale: nationwide, {{F306_2.human}}.\n\nWhen comparing firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap.",
             "body_segments": [
               {
                 "kind": "text",
@@ -629,7 +629,7 @@
               },
               {
                 "kind": "text",
-                "text": ". However, enterprise scale is the primary driver of technology uptake: nationwide, "
+                "text": ". However, adoption varies sharply by enterprise scale: nationwide, "
               },
               {
                 "kind": "token",
@@ -646,7 +646,7 @@
               },
               {
                 "kind": "text",
-                "text": ".\n\nWhen drilling down to compare firms of similar scale, "
+                "text": ".\n\nWhen comparing firms of similar scale, "
               },
               {
                 "kind": "token",
@@ -663,7 +663,7 @@
               },
               {
                 "kind": "text",
-                "text": ".\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology."
+                "text": ".\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap."
               }
             ],
             "fact_ids": [
@@ -1228,7 +1228,7 @@
               },
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               }
             ],
             "coverage_overlaps": [],
@@ -1284,7 +1284,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.12,
+                "duration_ms": 0.13,
                 "details": {
                   "rule_ids": [
                     "M2"
@@ -1302,7 +1302,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.04,
+                "duration_ms": 0.05,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -1326,7 +1326,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.11,
+                "duration_ms": 0.1,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -1476,7 +1476,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -1507,7 +1507,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.06,
+                "duration_ms": 0.08,
                 "result_count": 2
               },
               {
@@ -1518,7 +1518,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.03,
+                "duration_ms": 0.04,
                 "result_count": 2
               },
               {
@@ -1528,7 +1528,7 @@
                   "brief_id": "AI-302"
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "result_count": 5
               }
             ],
@@ -1549,7 +1549,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 2 rule(s), 2 precedent(s), 1 overlap(s)",
-                "duration_ms": 0.12,
+                "duration_ms": 0.16,
                 "details": {
                   "rule_ids": [
                     "M2",
@@ -1570,7 +1570,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.03,
+                "duration_ms": 0.05,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -1594,7 +1594,7 @@
                 "status": "retry",
                 "attempt": 1,
                 "summary": "Attempt 1 failed binding -> retry (quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison)",
-                "duration_ms": 0.05,
+                "duration_ms": 0.07,
                 "details": {
                   "error": "bind failed (BindError): quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison"
                 }
@@ -1617,7 +1617,7 @@
                 "status": "passed",
                 "attempt": 2,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.07,
+                "duration_ms": 0.08,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -1735,7 +1735,7 @@
             },
             "verdict": "skip",
             "rejection_category": "confounded_comparison",
-            "reason": "Methodology rule M:M1 prohibits publishing raw cross-provincial AI adoption comparisons on 'All enterprise sizes' because over two-thirds of the gap reflects regional firm size distribution rather than true tech uptake differences.",
+            "reason": "Methodology rule M:M1 prohibits publishing raw cross-provincial AI adoption comparisons on 'All enterprise sizes' because overall regional comparisons confound geography with enterprise size structure (the large-firm gap is only 2.3 points).",
             "critic_note": "",
             "attempts": 1,
             "citations": [
@@ -1747,14 +1747,14 @@
               {
                 "id": "M1",
                 "title": "Enterprise-size confounding in regional business AI adoption comparisons",
-                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas holding enterprise size to large businesses (100 employees or more) yields a 2.3 percentage point gap (39.1% vs 36.8%). Over 70% of the raw regional gap reflects enterprise size distribution (concentration of large corporate headquarters vs micro-enterprises) rather than regional technological adoption propensity.",
+                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as purely geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas among large enterprises (100 employees or more) the regional gap is 2.3 percentage points (39.1% vs 36.8%). Because AI adoption rises steeply with firm size, unstandardized regional comparisons confound geography with enterprise size structure; quantify composition's share only when computed with explicit subgroup weights.",
                 "source": "docs/remine-known-limitations.md#csbc-firm-size-confound"
               }
             ],
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H2",
@@ -1772,7 +1772,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.06,
+                "duration_ms": 0.05,
                 "result_count": 1
               },
               {
@@ -1814,7 +1814,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.12,
+                "duration_ms": 0.1,
                 "details": {
                   "rule_ids": [
                     "M1"
@@ -1832,7 +1832,7 @@
                 "status": "skip",
                 "attempt": 0,
                 "summary": "Angle Verdict: skip (confounded_comparison)",
-                "duration_ms": 0.04,
+                "duration_ms": 0.03,
                 "details": {
                   "verdict": "skip",
                   "rejection_category": "confounded_comparison"
@@ -1900,7 +1900,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -1931,7 +1931,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.04,
+                "duration_ms": 0.03,
                 "result_count": 1
               },
               {
@@ -1942,7 +1942,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.07,
                 "result_count": 2
               },
               {
@@ -1973,7 +1973,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 1 overlap(s)",
-                "duration_ms": 0.08,
+                "duration_ms": 0.12,
                 "details": {
                   "rule_ids": [
                     "M4"
@@ -2085,8 +2085,8 @@
           },
           {
             "brief_id": "AI-306",
-            "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
-            "summary": "Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+            "title": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall",
+            "summary": "Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
             "quality_flag": "A",
             "reliable": true,
             "standardized": true,
@@ -2100,7 +2100,7 @@
             },
             "verdict": "publish",
             "rejection_category": null,
-            "reason": "The Daily reports raw regional adoption averages but does not perform the firm-size drill-down that reveals the majority of the Ontario-Atlantic margin is driven by firm-size composition.",
+            "reason": "The Daily reports raw regional adoption averages across all enterprise sizes without presenting the size-controlled subgroup comparison within large firms.",
             "critic_note": "Exemplary descriptive drill-down: successfully deconstructs the raw geographic gap using enterprise size benchmarks (M:M1) and binds all facts to tokens without unverified numerals.",
             "attempts": 1,
             "citations": [
@@ -2114,7 +2114,7 @@
               {
                 "id": "M1",
                 "title": "Enterprise-size confounding in regional business AI adoption comparisons",
-                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas holding enterprise size to large businesses (100 employees or more) yields a 2.3 percentage point gap (39.1% vs 36.8%). Over 70% of the raw regional gap reflects enterprise size distribution (concentration of large corporate headquarters vs micro-enterprises) rather than regional technological adoption propensity.",
+                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as purely geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas among large enterprises (100 employees or more) the regional gap is 2.3 percentage points (39.1% vs 36.8%). Because AI adoption rises steeply with firm size, unstandardized regional comparisons confound geography with enterprise size structure; quantify composition's share only when computed with explicit subgroup weights.",
                 "source": "docs/remine-known-limitations.md#csbc-firm-size-confound"
               },
               {
@@ -2127,7 +2127,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H2",
@@ -2141,7 +2141,7 @@
                 "tool": "search_methodology_rules",
                 "arguments": {
                   "brief_id": "AI-306",
-                  "query": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+                  "query": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
                   "limit": 3
                 },
                 "ok": true,
@@ -2152,7 +2152,7 @@
                 "protocol": "mcp-jsonrpc-2.0",
                 "tool": "recall_editorial_memory",
                 "arguments": {
-                  "query": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+                  "query": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
                   "limit": 2
                 },
                 "ok": true,
@@ -2231,7 +2231,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 3 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.09,
+                "duration_ms": 0.08,
                 "details": {
                   "token_count": 3,
                   "fact_ids": [
@@ -2416,7 +2416,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -2518,7 +2518,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.08,
+                "duration_ms": 0.09,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -2666,7 +2666,7 @@
               },
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               }
             ],
             "coverage_overlaps": [
@@ -2888,7 +2888,7 @@
           "unreliable_count": 1,
           "llm_calls": 15,
           "mcp_calls": 18,
-          "total_duration_ms": 1.51,
+          "total_duration_ms": 1.59,
           "evaluation": {
             "total": 8,
             "correct_verdicts": 8,
@@ -3424,14 +3424,14 @@
           },
           {
             "brief_id": "AI-306",
-            "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
-            "headline": "Regional AI divide narrows sharply once accounting for company size",
-            "raw_headline": "Regional AI divide narrows sharply once accounting for company size",
-            "assumption": "Public commentary often assumes Atlantic Canada suffers from an acute regional technology adoption deficit relative to Ontario.",
+            "title": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall",
+            "headline": "Regional AI divide narrows sharply inside large enterprises",
+            "raw_headline": "Regional AI divide narrows sharply inside large enterprises",
+            "assumption": "Public commentary often treats headline all-firm provincial differences as evidence of a uniform regional technology deficit.",
             "stance": "challenges",
-            "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size distribution.",
-            "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, across all enterprise sizes, Ontario's AI adoption rate was 16.8% compared with 8.4% in the Atlantic provinces (an 8.4 percentage point margin). However, enterprise scale is the primary driver of technology uptake: nationwide, enterprises with 100 or more employees adopted AI at 38.4%, compared with 10.4% for small businesses with 1 to 19 employees.\n\nWhen drilling down to compare firms of similar scale, among enterprises with 100 or more employees, the gap between Ontario (39.1%) and the Atlantic provinces (36.8%) narrowed to 2.3 percentage points.\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology.",
-            "raw_body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, enterprise scale is the primary driver of technology uptake: nationwide, {{F306_2.human}}.\n\nWhen drilling down to compare firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology.",
+            "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size.",
+            "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, across all enterprise sizes, Ontario's AI adoption rate was 16.8% compared with 8.4% in the Atlantic provinces (an 8.4 percentage point margin). However, adoption varies sharply by enterprise scale: nationwide, enterprises with 100 or more employees adopted AI at 38.4%, compared with 10.4% for small businesses with 1 to 19 employees.\n\nWhen comparing firms of similar scale, among enterprises with 100 or more employees, the gap between Ontario (39.1%) and the Atlantic provinces (36.8%) narrowed to 2.3 percentage points.\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap.",
+            "raw_body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, adoption varies sharply by enterprise scale: nationwide, {{F306_2.human}}.\n\nWhen comparing firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap.",
             "body_segments": [
               {
                 "kind": "text",
@@ -3452,7 +3452,7 @@
               },
               {
                 "kind": "text",
-                "text": ". However, enterprise scale is the primary driver of technology uptake: nationwide, "
+                "text": ". However, adoption varies sharply by enterprise scale: nationwide, "
               },
               {
                 "kind": "token",
@@ -3469,7 +3469,7 @@
               },
               {
                 "kind": "text",
-                "text": ".\n\nWhen drilling down to compare firms of similar scale, "
+                "text": ".\n\nWhen comparing firms of similar scale, "
               },
               {
                 "kind": "token",
@@ -3486,7 +3486,7 @@
               },
               {
                 "kind": "text",
-                "text": ".\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology."
+                "text": ".\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap."
               }
             ],
             "fact_ids": [
@@ -4051,7 +4051,7 @@
               },
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               }
             ],
             "coverage_overlaps": [],
@@ -4065,7 +4065,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.03,
+                "duration_ms": 0.04,
                 "result_count": 1
               },
               {
@@ -4125,7 +4125,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -4299,7 +4299,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -4330,7 +4330,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.04,
+                "duration_ms": 0.08,
                 "result_count": 2
               },
               {
@@ -4341,7 +4341,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.08,
                 "result_count": 2
               },
               {
@@ -4351,7 +4351,7 @@
                   "brief_id": "AI-302"
                 },
                 "ok": true,
-                "duration_ms": 0.01,
+                "duration_ms": 0.02,
                 "result_count": 5
               }
             ],
@@ -4361,7 +4361,7 @@
                 "status": "passed",
                 "attempt": 0,
                 "summary": "Passed Gate 0 (strict semantic check)",
-                "duration_ms": 0.0,
+                "duration_ms": 0.01,
                 "details": {
                   "quality_flag": "A",
                   "standardized": true
@@ -4372,7 +4372,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 2 rule(s), 2 precedent(s), 1 overlap(s)",
-                "duration_ms": 0.09,
+                "duration_ms": 0.19,
                 "details": {
                   "rule_ids": [
                     "M2",
@@ -4393,7 +4393,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.02,
+                "duration_ms": 0.05,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -4417,7 +4417,7 @@
                 "status": "retry",
                 "attempt": 1,
                 "summary": "Attempt 1 failed binding -> retry (quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison)",
-                "duration_ms": 0.04,
+                "duration_ms": 0.05,
                 "details": {
                   "error": "bind failed (BindError): quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison"
                 }
@@ -4440,7 +4440,7 @@
                 "status": "passed",
                 "attempt": 2,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.06,
+                "duration_ms": 0.07,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -4454,7 +4454,7 @@
                 "status": "approved",
                 "attempt": 2,
                 "summary": "Critic approved on attempt 2",
-                "duration_ms": 0.12,
+                "duration_ms": 0.03,
                 "details": {
                   "note": "After retry eliminated the colloquial quantity word 'double', the draft accurately defines percentage point shifts between cross-sections (M:M3) and binds all facts to tokens."
                 }
@@ -4575,7 +4575,7 @@
                 "status": "blocked",
                 "attempt": 0,
                 "summary": "Gate 0 semantic check skipped AI-303",
-                "duration_ms": 0.01,
+                "duration_ms": 0.0,
                 "details": {
                   "verdict": "skip",
                   "reason": "Semantic confound metadata check: Raw comparison across Geography on unstandardized aggregate 'All enterprise sizes' without enterprise size standardization (violates M1)."
@@ -4643,7 +4643,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -4685,7 +4685,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.07,
+                "duration_ms": 0.03,
                 "result_count": 2
               },
               {
@@ -4716,7 +4716,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 1 overlap(s)",
-                "duration_ms": 0.14,
+                "duration_ms": 0.1,
                 "details": {
                   "rule_ids": [
                     "M4"
@@ -4828,8 +4828,8 @@
           },
           {
             "brief_id": "AI-306",
-            "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
-            "summary": "Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+            "title": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall",
+            "summary": "Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
             "quality_flag": "A",
             "reliable": true,
             "standardized": true,
@@ -4843,7 +4843,7 @@
             },
             "verdict": "publish",
             "rejection_category": null,
-            "reason": "The Daily reports raw regional adoption averages but does not perform the firm-size drill-down that reveals the majority of the Ontario-Atlantic margin is driven by firm-size composition.",
+            "reason": "The Daily reports raw regional adoption averages across all enterprise sizes without presenting the size-controlled subgroup comparison within large firms.",
             "critic_note": "Exemplary descriptive drill-down: successfully deconstructs the raw geographic gap using enterprise size benchmarks (M:M1) and binds all facts to tokens without unverified numerals.",
             "attempts": 1,
             "citations": [
@@ -4857,7 +4857,7 @@
               {
                 "id": "M1",
                 "title": "Enterprise-size confounding in regional business AI adoption comparisons",
-                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas holding enterprise size to large businesses (100 employees or more) yields a 2.3 percentage point gap (39.1% vs 36.8%). Over 70% of the raw regional gap reflects enterprise size distribution (concentration of large corporate headquarters vs micro-enterprises) rather than regional technological adoption propensity.",
+                "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as purely geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas among large enterprises (100 employees or more) the regional gap is 2.3 percentage points (39.1% vs 36.8%). Because AI adoption rises steeply with firm size, unstandardized regional comparisons confound geography with enterprise size structure; quantify composition's share only when computed with explicit subgroup weights.",
                 "source": "docs/remine-known-limitations.md#csbc-firm-size-confound"
               },
               {
@@ -4870,7 +4870,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H2",
@@ -4884,18 +4884,18 @@
                 "tool": "search_methodology_rules",
                 "arguments": {
                   "brief_id": "AI-306",
-                  "query": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+                  "query": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.06,
+                "duration_ms": 0.07,
                 "result_count": 2
               },
               {
                 "protocol": "mcp-jsonrpc-2.0",
                 "tool": "recall_editorial_memory",
                 "arguments": {
-                  "query": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+                  "query": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
                   "limit": 2
                 },
                 "ok": true,
@@ -4974,7 +4974,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 3 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.11,
+                "duration_ms": 0.08,
                 "details": {
                   "token_count": 3,
                   "fact_ids": [
@@ -5159,7 +5159,7 @@
             "memory": [
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               },
               {
                 "id": "H3",
@@ -5177,7 +5177,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.03,
+                "duration_ms": 0.13,
                 "result_count": 1
               },
               {
@@ -5208,7 +5208,7 @@
                 "status": "passed",
                 "attempt": 0,
                 "summary": "Passed Gate 0 (strict semantic check)",
-                "duration_ms": 0.0,
+                "duration_ms": 0.01,
                 "details": {
                   "quality_flag": "A",
                   "standardized": true
@@ -5219,7 +5219,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.08,
+                "duration_ms": 0.19,
                 "details": {
                   "rule_ids": [
                     "M2"
@@ -5237,7 +5237,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.03,
+                "duration_ms": 0.04,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -5261,7 +5261,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.17,
+                "duration_ms": 0.09,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -5275,7 +5275,7 @@
                 "status": "approved",
                 "attempt": 1,
                 "summary": "Critic approved on attempt 1",
-                "duration_ms": 0.03,
+                "duration_ms": 0.02,
                 "details": {
                   "note": "Superb probe: identifies the micro-enterprise uncertainty barrier not covered in the analytical paper, adheres to M:M2, and binds all facts to tokens without bare numerals or quantity words."
                 }
@@ -5409,7 +5409,7 @@
               },
               {
                 "id": "H1",
-                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+                "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
               }
             ],
             "coverage_overlaps": [
@@ -5470,7 +5470,7 @@
                   "brief_id": "AI-308"
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.07,
                 "result_count": 5
               }
             ],
@@ -5491,7 +5491,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 2 overlap(s)",
-                "duration_ms": 0.09,
+                "duration_ms": 0.13,
                 "details": {
                   "rule_ids": [
                     "M4"
@@ -5633,7 +5633,7 @@
           "unreliable_count": 1,
           "llm_calls": 9,
           "mcp_calls": 12,
-          "total_duration_ms": 0.68,
+          "total_duration_ms": 0.72,
           "evaluation": {
             "total": 5,
             "correct_verdicts": 5,
@@ -6190,7 +6190,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.04,
+                "duration_ms": 0.05,
                 "result_count": 2
               },
               {
@@ -6232,7 +6232,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 2 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.08,
+                "duration_ms": 0.09,
                 "details": {
                   "rule_ids": [
                     "M3",
@@ -6437,7 +6437,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.06,
+                "duration_ms": 0.03,
                 "result_count": 2
               },
               {
@@ -6468,7 +6468,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.1,
+                "duration_ms": 0.07,
                 "details": {
                   "rule_ids": [
                     "M3"
@@ -6510,7 +6510,7 @@
                 "status": "retry",
                 "attempt": 1,
                 "summary": "Attempt 1 failed binding -> retry (quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison)",
-                "duration_ms": 0.05,
+                "duration_ms": 0.06,
                 "details": {
                   "error": "bind failed (BindError): quantity word(s) ['double'] in story body — a number spelled in words is still a number and is not checked against the data; use a {{fact_id.human}} token or rewrite without the comparison"
                 }
@@ -6705,7 +6705,7 @@
                   "limit": 2
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.06,
                 "result_count": 1
               },
               {
@@ -6736,7 +6736,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 1 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.07,
+                "duration_ms": 0.11,
                 "details": {
                   "rule_ids": [
                     "M1"
@@ -6835,7 +6835,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "result_count": 1
               },
               {
@@ -6877,7 +6877,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 1 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.05,
+                "duration_ms": 0.06,
                 "details": {
                   "rule_ids": [
                     "M4"
@@ -7069,7 +7069,7 @@
           "unreliable_count": 1,
           "llm_calls": 8,
           "mcp_calls": 9,
-          "total_duration_ms": 0.67,
+          "total_duration_ms": 0.76,
           "evaluation": {
             "total": 5,
             "correct_verdicts": 5,
@@ -7626,7 +7626,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.06,
+                "duration_ms": 0.07,
                 "result_count": 2
               },
               {
@@ -7657,7 +7657,7 @@
                 "status": "passed",
                 "attempt": 0,
                 "summary": "Passed Gate 0 (strict semantic check)",
-                "duration_ms": 0.01,
+                "duration_ms": 0.0,
                 "details": {
                   "quality_flag": "A",
                   "standardized": true
@@ -7711,7 +7711,7 @@
                 "status": "passed",
                 "attempt": 1,
                 "summary": "Bound 2 symbolic token(s) with 0 contract violations",
-                "duration_ms": 0.1,
+                "duration_ms": 0.11,
                 "details": {
                   "token_count": 2,
                   "fact_ids": [
@@ -7725,7 +7725,7 @@
                 "status": "approved",
                 "attempt": 1,
                 "summary": "Critic approved on attempt 1",
-                "duration_ms": 0.02,
+                "duration_ms": 0.08,
                 "details": {
                   "note": "Story accurately labels the denominator as core-aged women (M:M2), states the endpoint caveat (M:M3), and binds all numbers from verified tokens."
                 }
@@ -7862,7 +7862,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.03,
+                "duration_ms": 0.04,
                 "result_count": 1
               },
               {
@@ -7883,7 +7883,7 @@
                   "brief_id": "LFS-202"
                 },
                 "ok": true,
-                "duration_ms": 0.0,
+                "duration_ms": 0.01,
                 "result_count": 5
               }
             ],
@@ -7904,7 +7904,7 @@
                 "status": "ok",
                 "attempt": 0,
                 "summary": "Retrieved 1 rule(s), 2 precedent(s), 0 overlap(s)",
-                "duration_ms": 0.07,
+                "duration_ms": 0.08,
                 "details": {
                   "rule_ids": [
                     "M3"
@@ -7922,7 +7922,7 @@
                 "status": "publish",
                 "attempt": 0,
                 "summary": "Angle Verdict: publish",
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "details": {
                   "verdict": "publish",
                   "rejection_category": null
@@ -7933,7 +7933,7 @@
                 "status": "ok",
                 "attempt": 1,
                 "summary": "Draft attempt 1 generated (challenges)",
-                "duration_ms": 0.01,
+                "duration_ms": 0.02,
                 "details": {
                   "fact_ids": [
                     "F202_1",
@@ -7956,7 +7956,7 @@
                 "status": "ok",
                 "attempt": 2,
                 "summary": "Draft attempt 2 generated (challenges)",
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "details": {
                   "fact_ids": [
                     "F202_1",
@@ -8196,7 +8196,7 @@
                   "limit": 3
                 },
                 "ok": true,
-                "duration_ms": 0.02,
+                "duration_ms": 0.03,
                 "result_count": 1
               },
               {
@@ -8316,7 +8316,7 @@
                 "status": "blocked",
                 "attempt": 0,
                 "summary": "Reliability gate blocked LFS-205 (flag=F)",
-                "duration_ms": 0.01,
+                "duration_ms": 0.0,
                 "details": {
                   "verdict": "unreliable_data",
                   "quality_flag": "F"
@@ -8376,7 +8376,7 @@
                 "status": "blocked",
                 "attempt": 0,
                 "summary": "Reliability gate blocked LFS-205 (flag=F)",
-                "duration_ms": 0.01,
+                "duration_ms": 0.0,
                 "details": {
                   "verdict": "unreliable_data",
                   "quality_flag": "F"

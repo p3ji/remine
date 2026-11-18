@@ -64,7 +64,7 @@
     {
       "id": "M1",
       "title": "Enterprise-size confounding in regional business AI adoption comparisons",
-      "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas holding enterprise size to large businesses (100 employees or more) yields a 2.3 percentage point gap (39.1% vs 36.8%). Over 70% of the raw regional gap reflects enterprise size distribution (concentration of large corporate headquarters vs micro-enterprises) rather than regional technological adoption propensity.",
+      "rule": "Do not publish raw cross-provincial or regional AI adoption rate gaps across 'All enterprise sizes' as purely geographic business technology differentials. Comparing Ontario (16.8%) and Atlantic Canada (8.4%) across all enterprise sizes yields an 8.4 percentage point gap, whereas among large enterprises (100 employees or more) the regional gap is 2.3 percentage points (39.1% vs 36.8%). Because AI adoption rises steeply with firm size, unstandardized regional comparisons confound geography with enterprise size structure; quantify composition's share only when computed with explicit subgroup weights.",
       "source": "docs/remine-known-limitations.md#csbc-firm-size-confound",
       "confirmed": true,
       "semantic_rule": {
@@ -72,7 +72,7 @@
         "confounder_dim": "Enterprise size",
         "required_benchmark": "100 employees or more",
         "unstandardized_aggregate": "All enterprise sizes",
-        "explanation": "Over two-thirds of the raw regional AI adoption gap reflects enterprise size composition (prevalence of micro-enterprises) rather than regional technological uptake."
+        "explanation": "Raw cross-provincial AI adoption gaps across all enterprise sizes confound geography with firm-size structure (8.4 percentage points overall compared with 2.3 percentage points among large enterprises with 100 or more employees)."
       }
     },
     {
@@ -413,8 +413,8 @@
     {
       "id": "AI-306",
       "release_id": "dq260619a",
-      "title": "Deconstructing the regional AI gap: enterprise firm size explains over 70% of the Ontario-Atlantic margin",
-      "summary": "Demonstrates the descriptive drill-down nuance: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at nearly four times the rate of micro-enterprises (38.4% vs 10.4%). Restricting the comparison to large enterprises narrows the provincial gap to 2.3 percentage points, debunking the premise of an acute regional technology divide.",
+      "title": "Subgroup comparison of the regional AI gap: large-enterprise gap is 2.3 points versus 8.4 points overall",
+      "summary": "Demonstrates the descriptive subgroup comparison: while headline figures show an 8.4 percentage point gap in AI adoption between Ontario and Atlantic Canada across all enterprise sizes, large enterprises (100+ employees) adopt AI at much higher rates than small firms (38.4% vs 10.4%). Within large enterprises, the Ontario-Atlantic gap is 2.3 percentage points (39.1% vs 36.8%), showing how unstandardized regional comparisons can mask firm-size differences.",
       "quality_flag": "A",
       "reliable": true,
       "standardized": true,
@@ -701,7 +701,7 @@
   "editorial_memory": [
     {
       "id": "H1",
-      "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' because over 70% of the raw gap was driven by enterprise size composition (prevalence of small firms in Atlantic Canada) rather than regional technology lag."
+      "summary": "Rejected an earlier cross-provincial AI adoption story comparing Ontario and Atlantic Canada on 'All enterprise sizes' without enterprise-size controls (the overall gap was 8.4 points compared with 2.3 points among large firms)."
     },
     {
       "id": "H2",

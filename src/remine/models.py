@@ -8,7 +8,32 @@ from typing import Any
 
 TOKEN = re.compile(r"\{\{([^{}]+)\}\}")
 NUMERAL = re.compile(
-    r"(?<![\w])(?:\d+(?:,\d{3})*(?:\.\d+)?|\.\d+)(?:st|nd|rd|th)?(?![\w])"
+    r"(?<![A-Za-z0-9_])(?:\d+(?:,\d{3})*(?:\.\d+)?|\.\d+)"
+    r"(?:[eE][+-]?\d+)?(?:[A-Za-z%]+)?(?![A-Za-z0-9_])"
+)
+_DATE_BEFORE = re.compile(
+    r"(?:"
+    r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
+    r"jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?"
+    r"|\bq[1-4](?:\s+of)?"
+    r"|\b(?:in|since|by|from|through|until|till|during|before|after|between|to|and|of|"
+    r"early|mid|late|around|circa|fiscal|calendar|year)"
+    r")\s+$",
+    re.I,
+)
+_DATE_AFTER = re.compile(
+    r"^(?:'s\b"
+    r"|\s*(?:-|–|—)\s*(?:present|current|(?:19|20)\d{2}\b)"
+    r"|\s+(?:and|to|through|until)\s+(?:19|20)\d{2}\b"
+    r"|\s+(?:release|survey|census|edition|bulletin|report|data|cohort|baseline|q[1-4])\b"
+    r")",
+    re.I,
+)
+_YEAR_QUANTITY_FOLLOW = re.compile(
+    r"^\s+(?:jobs?|workers?|people|persons?|employees?|firms?|enterprises?|"
+    r"businesses?|permits?|dollars?|percent(?:age)?|points?|pp|units?|cases?|"
+    r"hours?|days?|weeks?|months?|years?|times?|applicants?|roles?|openings?)\b",
+    re.I,
 )
 _QUANTITY_WORDS = re.compile(
     r"(?<![\w])("
@@ -293,13 +318,24 @@ def resolve_token(token: str, facts: dict[str, Fact]) -> str:
     return facts[fact_id].human
 
 
+def _is_validated_year_context(text: str, start: int, end: int) -> bool:
+    """Allow a bare 4-digit year only in an explicit date/time context, never as a quantity."""
+    before = text[:start]
+    after = text[end:]
+    if _YEAR_QUANTITY_FOLLOW.search(after):
+        return False
+    return bool(_DATE_BEFORE.search(before) or _DATE_AFTER.search(after))
+
+
 def check_bare_numerals(text: str) -> list[str]:
-    """Return any numerals outside {{...}} tokens that are neither 4-digit years nor ordinals."""
+    """Return any numerals outside {{...}} tokens that are not validated dates or ordinals."""
     stripped = TOKEN.sub(" ", text or "")
     bad: list[str] = []
     for match in NUMERAL.finditer(stripped):
         raw = match.group(0)
-        if YEAR.match(raw) or ORDINAL.match(raw):
+        if YEAR.match(raw) and _is_validated_year_context(stripped, match.start(), match.end()):
+            continue
+        if ORDINAL.match(raw):
             continue
         bad.append(raw)
     return bad

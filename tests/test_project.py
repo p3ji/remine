@@ -97,6 +97,34 @@ class RemineCourseTests(unittest.TestCase):
         with self.assertRaisesRegex(BindError, "superlative"):
             bind_story(with_superlative, brief, allowed, tools.release["table_url"])
 
+    def test_year_quantity_and_abbreviated_scientific_numerals_fail_bind(self) -> None:
+        tools, responses = fixtures()
+        brief = tools.briefs[0]
+        allowed = {"R:dq260807a", "F:F201_1", "F:F201_2", "M:M2", "M:M3"}
+        base = dict(responses["drafter:LFS-201"])
+
+        for bad_phrase in (
+            "Analysts counted 2026 jobs alongside {{F201_1.human}}.",
+            "Growth reached 50k jobs alongside {{F201_1.human}}.",
+            "Headcount reached 2e6 alongside {{F201_1.human}}.",
+        ):
+            with self.assertRaisesRegex(BindError, "bare numeral"):
+                bind_story({**base, "body": bad_phrase}, brief, allowed, tools.release["table_url"])
+
+        valid_dates = {
+            **base,
+            "body": "In July 2026, compared with the 1976 release, {{F201_1.human}}. {{F201_2.human}}.",
+        }
+        story = bind_story(valid_dates, brief, allowed, tools.release["table_url"])
+        self.assertGreaterEqual(len(story.token_bindings), 2)
+
+    def test_ai_adoption_m1_avoids_unsupported_decomposition_percentage(self) -> None:
+        ai_tools = RemineTools(ROOT / "data/ai_adoption_snapshot.json")
+        m1 = next(r for r in ai_tools.confirmed_methodology() if r.id == "M1")
+        self.assertNotIn("70%", m1.rule)
+        assert m1.semantic_rule is not None
+        self.assertNotIn("two-thirds", m1.semantic_rule.explanation.lower())
+
     def test_false_not_discussed_claim_caught_by_mention_map(self) -> None:
         tools, responses = fixtures()
         brief = tools.briefs[0]
@@ -187,10 +215,10 @@ class RemineCourseTests(unittest.TestCase):
         self.assertEqual(states[1]["decision"].attempts, 2)
         self.assertEqual(states[4]["decision"].verdict, Verdict.UNRELIABLE)
         self.assertEqual(states[4]["decision"].attempts, 0)
-        # AI-306 is the explanatory decomposition probe busting the firm-size confound
+        # AI-306 is the descriptive subgroup comparison checking firm-size benchmarks
         self.assertEqual(states[5]["decision"].verdict, Verdict.PUBLISH)
         self.assertEqual(states[5]["decision"].bound_story.stance, "challenges")
-        self.assertIn("majority of the apparent provincial gap", states[5]["decision"].bound_story.body)
+        self.assertIn("regional margin among large enterprises is narrower", states[5]["decision"].bound_story.body)
         # AI-307 is the deep frontier probe uncovering the micro-enterprise uncertainty barrier
         self.assertEqual(states[6]["decision"].verdict, Verdict.PUBLISH)
         self.assertEqual(states[6]["decision"].bound_story.stance, "challenges")

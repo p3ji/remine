@@ -3,7 +3,13 @@
     "verdict": "publish",
     "reason": "The Daily reports only monthly changes for core-aged women and omits the multi-decade rise since the start of the survey series.",
     "rejection_category": null,
-    "citations": ["R:dq260807a", "F:F201_1", "F:F201_2", "M:M2", "M:M3"]
+    "citations": [
+      "R:dq260807a",
+      "F:F201_1",
+      "F:F201_2",
+      "M:M2",
+      "M:M3"
+    ]
   },
   "drafter:LFS-201": {
     "headline": "Long-run shift in participation and employment rates among core-aged women",
@@ -11,8 +17,17 @@
     "stance": "concretizes",
     "differs_from_daily": "The release reports movements for the reference month only and does not compare current participation or employment rates against the start of the series.",
     "body": "The table cited by the release carries the series from its initial year, whereas the bulletin narrates movements for the reference month only.\n\nSpecifically, {{F201_1.human}}. Over the same span, {{F201_2.human}}.\n\nBoth series use the seasonally adjusted estimate for core-aged women rather than women of all ages, avoiding distortion from shifting age structures across the broader population. Because participation and employment rates moved by similar magnitudes between the endpoints, the long-run expansion in labour force entry was absorbed largely into employment rather than unemployment.",
-    "fact_ids": ["F201_1", "F201_2"],
-    "citations": ["R:dq260807a", "F:F201_1", "F:F201_2", "M:M2", "M:M3"]
+    "fact_ids": [
+      "F201_1",
+      "F201_2"
+    ],
+    "citations": [
+      "R:dq260807a",
+      "F:F201_1",
+      "F:F201_2",
+      "M:M2",
+      "M:M3"
+    ]
   },
   "critic:LFS-201": {
     "approved": true,
@@ -22,7 +37,12 @@
     "verdict": "publish",
     "reason": "The Daily reports monthly changes for core-aged workers and youth separately, but never compares the age groups directly or reports employment share shifts over time.",
     "rejection_category": null,
-    "citations": ["R:dq260807a", "F:F202_1", "F:F202_2", "M:M3"]
+    "citations": [
+      "R:dq260807a",
+      "F:F202_1",
+      "F:F202_2",
+      "M:M3"
+    ]
   },
   "drafter:LFS-202:attempt1": {
     "headline": "Core-aged employment share and the widening gap with young workers",
@@ -30,8 +50,16 @@
     "stance": "challenges",
     "differs_from_daily": "The release reports monthly employment movement for core-aged people and the monthly youth unemployment rate separately without placing the age groups against each other.",
     "body": "The bulletin reports single-month movements for each age group in isolation.\n\nOver the multi-year window, {{F202_1.human}}, while {{F202_2.human}}, leaving the gap nearly double its earlier margin.\n\nShare of employment reflects both population composition and employment rates, whereas the employment rate gap isolates labour-market attachment within each age band.",
-    "fact_ids": ["F202_1", "F202_2"],
-    "citations": ["R:dq260807a", "F:F202_1", "F:F202_2", "M:M3"]
+    "fact_ids": [
+      "F202_1",
+      "F202_2"
+    ],
+    "citations": [
+      "R:dq260807a",
+      "F:F202_1",
+      "F:F202_2",
+      "M:M3"
+    ]
   },
   "drafter:LFS-202:attempt2": {
     "headline": "Core-aged employment share and the widening gap with young workers",
@@ -39,8 +67,16 @@
     "stance": "challenges",
     "differs_from_daily": "The release reports monthly employment movement for core-aged people and the monthly youth unemployment rate separately without placing the age groups against each other.",
     "body": "The bulletin reports single-month movements for each age group in isolation.\n\nAcross the multi-year window, {{F202_1.human}}. Over the same period, {{F202_2.human}}.\n\nAs noted in methodology rule M:M3, a group's share of total employment reflects both population size and employment rates, whereas the employment rate gap between age groups is free of that compositional effect and moves in the same direction.",
-    "fact_ids": ["F202_1", "F202_2"],
-    "citations": ["R:dq260807a", "F:F202_1", "F:F202_2", "M:M3"]
+    "fact_ids": [
+      "F202_1",
+      "F202_2"
+    ],
+    "citations": [
+      "R:dq260807a",
+      "F:F202_1",
+      "F:F202_2",
+      "M:M3"
+    ]
   },
   "critic:LFS-202": {
     "approved": true,
@@ -50,19 +86,32 @@
     "verdict": "skip",
     "reason": "Methodology rule M:M1 warns that raw 15-and-over provincial employment rate gaps are heavily confounded by population age structure rather than labour-market differences.",
     "rejection_category": "confounded_comparison",
-    "citations": ["R:dq260807a", "F:F203_1", "M:M1"]
+    "citations": [
+      "R:dq260807a",
+      "F:F203_1",
+      "M:M1"
+    ]
   },
   "angle:LFS-204": {
     "verdict": "skip",
     "reason": "The Daily highlights already lead with the monthly employment gains in Ontario and across Canada.",
     "rejection_category": "already_in_daily",
-    "citations": ["R:dq260807a", "F:F204_1", "M:M4"]
+    "citations": [
+      "R:dq260807a",
+      "F:F204_1",
+      "M:M4"
+    ]
   },
   "angle:AI-301": {
     "verdict": "publish",
     "reason": "The Daily release reports overall industry adoption averages but omits the sharp concentration in customer-facing conversational interfaces and text analytics among businesses planning adoption.",
     "rejection_category": null,
-    "citations": ["R:dq260619a", "F:F301_1", "F:F301_2", "M:M2"]
+    "citations": [
+      "R:dq260619a",
+      "F:F301_1",
+      "F:F301_2",
+      "M:M2"
+    ]
   },
   "drafter:AI-301": {
     "headline": "Planned enterprise AI adoption concentrates heavily in virtual agents and text analytics",
@@ -70,8 +119,16 @@
     "stance": "challenges",
     "differs_from_daily": "The release highlights industry-level adoption percentages without reporting the specific application-type composition among planning firms.",
     "body": "While headline reports focus on the overall adoption rate, the underlying survey reveals sharp divergences in planned tooling.\n\nSpecifically, {{F301_1.human}}. In addition, {{F301_2.human}}.\n\nAs specified in methodology rule M:M2, these figures capture forward-looking adoption intentions over the coming year rather than active systems already in production. This pattern indicates that initial corporate AI expansion remains heavily concentrated in customer-facing and content generation tools rather than embedded operational autonomy.",
-    "fact_ids": ["F301_1", "F301_2"],
-    "citations": ["R:dq260619a", "F:F301_1", "F:F301_2", "M:M2"]
+    "fact_ids": [
+      "F301_1",
+      "F301_2"
+    ],
+    "citations": [
+      "R:dq260619a",
+      "F:F301_1",
+      "F:F301_2",
+      "M:M2"
+    ]
   },
   "critic:AI-301": {
     "approved": true,
@@ -81,7 +138,13 @@
     "verdict": "publish",
     "reason": "The release notes that active AI use rose, but does not analyze the multi-period percentage point acceleration against planned adoption.",
     "rejection_category": null,
-    "citations": ["R:dq260619a", "F:F302_1", "F:F302_2", "M:M2", "M:M3"]
+    "citations": [
+      "R:dq260619a",
+      "F:F302_1",
+      "F:F302_2",
+      "M:M2",
+      "M:M3"
+    ]
   },
   "drafter:AI-302:attempt1": {
     "headline": "Year-over-year surge in enterprise AI utilization",
@@ -89,8 +152,17 @@
     "stance": "challenges",
     "differs_from_daily": "The Daily notes both point estimates but does not contextualize the percentage point delta against planned forward intentions.",
     "body": "The release records notable acceleration in active business deployment.\n\nOver the observation window, {{F302_1.human}}, leaving active adoption nearly double its previous rate.\n\nIn addition, {{F302_2.human}}.",
-    "fact_ids": ["F302_1", "F302_2"],
-    "citations": ["R:dq260619a", "F:F302_1", "F:F302_2", "M:M2", "M:M3"]
+    "fact_ids": [
+      "F302_1",
+      "F302_2"
+    ],
+    "citations": [
+      "R:dq260619a",
+      "F:F302_1",
+      "F:F302_2",
+      "M:M2",
+      "M:M3"
+    ]
   },
   "drafter:AI-302:attempt2": {
     "headline": "Year-over-year surge in active enterprise AI utilization",
@@ -98,8 +170,17 @@
     "stance": "challenges",
     "differs_from_daily": "The Daily notes both point estimates but does not contextualize the percentage point delta against planned forward intentions.",
     "body": "The release records notable acceleration in active business deployment across Canadian enterprises.\n\nOver the observation window, {{F302_1.human}}.\n\nFurthermore, {{F302_2.human}}.\n\nIn accordance with methodology rules M:M2 and M:M3, this expansion reflects percentage point growth between annual cross-sections of active enterprise deployment rather than speculative plans or compounding trajectory assumptions.",
-    "fact_ids": ["F302_1", "F302_2"],
-    "citations": ["R:dq260619a", "F:F302_1", "F:F302_2", "M:M2", "M:M3"]
+    "fact_ids": [
+      "F302_1",
+      "F302_2"
+    ],
+    "citations": [
+      "R:dq260619a",
+      "F:F302_1",
+      "F:F302_2",
+      "M:M2",
+      "M:M3"
+    ]
   },
   "critic:AI-302": {
     "approved": true,
@@ -107,30 +188,54 @@
   },
   "angle:AI-303": {
     "verdict": "skip",
-    "reason": "Methodology rule M:M1 prohibits publishing raw cross-provincial AI adoption comparisons on 'All enterprise sizes' because over two-thirds of the gap reflects regional firm size distribution rather than true tech uptake differences.",
+    "reason": "Methodology rule M:M1 prohibits publishing raw cross-provincial AI adoption comparisons on 'All enterprise sizes' because overall regional comparisons confound geography with enterprise size structure (the large-firm gap is only 2.3 points).",
     "rejection_category": "confounded_comparison",
-    "citations": ["R:dq260619a", "F:F303_1", "M:M1"]
+    "citations": [
+      "R:dq260619a",
+      "F:F303_1",
+      "M:M1"
+    ]
   },
   "angle:AI-304": {
     "verdict": "skip",
     "reason": "The Daily highlights already lead with the national finding that 19.2% of businesses used AI and 14.5% planned to adopt.",
     "rejection_category": "already_in_daily",
-    "citations": ["R:dq260619a", "F:F304_1", "M:M4"]
+    "citations": [
+      "R:dq260619a",
+      "F:F304_1",
+      "M:M4"
+    ]
   },
   "angle:AI-306": {
     "verdict": "publish",
-    "reason": "The Daily reports raw regional adoption averages but does not perform the firm-size drill-down that reveals the majority of the Ontario-Atlantic margin is driven by firm-size composition.",
+    "reason": "The Daily reports raw regional adoption averages across all enterprise sizes without presenting the size-controlled subgroup comparison within large firms.",
     "rejection_category": null,
-    "citations": ["R:dq260619a", "F:F306_1", "F:F306_2", "F:F306_3", "M:M1"]
+    "citations": [
+      "R:dq260619a",
+      "F:F306_1",
+      "F:F306_2",
+      "F:F306_3",
+      "M:M1"
+    ]
   },
   "drafter:AI-306": {
-    "headline": "Regional AI divide narrows sharply once accounting for company size",
-    "assumption": "Public commentary often assumes Atlantic Canada suffers from an acute regional technology adoption deficit relative to Ontario.",
+    "headline": "Regional AI divide narrows sharply inside large enterprises",
+    "assumption": "Public commentary often treats headline all-firm provincial differences as evidence of a uniform regional technology deficit.",
     "stance": "challenges",
-    "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size distribution.",
-    "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, enterprise scale is the primary driver of technology uptake: nationwide, {{F306_2.human}}.\n\nWhen drilling down to compare firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this decomposition demonstrates that the majority of the apparent provincial gap reflects Atlantic Canada's higher concentration of small enterprises rather than a regional reluctance to adopt technology.",
-    "fact_ids": ["F306_1", "F306_2", "F306_3"],
-    "citations": ["R:dq260619a", "F:F306_1", "F:F306_2", "F:F306_3", "M:M1"]
+    "differs_from_daily": "The release highlights top-level provincial adoption percentages without conditioning on enterprise size.",
+    "body": "Headline comparisons suggest a wide geographic gulf in Canadian enterprise technology adoption.\n\nAt the surface level, {{F306_1.human}}. However, adoption varies sharply by enterprise scale: nationwide, {{F306_2.human}}.\n\nWhen comparing firms of similar scale, {{F306_3.human}}.\n\nIn accordance with methodology rule M:M1, this subgroup comparison shows that the regional margin among large enterprises is narrower than the unadjusted all-size gap.",
+    "fact_ids": [
+      "F306_1",
+      "F306_2",
+      "F306_3"
+    ],
+    "citations": [
+      "R:dq260619a",
+      "F:F306_1",
+      "F:F306_2",
+      "F:F306_3",
+      "M:M1"
+    ]
   },
   "critic:AI-306": {
     "approved": true,
@@ -140,7 +245,12 @@
     "verdict": "publish",
     "reason": "Neither The Daily nor the analytical paper reported on the uncertainty margin among micro-enterprises; while active rejection is comparable across firm size, uncertainty among micro-firms is double that of large enterprises.",
     "rejection_category": null,
-    "citations": ["R:dq260619a", "F:F307_1", "F:F307_2", "M:M2"]
+    "citations": [
+      "R:dq260619a",
+      "F:F307_1",
+      "F:F307_2",
+      "M:M2"
+    ]
   },
   "drafter:AI-307": {
     "headline": "Micro-enterprise AI adoption lag driven by information uncertainty rather than outright rejection",
@@ -148,8 +258,16 @@
     "stance": "challenges",
     "differs_from_daily": "The Daily and analytical paper focused on adoption and active non-adoption, omitting the large uncertainty barrier among micro-enterprises.",
     "body": "Public discussions of technology adoption frequently portray micro-enterprises as resistant to innovation.\n\nHowever, the survey indicates that outright rejection of artificial intelligence is virtually identical across company sizes.\n\nSpecifically, {{F307_2.human}}.\n\nRather than deliberate resistance, the decisive barrier facing smaller enterprises is informational uncertainty.\n\nIndeed, {{F307_1.human}}.\n\nIn accordance with methodology rule M:M2, distinguishing uncertain non-adopters from active rejectors highlights that small-business outreach requires clearer guidance rather than persuasion.",
-    "fact_ids": ["F307_1", "F307_2"],
-    "citations": ["R:dq260619a", "F:F307_1", "F:F307_2", "M:M2"]
+    "fact_ids": [
+      "F307_1",
+      "F307_2"
+    ],
+    "citations": [
+      "R:dq260619a",
+      "F:F307_1",
+      "F:F307_2",
+      "M:M2"
+    ]
   },
   "critic:AI-307": {
     "approved": true,
@@ -159,6 +277,10 @@
     "verdict": "skip",
     "reason": "This finding on planned application mix (virtual agents 34.8%, data analytics 32.9%, text analytics 28.5%) was already published in Analytical Paper Catalogue 11-621-M, Section 3.",
     "rejection_category": "already_in_analytical_paper",
-    "citations": ["R:dq260619a", "F:F308_1", "M:M4"]
+    "citations": [
+      "R:dq260619a",
+      "F:F308_1",
+      "M:M4"
+    ]
   }
 }

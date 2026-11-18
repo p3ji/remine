@@ -86,6 +86,40 @@ class ProbesTests(unittest.TestCase):
         self.assertTrue(len(ranked) > 0)
         self.assertTrue(all(f.human for f in ranked))
 
+    def test_share_of_total_rejects_incomplete_denominator_when_category_drops(self) -> None:
+        df = pd.DataFrame(
+            [
+                {"REF_DATE": "2026-01", "Sector": "A", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v1", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-01", "Sector": "B", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v2", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-01", "Sector": "C", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v3", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "A", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v1", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "B", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v2", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+            ]
+        )
+        cfg = {"measure_dimension": "Measure", "measures": ["Count"], "hold_at": {"Sector": "Total"}}
+        self.assertEqual(probes.probe_share_of_total(df, "Sector", cfg), [])
+
+    def test_run_probes_records_actual_slices_and_rejects_ambiguous_dimensions(self) -> None:
+        base_rows = [
+            {"REF_DATE": "2026-01", "Geography": "Alberta", "Gender": "Women+", "Labour": "Employment rate", "VALUE": 65.0, "VECTOR": "v1", "UOM": "Percent", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+            {"REF_DATE": "2026-01", "Geography": "Ontario", "Gender": "Women+", "Labour": "Employment rate", "VALUE": 61.0, "VECTOR": "v2", "UOM": "Percent", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+        ]
+        cfg = {
+            "measure_dimension": "Labour",
+            "measures": ["Employment rate"],
+            "rate_measures": ["Employment rate"],
+            "hold_at": {"Geography": "Canada"},
+        }
+        facts_single = probes.run_probes(pd.DataFrame(base_rows), ["Geography"], cfg)
+        self.assertGreater(len(facts_single), 0)
+        self.assertTrue(all(f.meta["held_at"].get("Gender") == "Women+" for f in facts_single))
+
+        ambig_rows = base_rows + [
+            {"REF_DATE": "2026-01", "Geography": "Alberta", "Gender": "Men+", "Labour": "Employment rate", "VALUE": 71.0, "VECTOR": "v3", "UOM": "Percent", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+            {"REF_DATE": "2026-01", "Geography": "Ontario", "Gender": "Men+", "Labour": "Employment rate", "VALUE": 68.0, "VECTOR": "v4", "UOM": "Percent", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+        ]
+        self.assertEqual(probes.run_probes(pd.DataFrame(ambig_rows), ["Geography"], cfg), [])
+
 
 class HarvesterTests(unittest.TestCase):
     def _sample_daily_index_html(self) -> str:

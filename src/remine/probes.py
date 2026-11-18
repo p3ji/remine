@@ -436,10 +436,22 @@ def probe_share_of_total(
     if len(periods) < 2:
         return []
 
+    all_members = {
+        str(m)
+        for m in df[~df[dim].isin(aggregates)][dim].dropna().unique()
+    }
+    if len(all_members) < 2:
+        return []
+
     def _shares(period: str) -> dict[str, tuple[float, pd.Series]] | None:
         chunk = df[(df["REF_DATE"] == period) & (~df[dim].isin(aggregates))]
+        if chunk["VALUE"].isna().any():
+            return None
+        present = {str(m) for m in chunk[dim]}
+        if present != all_members or len(chunk) != len(all_members):
+            return None
         total = float(chunk["VALUE"].sum())
-        if total <= 0 or len(chunk) < 2:
+        if total <= 0:
             return None
         return {
             str(row[dim]): (float(row["VALUE"]) / total * 100.0, row)
@@ -659,18 +671,27 @@ def run_probes(
             sliced = _slice_for_probe(df, cfg, measure, dim)
             if dim not in sliced.columns or sliced[dim].nunique() < 2:
                 continue
-            # Ensure every remaining dimension is pinned uniquely to avoid mixing series.
+            vdim = cfg.get("value_dimension")
             non_target = [
                 c
                 for c in sliced.columns
-                if c not in {dim, mdim, "REF_DATE", "VALUE", "VECTOR", "COORDINATE",
+                if c not in {dim, mdim, vdim, "REF_DATE", "VALUE", "VECTOR", "COORDINATE",
                              "STATUS", "SYMBOL", "TERMINATED", "DECIMALS", "DGUID",
                              "UOM", "UOM_ID", "SCALAR_FACTOR", "SCALAR_ID", "SE", "SE_MOM", "SE_YOY"}
             ]
-            for extra_dim in non_target:
-                if sliced[extra_dim].nunique() > 1:
-                    first_val = sliced[extra_dim].iloc[0]
-                    sliced = sliced[sliced[extra_dim] == first_val]
+            # Reject ambiguous slices where an unconfigured dimension still has >1 distinct value
+            # rather than silently narrowing to row 0 without documentation.
+            if any(sliced[extra_dim].nunique() > 1 for extra_dim in non_target):
+                continue
+
+            actual_held = {
+                extra_dim: str(sliced[extra_dim].iloc[0])
+                for extra_dim in non_target
+                if sliced[extra_dim].nunique() == 1
+            }
+            for k, val in (cfg.get("hold_at") or {}).items():
+                if k != dim:
+                    actual_held.setdefault(k, str(val))
 
             for name, fn in PROBES.items():
                 if name in _CROSS_MEMBER_PROBES and rates and measure not in rates:
@@ -695,7 +716,7 @@ def run_probes(
                     fact.meta["measure"] = measure
                     fact.meta["held_at"] = {
                         k: val
-                        for k, val in (cfg.get("hold_at") or {}).items()
+                        for k, val in actual_held.items()
                         if k != dim and k not in fact.cut
                     }
                     if mdim and measure is not None:
