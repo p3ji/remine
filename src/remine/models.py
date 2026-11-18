@@ -15,6 +15,7 @@ _EXPLICIT_DATE_BEFORE = re.compile(
     r"(?:"
     r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
     r"jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?"
+    r"(?:\s+(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?,?)?"
     r"|\bq[1-4](?:\s+of)?"
     r"|\b(?:first|second|third|fourth|1st|2nd|3rd|4th)\s+quarter(?:\s+of)?"
     r"|\b(?:fiscal|calendar)?\s*year"
@@ -34,6 +35,12 @@ _YEAR_QUANTITY_FOLLOW = re.compile(
     r"^\s+(?:[a-z]+\s+){0,2}(?:jobs?|workers?|people|persons?|employees?|firms?|enterprises?|"
     r"businesses?|permits?|dollars?|percent(?:age)?|points?|pp|units?|cases?|"
     r"hours?|days?|weeks?|months?|years?|times?|applicants?|roles?|openings?)\b",
+    re.I,
+)
+_CURRENCY_BEFORE = re.compile(r"(?:[$€£¥]|(?:CAD|US|USD|CA|C)\$?)\s*$", re.I)
+_MONTH_BEFORE = re.compile(
+    r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
+    r"jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+$",
     re.I,
 )
 _QUANTITY_WORDS = re.compile(
@@ -320,23 +327,36 @@ def resolve_token(token: str, facts: dict[str, Fact]) -> str:
 
 
 def _is_validated_year_context(text: str, start: int, end: int) -> bool:
-    """Allow a bare 4-digit year only in explicit calendar syntax, never with quantity phrases."""
+    """Allow a bare 4-digit year only in explicit calendar syntax, never with currency or quantity phrases."""
     before = text[:start]
     after = text[end:]
-    if _YEAR_QUANTITY_FOLLOW.search(after):
+    if _CURRENCY_BEFORE.search(before) or _YEAR_QUANTITY_FOLLOW.search(after):
         return False
     return bool(_EXPLICIT_DATE_BEFORE.search(before) or _EXPLICIT_DATE_AFTER.search(after))
 
 
+def _is_validated_calendar_ordinal(text: str, raw: str, start: int, end: int) -> bool:
+    """Allow ordinals only inside explicit calendar expressions (quarters or month days)."""
+    before = text[:start]
+    after = text[end:]
+    if _CURRENCY_BEFORE.search(before):
+        return False
+    if re.match(r"^[1-4](?:st|nd|rd|th)$", raw, re.I) and re.match(r"^\s+quarters?\b", after, re.I):
+        return True
+    if re.match(r"^(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)$", raw, re.I) and _MONTH_BEFORE.search(before):
+        return True
+    return False
+
+
 def check_bare_numerals(text: str) -> list[str]:
-    """Return any numerals outside {{...}} tokens that are not validated dates or ordinals."""
+    """Return any numerals outside {{...}} tokens that are not validated dates or calendar ordinals."""
     stripped = TOKEN.sub(" ", text or "")
     bad: list[str] = []
     for match in NUMERAL.finditer(stripped):
         raw = match.group(0)
         if YEAR.match(raw) and _is_validated_year_context(stripped, match.start(), match.end()):
             continue
-        if ORDINAL.match(raw):
+        if ORDINAL.match(raw) and _is_validated_calendar_ordinal(stripped, raw, match.start(), match.end()):
             continue
         bad.append(raw)
     return bad

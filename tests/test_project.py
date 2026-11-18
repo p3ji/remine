@@ -107,6 +107,8 @@ class RemineCourseTests(unittest.TestCase):
             "Analysts counted 2026 jobs alongside {{F201_1.human}}.",
             "Employment rose to 2026 new jobs alongside {{F201_1.human}}.",
             "The bill rose to 2026 Canadian dollars alongside {{F201_1.human}}.",
+            "The agency commissioned a $2026 report alongside {{F201_1.human}}.",
+            "The sector ranked 99th nationally alongside {{F201_1.human}}.",
             "Growth reached 50k jobs alongside {{F201_1.human}}.",
             "Headcount reached 2e6 alongside {{F201_1.human}}.",
         ):
@@ -115,7 +117,7 @@ class RemineCourseTests(unittest.TestCase):
 
         valid_dates = {
             **base,
-            "body": "In July 2026, compared with the 1976 release (from 1976 to 2026), {{F201_1.human}}. {{F201_2.human}}.",
+            "body": "In July 1st, 2026 and the 2nd quarter of 2026, compared with the 1976 release (from 1976 to 2026), {{F201_1.human}}. {{F201_2.human}}.",
         }
         story = bind_story(valid_dates, brief, allowed, tools.release["table_url"])
         self.assertGreaterEqual(len(story.token_bindings), 2)
