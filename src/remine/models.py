@@ -11,17 +11,18 @@ NUMERAL = re.compile(
     r"(?<![A-Za-z0-9_])(?:\d+(?:,\d{3})*(?:\.\d+)?|\.\d+)"
     r"(?:[eE][+-]?\d+)?(?:[A-Za-z%]+)?(?![A-Za-z0-9_])"
 )
-_DATE_BEFORE = re.compile(
+_EXPLICIT_DATE_BEFORE = re.compile(
     r"(?:"
     r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
     r"jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?"
     r"|\bq[1-4](?:\s+of)?"
-    r"|\b(?:in|since|by|from|through|until|till|during|before|after|between|to|and|of|"
-    r"early|mid|late|around|circa|fiscal|calendar|year)"
+    r"|\b(?:first|second|third|fourth|1st|2nd|3rd|4th)\s+quarter(?:\s+of)?"
+    r"|\b(?:fiscal|calendar)?\s*year"
+    r"|\b(?:19|20)\d{2}\s*(?:to|and|-|–|—)"
     r")\s+$",
     re.I,
 )
-_DATE_AFTER = re.compile(
+_EXPLICIT_DATE_AFTER = re.compile(
     r"^(?:'s\b"
     r"|\s*(?:-|–|—)\s*(?:present|current|(?:19|20)\d{2}\b)"
     r"|\s+(?:and|to|through|until)\s+(?:19|20)\d{2}\b"
@@ -30,7 +31,7 @@ _DATE_AFTER = re.compile(
     re.I,
 )
 _YEAR_QUANTITY_FOLLOW = re.compile(
-    r"^\s+(?:jobs?|workers?|people|persons?|employees?|firms?|enterprises?|"
+    r"^\s+(?:[a-z]+\s+){0,2}(?:jobs?|workers?|people|persons?|employees?|firms?|enterprises?|"
     r"businesses?|permits?|dollars?|percent(?:age)?|points?|pp|units?|cases?|"
     r"hours?|days?|weeks?|months?|years?|times?|applicants?|roles?|openings?)\b",
     re.I,
@@ -319,12 +320,12 @@ def resolve_token(token: str, facts: dict[str, Fact]) -> str:
 
 
 def _is_validated_year_context(text: str, start: int, end: int) -> bool:
-    """Allow a bare 4-digit year only in an explicit date/time context, never as a quantity."""
+    """Allow a bare 4-digit year only in explicit calendar syntax, never with quantity phrases."""
     before = text[:start]
     after = text[end:]
     if _YEAR_QUANTITY_FOLLOW.search(after):
         return False
-    return bool(_DATE_BEFORE.search(before) or _DATE_AFTER.search(after))
+    return bool(_EXPLICIT_DATE_BEFORE.search(before) or _EXPLICIT_DATE_AFTER.search(after))
 
 
 def check_bare_numerals(text: str) -> list[str]:

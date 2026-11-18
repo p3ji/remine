@@ -436,11 +436,13 @@ def probe_share_of_total(
     if len(periods) < 2:
         return []
 
+    configured = set((cfg.get("comparable_members") or {}).get(dim) or []) - aggregates
     all_members = {
         str(m)
         for m in df[~df[dim].isin(aggregates)][dim].dropna().unique()
     }
-    if len(all_members) < 2:
+    expected_members = configured if configured else all_members
+    if len(expected_members) < 2:
         return []
 
     def _shares(period: str) -> dict[str, tuple[float, pd.Series]] | None:
@@ -448,11 +450,16 @@ def probe_share_of_total(
         if chunk["VALUE"].isna().any():
             return None
         present = {str(m) for m in chunk[dim]}
-        if present != all_members or len(chunk) != len(all_members):
+        if present != expected_members or len(chunk) != len(expected_members):
             return None
         total = float(chunk["VALUE"].sum())
         if total <= 0:
             return None
+        if not configured:
+            agg_rows = df[(df["REF_DATE"] == period) & (df[dim].isin(aggregates))]
+            agg_vals = agg_rows["VALUE"].dropna().astype(float).tolist()
+            if not agg_vals or not any(abs(total - av) <= max(0.5, 0.01 * abs(av)) for av in agg_vals):
+                return None
         return {
             str(row[dim]): (float(row["VALUE"]) / total * 100.0, row)
             for _, row in chunk.iterrows()

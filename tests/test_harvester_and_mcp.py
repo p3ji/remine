@@ -96,8 +96,33 @@ class ProbesTests(unittest.TestCase):
                 {"REF_DATE": "2026-02", "Sector": "B", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v2", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
             ]
         )
-        cfg = {"measure_dimension": "Measure", "measures": ["Count"], "hold_at": {"Sector": "Total"}}
+        cfg = {
+            "measure_dimension": "Measure",
+            "measures": ["Count"],
+            "comparable_members": {"Sector": ["A", "B", "C"]},
+        }
         self.assertEqual(probes.probe_share_of_total(df, "Sector", cfg), [])
+
+        df_missing_both = df[df["Sector"] != "C"]
+        self.assertEqual(probes.probe_share_of_total(df_missing_both, "Sector", cfg), [])
+        self.assertEqual(probes.probe_share_of_total(df_missing_both, "Sector", {}), [])
+
+        df_with_total = pd.DataFrame(
+            [
+                {"REF_DATE": "2026-01", "Sector": "Total", "Measure": "Count", "VALUE": 300.0, "VECTOR": "vt", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-01", "Sector": "A", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v1", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-01", "Sector": "B", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v2", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-01", "Sector": "C", "Measure": "Count", "VALUE": 100.0, "VECTOR": "v3", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "Total", "Measure": "Count", "VALUE": 300.0, "VECTOR": "vt", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "A", "Measure": "Count", "VALUE": 150.0, "VECTOR": "v1", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "B", "Measure": "Count", "VALUE": 75.0, "VECTOR": "v2", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+                {"REF_DATE": "2026-02", "Sector": "C", "Measure": "Count", "VALUE": 75.0, "VECTOR": "v3", "UOM": "Units", "SCALAR_FACTOR": "units", "DECIMALS": 1},
+            ]
+        )
+        complete_facts = probes.probe_share_of_total(
+            df_with_total, "Sector", {"aggregate_members": {"Sector": ["Total"]}}
+        )
+        self.assertEqual(len(complete_facts), 3)
 
     def test_run_probes_records_actual_slices_and_rejects_ambiguous_dimensions(self) -> None:
         base_rows = [
